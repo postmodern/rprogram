@@ -1,0 +1,8 @@
+== 1.0.0 / 2008-01-02
+
+* Initial release.
+* Provides cross-platform access to the PATH variable.
+* Supports mapping long and short options.
+* Supports mapping leading and tailing non-options.
+* Supports custom formating of options.
+
