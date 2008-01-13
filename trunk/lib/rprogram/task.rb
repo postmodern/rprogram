@@ -108,7 +108,7 @@ module RProgram
     # the tasks leading non_options, options and tailing non-options.
     #
     def arguments
-      leading_non_options + options + ['--'] + tailing_non_options
+      leading_non_options + options + tailing_non_options
     end
 
     protected
