@@ -10,7 +10,10 @@ module RProgram
     # given, it is passed the newly created Task object.
     #
     #   Task.new(:test => 'example', :count => 2, :verbose => true)
-    #   Task.new(:help => true) { |task| ... }
+    #
+    #   Task.new(:help => true) do |task|
+    #     ...
+    #   end
     #
     def initialize(options={},&block)
       @subtasks = {}
