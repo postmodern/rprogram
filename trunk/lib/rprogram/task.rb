@@ -211,7 +211,7 @@ module RProgram
     #
     # Converts a long-option flag to a Ruby method name.
     # 
-    #   Task.flag_namify('--output-file')  #=> "output_files"
+    #   Task.flag_namify('--output-file')  # => "output_file"
     #
     def Task.flag_namify(flag)
       flag = flag.to_s
