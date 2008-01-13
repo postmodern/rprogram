@@ -13,12 +13,24 @@ module RProgram
     # Can the argument be specified multiple times
     attr_reader :multiple
 
-    def initialize(opts={:name => nil, :leading => false, :tailing => false, :multiple => false})
-      @name = opts[:name]
+    #
+    # Creates a new NonOption object with the specified _options_.
+    #
+    # _options_ may contain the following keys:
+    # <tt>:name</tt>:: The name of the non-option.
+    # <tt>:leading</tt>:: Implies the non-option is a leading non-option.
+    #                     Defaults to +false+, if not given.
+    # <tt>:tailing</tt>:: Implies the non-option is a tailing non-option.
+    #                     Defaults to +true+, if not given.
+    # <tt>:multiple</tt>:: Implies the non-option maybe given an Array
+    #                      of values. Defaults to +false+, if not given.
+    #
+    def initialize(options={})
+      @name = options[:name]
 
-      @leading = opts[:leading] || false
-      @tailing = opts[:tailing] || true
-      @multiple = opts[:multiple] || false
+      @leading = options[:leading] || false
+      @tailing = options[:tailing] || true
+      @multiple = options[:multiple] || false
     end
 
     def arguments(value)
