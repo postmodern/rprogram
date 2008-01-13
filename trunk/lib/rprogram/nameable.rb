@@ -5,22 +5,24 @@ module RProgram
   module Nameable
     def self.included(base)
       base.metaclass_eval do
+        #
+        # Returns the name of the program.
+        #
         def program_name
           @program_name ||= nil
         end
 
-        def program_name=(name)
-          @program_name = name.to_s
-        end
-
+        #
+        # Returns an Array of the program's aliases.
+        #
         def program_aliases
           @program_aliases ||= []
         end
 
-        def program_aliases=(aliases)
-          @program_aliases = aliases.to_a.map { |name| name.to_s }
-        end
-
+        #
+        # Returns an Array of all names the program is known by, combining
+        # both program_name and program_aliases.
+        #
         def program_names
           ([program_name] + program_aliases).compact
         end
@@ -31,7 +33,7 @@ module RProgram
         #   name_program 'ls'
         #
         def name_program(name)
-          self.program_name = name
+          self.program_name = name.to_s
         end
 
         #
@@ -40,7 +42,7 @@ module RProgram
         #   alias_program 'vim', 'vi'
         #
         def alias_program(*aliases)
-          self.program_aliases = aliases
+          self.program_aliases = aliases.map { |name| name.to_s }
         end
       end
     end
