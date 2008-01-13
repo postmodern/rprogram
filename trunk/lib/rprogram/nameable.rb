@@ -6,7 +6,7 @@ module RProgram
     def self.included(base)
       base.metaclass_eval do
         def program_name
-          @program_name
+          @program_name ||= nil
         end
 
         def program_name=(name)
@@ -21,11 +21,26 @@ module RProgram
           @program_aliases = aliases.to_a.map { |name| name.to_s }
         end
 
-        def find_program
-          names = self.program_aliases
-          names.unshift(self.program_name) if self.program_name
+        def program_names
+          ([program_name] + program_aliases).compact
+        end
 
-          return Compat.find_program_by_names(*names)
+        #
+        # Sets the program name for a class to the specified _name_.
+        #
+        #   name_program 'ls'
+        #
+        def name_program(name)
+          self.program_name = name
+        end
+
+        #
+        # Sets the program aliases for a class to the specified _aliases_.
+        #
+        #   alias_program 'vim', 'vi'
+        #
+        def alias_program(*aliases)
+          self.program_aliases = aliases
         end
       end
     end
@@ -42,26 +57,6 @@ module RProgram
     #
     def program_aliases
       self.class.program_aliases
-    end
-
-    protected
-
-    #
-    # Sets the program name for a class to the specified _name_.
-    #
-    #   name_program 'ls'
-    #
-    def Object.name_program(name)
-      self.program_name = name
-    end
-
-    #
-    # Sets the program aliases for a class to the specified _aliases_.
-    #
-    #   name_program 'vim', 'vi'
-    #
-    def Object.alias_program(*aliases)
-      self.program_aliases = aliases
     end
   end
 end
