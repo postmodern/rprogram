@@ -96,7 +96,7 @@ module RProgram
     #
     # Runs the program with the specified _task_ object.
     #
-    def run_task(task)
+    def run_with_task(task)
       run(*(task.arguments))
     end
 
