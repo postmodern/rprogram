@@ -33,7 +33,7 @@ module RProgram
         #   name_program 'ls'
         #
         def name_program(name)
-          self.program_name = name.to_s
+          @program_name = name.to_s
         end
 
         #
@@ -42,7 +42,7 @@ module RProgram
         #   alias_program 'vim', 'vi'
         #
         def alias_program(*aliases)
-          self.program_aliases = aliases.map { |name| name.to_s }
+          @program_aliases = aliases.map { |name| name.to_s }
         end
       end
     end
