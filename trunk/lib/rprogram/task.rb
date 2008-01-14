@@ -121,7 +121,7 @@ module RProgram
     #
     #   subtask :extra, ExtraTask
     #
-    def Object.subtask(name,task)
+    def self.subtask(name,task)
       class_eval %{
         def #{name}(options={},&block)
           if @subtasks[#{name.dump}]
@@ -144,7 +144,7 @@ module RProgram
     #
     #   non_option :name => 'file', :tailing => true, :multiple => true
     #
-    def Object.non_option(opts={})
+    def self.non_option(opts={})
       name = opts[:name].to_sym
 
       self.non_options[name] = NonOption.new(opts)
@@ -169,7 +169,7 @@ module RProgram
     #
     #   long_option :flag => '-f', :name => :file
     #
-    def Object.long_option(opts={},&block)
+    def self.long_option(opts={},&block)
       flag = opts[:flag].to_s
       method_name = (opts[:name] || Task.flag_namify(flag)).to_sym
 
@@ -193,7 +193,7 @@ module RProgram
     #
     #   short_option :flag => '-c', :name => :count
     #
-    def Object.short_option(opts={},&block)
+    def self.short_option(opts={},&block)
       method_name = opts[:name].to_sym
 
       self.options[method_name] = Option.new(opts,&block)
