@@ -32,6 +32,10 @@ module RProgram
       @formating = block
     end
 
+    #
+    # Returns an +Array+ of the arguments for the option with the specified
+    # _value_.
+    #
     def arguments(value)
       return [@flag] if value==true
       return [] if (value==nil || value==false)
