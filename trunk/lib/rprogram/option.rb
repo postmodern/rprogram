@@ -10,6 +10,9 @@ module RProgram
     # Can the option be specified multiple times
     attr_reader :multiple
 
+    # Argument separator
+    attr_reader :separator
+
     #
     # Creates a new Option object with the specified _options_. If a _block_
     # is given it will be used for the custom formating of the option. If a
@@ -22,12 +25,16 @@ module RProgram
     #                    Defaults to +falue+, if not given.
     # <tt>:multuple</tt>:: Implies the option maybe given an Array of
     #                      values. Defaults to +false+, if not given.
+    # <tt>:separator</tt>:: The separator to use for formating multiple
+    #                       arguments into one +String+. Cannot be used
+    #                       with +:multiple+.
     #
     def initialize(options={},&block)
       @flag = options[:flag]
 
       @equals = options[:equals] || false
       @multiple = options[:multiple] || false
+      @separator = options[:separator]
 
       @formating = block
     end
@@ -52,6 +59,10 @@ module RProgram
         value.each { |arg| args += format(arg) }
         return args
       else
+        if (value.kind_of?(Array) && @separator)
+          value = value.join(@separator)
+        end
+
         return format(value)
       end
     end
