@@ -3,6 +3,8 @@ require 'rprogram/task'
 require 'rprogram/nameable'
 require 'rprogram/exceptions/program_not_found'
 
+require 'open3'
+
 module RProgram
   class Program
 
@@ -15,14 +17,21 @@ module RProgram
     attr_reader :name
 
     #
-    # Creates a new Program object from _path_. If _block_ is given, it will
-    # be passed the newly created Program.
+    # Creates a new Program object from _path_. If _path_ is not a valid
+    # file, a ProgramNotFound exception will be thrown. If a _block_ is
+    # given, it will be passed the newly created Program.
     #
     #   Program.new('/usr/bin/ls')
     #
     def initialize(path,&block)
-      @path = File.expand_path(path)
-      @name = File.basename(@path)
+      path = File.expand_path(path)
+
+      unless File.file?(path)
+        raise(ProgramNotFound,"program #{path.dump} does not exist",caller)
+      end
+
+      @path = path
+      @name = File.basename(path)
 
       block.call(self) if block
     end
@@ -86,10 +95,10 @@ module RProgram
     #   echo.run("hello") # => ["hello\n"]
     #
     def run(*args)
-      command = [@path] + args
+      args = args.map { |arg| arg.to_s }
 
-      IO.popen(command.join(' ')) do |process|
-        return process.readlines
+      Open3.popen3(@path,*args) do |stdin,stdout,stderr|
+        return stdout.readlines
       end
     end
 
