@@ -1,3 +1,5 @@
+require 'rprogram/extensions'
+
 module RProgram
   class Option
 
@@ -19,15 +21,18 @@ module RProgram
     # _block_ is not given, the option will use the default_format when
     # generating the arguments.
     #
-    # _options_ may contain the following keys:
+    # _options_ must contain the following key:
     # <tt>:flag</tt>:: The command-line flag to use.
-    # <tt>:equals</tt>:: Implies the option maybe formated as '--flag=value'.
-    #                    Defaults to +falue+, if not given.
+    #
+    # _options_ may also contain the following keys:
+    # <tt>:equals</tt>:: Implies the option maybe formated as
+    #                    <tt>"--flag=value"</tt>. Defaults to +falue+, if
+    #                    not given.
     # <tt>:multuple</tt>:: Implies the option maybe given an Array of
     #                      values. Defaults to +false+, if not given.
     # <tt>:separator</tt>:: The separator to use for formating multiple
     #                       arguments into one +String+. Cannot be used
-    #                       with +:multiple+.
+    #                       with <tt>:multiple</tt>.
     #
     def initialize(options={},&block)
       @flag = options[:flag]
@@ -47,24 +52,21 @@ module RProgram
       return [@flag] if value==true
       return [] if (value==nil || value==false)
 
-      if value.kind_of?(Hash)
-        value = value.map { |name,value| "#{name}=#{value}" }
-      elsif value.kind_of?(Array)
-        value = value.compact
+      if value.respond_to?(:arguments)
+        value = value.arguments
       end
 
       if @multiple
-        args = []
-
-        value.each { |arg| args += format(arg) }
-        return args
-      else
-        if (value.kind_of?(Array) && @separator)
-          value = value.join(@separator)
+        if value.respond_to?(:map)
+          return value.map { |arg| format(arg) }
         end
-
-        return format(value)
       end
+
+      if (value.kind_of?(Array) && @separator)
+        value = value.join(@separator)
+      end
+
+      return format(value)
     end
 
     protected
