@@ -1,4 +1,5 @@
 require 'rprogram/options'
+require 'rprogram/option_list'
 
 module RProgram
   class Task
@@ -163,43 +164,71 @@ module RProgram
     end
 
     #
-    # Defines a long-option with the given _opts_.
+    # Defines a long-option with the specified _opts_.
+    #
+    # _opts_ must contain the following keys:
+    # <tt>:flag</tt>:: The flag to use for the option.
+    #
+    # _opts_ may also contain the following keys:
+    # <tt>:name</tt>:: The name of the option. Defaults to the
+    #                  flag_namify'ed form of <tt>opts[:flag]</tt>, if not
+    #                  given.
+    # <tt>:multiply</tt>:: Specifies that the option may appear multiple
+    #                      times in the arguments.
+    # <tt>:sub_options</tt>:: Specifies that the option contains multiple
+    #                  sub-options.
     #
     #   long_option :flag => '--output'
     #
     #   long_option :flag => '-f', :name => :file
     #
     def self.long_option(opts={},&block)
-      flag = opts[:flag].to_s
-      method_name = (opts[:name] || Task.flag_namify(flag)).to_sym
+      opts[:name] ||= Task.flag_namify(opts[:flag])
 
-      self.options[method_name] = Option.new(opts,&block)
-
-      class_def(method_name) do
-        if opts[:multiple]
-          @options[method_name] ||= []
-        else
-          @options[method_name]
-        end
-      end
-
-      class_def("#{method_name}=") do |value|
-        @options[method_name] = value
-      end
+      define_option(opts,&block)
     end
 
     #
-    # Defines a short_option with the given _opts_.
+    # Defines a short_option with the specified _opts_.
+    #
+    # _opts_ must contain the following keys:
+    # <tt>:name</tt>:: The name of the option.
+    # <tt>:flag</tt>:: The flag to use for the option.
+    #
+    # _opts_ may also contain the following keys:
+    # <tt>:multiply</tt>:: Specifies that the option may appear multiple
+    #                      times in the arguments.
+    # <tt>:sub_options</tt>:: Specifies that the option contains multiple
+    #                  sub-options.
     #
     #   short_option :flag => '-c', :name => :count
     #
-    def self.short_option(opts={},&block)
+    def self.short_option(opts,&block)
+      define_option(opts,&block)
+    end
+
+    #
+    # Defines an option with the specified _opts_ and the given _block_.
+    #
+    # _opts_ must contain the following keys:
+    # <tt>:name</tt>:: The name of the option.
+    # <tt>:flag</tt>:: The flag to use for the option.
+    #
+    # _opts_ may also contain the following keys:
+    # <tt>:multiply</tt>:: Specifies that the option may appear multiple
+    #                      times in the arguments.
+    # <tt>:sub_options</tt>:: Specifies that the option contains multiple
+    #                  sub-options.
+    #
+    def self.define_option(opts,&block)
       method_name = opts[:name].to_sym
 
       self.options[method_name] = Option.new(opts,&block)
 
       class_def(method_name) do
-        if opts[:multiple]
+        if opts[:sub_options]
+          @options[method_name] ||= OptionList.new
+        elsif opts[:multiple]
           @options[method_name] ||= []
         else
           @options[method_name]
@@ -207,7 +236,11 @@ module RProgram
       end
 
       class_def("#{method_name}=") do |value|
-        @options[method_name] = value
+        if opts[:sub_options]
+          @options[method_name] = OptionList.new(value)
+        else
+          @options[method_name] = value
+        end
       end
     end
 

@@ -15,6 +15,9 @@ module RProgram
     # Argument separator
     attr_reader :separator
 
+    # Does the option contain sub-options
+    attr_reader :sub_options
+
     #
     # Creates a new Option object with the specified _options_. If a _block_
     # is given it will be used for the custom formating of the option. If a
@@ -28,11 +31,14 @@ module RProgram
     # <tt>:equals</tt>:: Implies the option maybe formated as
     #                    <tt>"--flag=value"</tt>. Defaults to +falue+, if
     #                    not given.
-    # <tt>:multuple</tt>:: Implies the option maybe given an Array of
+    # <tt>:multuple</tt>:: Specifies the option maybe given an Array of
     #                      values. Defaults to +false+, if not given.
     # <tt>:separator</tt>:: The separator to use for formating multiple
     #                       arguments into one +String+. Cannot be used
     #                       with <tt>:multiple</tt>.
+    # <tt>:sub_options</tt>:: Specifies that the option contains
+    #                         sub-options. Defaults to false, if not given.
+    #
     #
     def initialize(options={},&block)
       @flag = options[:flag]
@@ -40,6 +46,7 @@ module RProgram
       @equals = options[:equals] || false
       @multiple = options[:multiple] || false
       @separator = options[:separator]
+      @sub_options = options[:sub_options] || false
 
       @formating = block
     end
