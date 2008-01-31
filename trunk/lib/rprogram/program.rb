@@ -1,3 +1,4 @@
+require 'rprogram/rprogram'
 require 'rprogram/compat'
 require 'rprogram/task'
 require 'rprogram/nameable'
@@ -96,6 +97,10 @@ module RProgram
     #
     def run(*args)
       args = args.map { |arg| arg.to_s }
+
+      if RProgram.debug
+        $stderr << ">>> #{@path} #{args.join(' ')}\n"
+      end
 
       Open3.popen3(@path,*args) do |stdin,stdout,stderr|
         return stdout.readlines
