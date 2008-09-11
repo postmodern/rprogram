@@ -1,6 +1,6 @@
 = RProgram
 
-* http://rubyforge.org/projects/rprogram/
+* http://rprogram.rubyforge.org/
 * Postmodern Modulus III (postmodern.mod3@gmail.com)
 
 == DESCRIPTION:
