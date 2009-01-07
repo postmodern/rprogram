@@ -3,12 +3,22 @@ require 'rprogram/extensions/hash'
 module RProgram
   class OptionList < Hash
 
+    #
+    # Creates a new OptionList object with the given _options_.
+    #
     def initialize(options={})
       super(options)
     end
 
     protected
 
+    #
+    # Provides transparent access to the options within the option list.
+    #
+    #   opt_list = OptionList.new(:name => 'test')
+    #   opt_list.name
+    #   # => "test"
+    #
     def method_missing(sym,*args,&block)
       name = sym.to_s
 
