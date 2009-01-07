@@ -4,7 +4,6 @@ README.txt
 Rakefile
 lib/rprogram.rb
 lib/rprogram/version.rb
-lib/rprogram/rprogram.rb
 lib/rprogram/compat.rb
 lib/rprogram/exceptions/program_not_found.rb
 lib/rprogram/exceptions.rb
