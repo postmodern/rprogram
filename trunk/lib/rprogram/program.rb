@@ -102,9 +102,7 @@ module RProgram
         $stderr << ">>> #{@path} #{args.join(' ')}\n"
       end
 
-      Open3.popen3(@path,*args) do |stdin,stdout,stderr|
-        return stdout.readlines
-      end
+      return Kernel.system(@path,*args)
     end
 
     #
