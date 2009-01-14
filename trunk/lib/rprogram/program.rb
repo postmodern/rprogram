@@ -102,7 +102,7 @@ module RProgram
       args = args.map { |arg| arg.to_s }
 
       if RProgram.debug
-        $stderr << ">>> #{@path} #{args.join(' ')}\n"
+        STDERR.puts ">>> #{@path} #{args.join(' ')}"
       end
 
       return Kernel.system(@path,*args)
