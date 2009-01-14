@@ -90,10 +90,13 @@ module RProgram
 
     #
     # Runs the program with the specified _args_ and returns
-    # an Array of the programs output.
+    # either +true+ or +false+, depending on the exit status of the
+    # program.
     #
     #   echo = Program.find_by_name('echo')
-    #   echo.run("hello") # => ["hello\n"]
+    #   echo.run('hello')
+    #   # hello
+    #   # => true
     #
     def run(*args)
       args = args.map { |arg| arg.to_s }
@@ -115,9 +118,8 @@ module RProgram
     #
     # Returns the path of the program.
     #
-    #   puts Program.find_by_name('echo')
-    #   /usr/bin/echo
-    #   # => nil
+    #   Program.find_by_name('echo').to_s
+    #   # => "/usr/bin/echo"
     #
     def to_s
       @path.to_s
