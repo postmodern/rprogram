@@ -33,6 +33,10 @@ module RProgram
       @multiple = options[:multiple] || false
     end
 
+    #
+    # Returns an +Array+ of the arguments for the non-option with the
+    # specified _value_.
+    #
     def arguments(value)
       return [] if (value==nil || value==false)
 
