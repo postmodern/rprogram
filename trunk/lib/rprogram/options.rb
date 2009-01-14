@@ -37,7 +37,9 @@ module RProgram
 
           ancestors.each do |base|
             if base.include?(Options)
-              return base.non_options[name] if base.non_options.has_key?(name)
+              if base.non_options.has_key?(name)
+                return base.non_options[name]
+              end
             end
           end
 
