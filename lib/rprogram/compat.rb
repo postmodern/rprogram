@@ -14,9 +14,9 @@ module RProgram
     # If the +PATH+ environment variable is not setup, an empty array will
     # be returned.
     #
-    #   Compat.PATH  #=> ["/bin", "/usr/bin"]
+    #   Compat.paths #=> ["/bin", "/usr/bin"]
     #
-    def self.PATH
+    def self.paths
       # return an empty array in case
       # the PATH variable does not exist
       return [] unless ENV['PATH']
@@ -35,7 +35,7 @@ module RProgram
     #   Compat.find_program('as')  #=> "/usr/bin/as"
     #
     def self.find_program(name)
-      self.PATH.each do |dir|
+      self.paths.each do |dir|
         full_path = File.expand_path(File.join(dir,name))
 
         return full_path if File.file?(full_path)
