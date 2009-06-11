@@ -4,8 +4,6 @@ require 'rprogram/task'
 require 'rprogram/nameable'
 require 'rprogram/exceptions/program_not_found'
 
-require 'open3'
-
 module RProgram
   class Program
 
