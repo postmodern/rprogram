@@ -49,7 +49,7 @@ module RProgram
     # specified _value_.
     #
     def arguments(value)
-      return [] if (value==nil || value==false)
+      return [] unless value
 
       if value.kind_of?(Hash)
         return value.map { |name,value| "#{name}=#{value}" }

@@ -54,8 +54,8 @@ module RProgram
     # _value_.
     #
     def arguments(value)
-      return [@flag] if value==true
-      return [] if (value==nil || value==false)
+      return [@flag] if value == true
+      return [] unless value
 
       if value.respond_to?(:arguments)
         value = value.arguments
