@@ -1,4 +1,5 @@
 require 'rprogram/version'
+require 'rprogram/rprogram'
 
 require 'spec_helper'
 
