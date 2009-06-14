@@ -1,5 +1,3 @@
-require 'rprogram/extensions'
-
 module RProgram
   class Option
 
