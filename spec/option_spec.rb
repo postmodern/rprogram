@@ -72,6 +72,30 @@ describe Option do
     end
   end
 
+  describe "multiple equals flags" do
+    before(:all) do
+      @option = Option.new(:multiple => true, :equals => true, :flag => '-f')
+    end
+
+    it_should_behave_like 'Option'
+
+    it "should render a single flag with a value" do
+      @option.arguments('foo').should == ['-f', 'foo']
+    end
+
+    it "should render multiple equal flags for multiple values" do
+      @option.arguments(['foo', 'bar']).should == ['-f=foo', '-f=bar']
+    end
+
+    it "should render multiple equal flags for a Hash of keys" do
+      @option.arguments({:foo => true, :bar => true, :baz => false}).should == ['-f=foo', '-f=bar']
+    end
+
+    it "should render multiple equal flags for a Hash of values" do
+      @option.arguments({:foo => 'bar', :bar => 'baz'}).should == ['-f=foo=bar', '-f=bar=baz']
+    end
+  end
+
   describe "separated values" do
     before(:all) do
       @option = Option.new(:seprator => ',', :flag => '-f')
