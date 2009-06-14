@@ -46,7 +46,7 @@ module RProgram
       @separator = options[:separator]
       @sub_options = options[:sub_options] || false
 
-      @formatter = (block || method(:default_format))
+      @formatter = (block || method(:default_formatter))
     end
 
     #
@@ -94,7 +94,7 @@ module RProgram
     # Returns an Array of the flag and the specified _value_ in argument
     # form.
     #
-    def default_format(value)
+    def default_formatter(value)
       return [@flag] + value if value.kind_of?(Array)
       return ["#{flag}=#{value}"] if @equals
       return [@flag, value]
