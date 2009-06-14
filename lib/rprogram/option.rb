@@ -81,10 +81,13 @@ module RProgram
             "#{key}=#{sub_value}"
           end
         }
+      elsif value.kind_of?(Array)
+        value.flatten!
+      else
+        value = [value]
       end
 
-      value = [value] unless value.kind_of?(Array)
-      value = value.flatten.compact
+      value.compact!
 
       if @multiple
         return value.inject([]) do |args,value|
