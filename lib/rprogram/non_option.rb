@@ -52,7 +52,7 @@ module RProgram
       return [] unless value
 
       if value.kind_of?(Hash)
-        return value.map { |name,value| "#{name}=#{value}" }
+        return value.map { |key,sub_value| "#{key}=#{sub_value}" }
       elsif value.kind_of?(Array)
         return value.compact
       else
