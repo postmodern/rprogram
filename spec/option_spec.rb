@@ -40,7 +40,7 @@ describe Option do
     end
 
     it "should render a single flag with multiple values" do
-      @option.arguments(['foo', 'bar', 'baz']).should == ['-f', 'foo', 'bar', 'baz']
+      @option.arguments(['foo', 'bar', 'baz']).should == ['-f=foo bar baz']
     end
 
     it "should render a single flag with a Hash of keys" do
