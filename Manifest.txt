@@ -9,8 +9,6 @@ lib/rprogram/exceptions/program_not_found.rb
 lib/rprogram/exceptions.rb
 lib/rprogram/extensions/meta/object.rb
 lib/rprogram/extensions/meta.rb
-lib/rprogram/extensions/array.rb
-lib/rprogram/extensions/hash.rb
 lib/rprogram/extensions.rb
 lib/rprogram/option_list.rb
 lib/rprogram/option.rb

@@ -63,6 +63,20 @@ module RProgram
         value = value.arguments
       end
 
+      if value.kind_of?(Hash)
+        value = value.map { |key,value|
+          if value == true
+            key.to_s
+          elsif value
+            "#{key}=#{value}"
+          end
+        }
+      end
+
+      if value.kind_of?(Array)
+        value = value.compact
+      end
+
       if @multiple
         if value.respond_to?(:map)
           return value.map { |arg| format(arg) }
