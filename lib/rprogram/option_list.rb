@@ -23,14 +23,14 @@ module RProgram
       name = sym.to_s
 
       unless block
-        if (name =~ /=$/ && args.length==1)
-          return self[name.chop.to_sym] = args[0]
-        elsif args.length==0
+        if (name =~ /=$/ && args.length == 1)
+          return self[name.chop.to_sym] = args.first
+        elsif args.empty?
           return self[sym]
         end
       end
 
-      super(sym,*args,&block)
+      return super(sym,*args,&block)
     end
 
   end
