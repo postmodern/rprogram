@@ -98,7 +98,7 @@ describe Option do
 
   describe "separated values" do
     before(:all) do
-      @option = Option.new(:seprator => ',', :flag => '-f')
+      @option = Option.new(:separator => ',', :flag => '-f')
     end
 
     it_should_behave_like 'Option'
