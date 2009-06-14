@@ -4,7 +4,7 @@ module RProgram
   # +false+ if they are not enabled.
   #
   def RProgram.debug
-    @@debug ||= false
+    @@rprogram_debug ||= false
   end
 
   #
@@ -12,6 +12,6 @@ module RProgram
   # specified _value_.
   #
   def RProgram.debug=(value)
-    @@debug = value
+    @@rprogram_debug = value
   end
 end
