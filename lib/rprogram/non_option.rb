@@ -4,9 +4,6 @@ module RProgram
     # Name of the argument(s)
     attr_reader :name
 
-    # Is the argument a leading argument(s)
-    attr_reader :leading
-
     # Is the argument a tailing argument(s)
     attr_reader :tailing
 
@@ -28,9 +25,23 @@ module RProgram
     def initialize(options={})
       @name = options[:name]
 
-      @leading = options[:leading] || false
-      @tailing = options[:tailing] || true
-      @multiple = options[:multiple] || false
+      @tailing = if options[:leading]
+                   !(options[:leading])
+                 elsif options[:tailing]
+                   options[:tailing]
+                 else
+                   true
+                 end
+
+      @multiple = (options[:multiple] || false)
+    end
+
+    #
+    # Returns +true+ if the non-options arguments are leading, returns
+    # +false+ otherwise.
+    #
+    def leading
+      !(@tailing)
     end
 
     #
