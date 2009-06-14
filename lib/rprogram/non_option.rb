@@ -52,12 +52,20 @@ module RProgram
       return [] unless value
 
       if value.kind_of?(Hash)
-        return value.map { |key,sub_value| "#{key}=#{sub_value}" }
+        value = value.map do |key,sub_value|
+          if sub_value == true
+            key.to_s
+          elsif sub_value
+            "#{key}=#{sub_value}"
+          end
+        end
       elsif value.kind_of?(Array)
-        return value.compact
+        value = value.flatten
       else
-        return [value]
+        value = [value]
       end
+
+      return value.compact
     end
 
   end
