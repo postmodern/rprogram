@@ -43,11 +43,7 @@ module RProgram
       if value.kind_of?(Hash)
         return value.map { |name,value| "#{name}=#{value}" }
       elsif value.kind_of?(Array)
-        if @multiple
-          return value.compact
-        else
-          return value.join
-        end
+        return value.compact
       else
         return [value]
       end
