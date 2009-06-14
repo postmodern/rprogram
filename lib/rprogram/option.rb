@@ -48,7 +48,7 @@ module RProgram
       @separator = options[:separator]
       @sub_options = options[:sub_options] || false
 
-      @formating = block
+      @formatter = (block || method(:default_format))
     end
 
     #
@@ -79,7 +79,7 @@ module RProgram
 
       if @multiple
         if value.respond_to?(:map)
-          return value.map { |arg| format(arg) }
+          return value.map { |arg| @formatter.call(arg) }
         end
       end
 
@@ -87,7 +87,7 @@ module RProgram
         value = value.join(@separator)
       end
 
-      return format(value)
+      return @formatter.call(value)
     end
 
     protected
@@ -100,18 +100,6 @@ module RProgram
       return [@flag] + value if value.kind_of?(Array)
       return ["#{flag}=#{value}"] if @equals
       return [@flag, value]
-    end
-
-    #
-    # Formats specified _value_ with the option flag using
-    # either the custom formating or the default_format.
-    #
-    def format(value)
-      if @formating
-        return @formating.call(@flag,value).to_a
-      else
-        return default_format(value)
-      end
     end
 
   end
