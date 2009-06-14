@@ -70,7 +70,7 @@ module RProgram
       end
 
       value = [value] unless value.kind_of?(Array)
-      value = value.compact
+      value = value.flatten.compact
 
       if @multiple
         return value.map(&@formatting).to_a
