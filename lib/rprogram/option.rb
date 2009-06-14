@@ -57,9 +57,7 @@ module RProgram
       return [@flag] if value == true
       return [] unless value
 
-      if value.respond_to?(:arguments)
-        value = value.arguments
-      end
+      value = value.arguments if value.respond_to?(:arguments)
 
       if value.kind_of?(Hash)
         value = value.map { |key,value|
@@ -71,21 +69,16 @@ module RProgram
         }
       end
 
-      if value.kind_of?(Array)
-        value = value.compact
-      end
+      value = [value] unless value.kind_of?(Array)
+      value = value.compact
 
       if @multiple
-        if value.respond_to?(:map)
-          return value.map { |arg| @formatter.call(arg) }
-        end
-      end
+        return value.map(&@formatting)
+      else
+        value = value.join(@separator) if @separator
 
-      if (value.kind_of?(Array) && @separator)
-        value = value.join(@separator)
+        return @formatter.call(value)
       end
-
-      return @formatter.call(value)
     end
 
     protected
@@ -95,9 +88,11 @@ module RProgram
     # form.
     #
     def default_formatter(value)
-      return [@flag] + value if value.kind_of?(Array)
-      return ["#{flag}=#{value}"] if @equals
-      return [@flag, value]
+      if @equals
+        return ["#{flag}=#{value}"]
+      else
+        return [@flag] + value
+      end
     end
 
   end
