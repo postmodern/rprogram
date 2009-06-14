@@ -10,6 +10,19 @@ module RProgram
       super(options)
     end
 
+    #
+    # Returns the arguments for the option-list.
+    #
+    def arguments
+      self.map do |key,sub_value|
+        if sub_value == true
+          key.to_s
+        elsif sub_value
+          "#{key}=#{sub_value}"
+        end
+      end
+    end
+
     protected
 
     #
