@@ -43,10 +43,24 @@ module RProgram
 
       @equals = (options[:equals] || false)
       @multiple = (options[:multiple] || false)
-      @separator = options[:separator]
+      @separator = if options[:separator]
+                     options[:separator]
+                   elsif options[:equals]
+                     ' '
+                   end
       @sub_options = (options[:sub_options] || false)
 
-      @formatter = (block || method(:default_formatter))
+      @formatter = if block
+        block
+      else
+        Proc.new do |opt,value|
+          if opt.equals
+            ["#{opt.flag}=#{value.first}"]
+          else
+            [opt.flag] + value
+          end
+        end
+      end
     end
 
     #
@@ -60,11 +74,11 @@ module RProgram
       value = value.arguments if value.respond_to?(:arguments)
 
       if value.kind_of?(Hash)
-        value = value.map { |key,value|
-          if value == true
+        value = value.map { |key,sub_value|
+          if sub_value == true
             key.to_s
-          elsif value
-            "#{key}=#{value}"
+          elsif sub_value
+            "#{key}=#{sub_value}"
           end
         }
       end
@@ -73,25 +87,13 @@ module RProgram
       value = value.flatten.compact
 
       if @multiple
-        return value.map(&@formatting).to_a
+        return value.inject([]) do |args,value|
+          args + @formatter.call(self,[value])
+        end
       else
         value = [value.join(@separator)] if @separator
 
-        return @formatter.call(value)
-      end
-    end
-
-    protected
-
-    #
-    # Returns an Array of the flag and the specified _value_ in argument
-    # form.
-    #
-    def default_formatter(value)
-      if @equals
-        return ["#{@flag}=#{value}"]
-      else
-        return [@flag] + value
+        return @formatter.call(self,value)
       end
     end
 
