@@ -41,10 +41,10 @@ module RProgram
     def initialize(options={},&block)
       @flag = options[:flag]
 
-      @equals = options[:equals] || false
-      @multiple = options[:multiple] || false
+      @equals = (options[:equals] || false)
+      @multiple = (options[:multiple] || false)
       @separator = options[:separator]
-      @sub_options = options[:sub_options] || false
+      @sub_options = (options[:sub_options] || false)
 
       @formatter = (block || method(:default_formatter))
     end
@@ -73,9 +73,9 @@ module RProgram
       value = value.compact
 
       if @multiple
-        return value.map(&@formatting)
+        return value.map(&@formatting).to_a
       else
-        value = value.join(@separator) if @separator
+        value = [value.join(@separator)] if @separator
 
         return @formatter.call(value)
       end
@@ -89,7 +89,7 @@ module RProgram
     #
     def default_formatter(value)
       if @equals
-        return ["#{flag}=#{value}"]
+        return ["#{@flag}=#{value}"]
       else
         return [@flag] + value
       end
