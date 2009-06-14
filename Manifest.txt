@@ -23,4 +23,3 @@ spec/rprogram_spec.rb
 spec/compat_spec.rb
 spec/option_examples.rb
 spec/option_spec.rb
-spec/non_option_spec.rb
