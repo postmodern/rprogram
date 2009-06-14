@@ -80,7 +80,7 @@ describe Option do
     it_should_behave_like 'Option'
 
     it "should render a single flag with a value" do
-      @option.arguments('foo').should == ['-f', 'foo']
+      @option.arguments('foo').should == ['-f=foo']
     end
 
     it "should render multiple equal flags for multiple values" do
