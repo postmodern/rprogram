@@ -19,9 +19,12 @@ lib/rprogram/nameable.rb
 lib/rprogram/program.rb
 lib/rprogram/rprogram.rb
 spec/spec_helper.rb
+spec/classes/named_program.rb
+spec/classes/aliased_program.rb
 spec/rprogram_spec.rb
 spec/compat_spec.rb
 spec/option_examples.rb
 spec/option_spec.rb
 spec/non_option_spec.rb
 spec/option_list_spec.rb
+spec/nameable_spec.rb
