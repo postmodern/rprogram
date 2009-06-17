@@ -123,6 +123,8 @@ module RProgram
     #   subtask :extra, ExtraTask
     #
     def self.subtask(name,task)
+      name = name.to_s
+
       class_eval %{
         def #{name}(options={},&block)
           if @subtasks[#{name.dump}]
