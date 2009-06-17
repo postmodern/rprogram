@@ -76,9 +76,10 @@ module RProgram
     #   end
     #
     def self.find(*args,&block)
-      path = Compat.find_program_by_names(program_names)
+      path = Compat.find_program_by_names(self.program_names)
+
       unless path
-        names = program_names.map { |name| name.dump }.join(', ')
+        names = self.program_names.map { |name| name.dump }.join(', ')
 
         raise(ProgramNotFound,"programs #{names} were not found",caller)
       end
