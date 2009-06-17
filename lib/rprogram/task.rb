@@ -253,9 +253,9 @@ module RProgram
       flag = flag.to_s
 
       # remove leading dashes
-      if flag =~ /^--/
+      if flag[0..1] == '--'
         method_name = flag[2..-1]
-      elsif flag =~ /^-/
+      elsif flag[0..0] == '-'
         method_name = flag[1..-1]
       else
         method_name = flag
