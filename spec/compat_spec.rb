@@ -4,7 +4,9 @@ require 'spec_helper'
 
 describe Compat do
   it "should have a list of directories that contain programs" do
-    Compat.paths.any? { |dir|
+    Compat.paths.should_not be_empty
+
+    Compat.paths.all? { |dir|
       File.directory?(dir)
     }.should == true
   end
