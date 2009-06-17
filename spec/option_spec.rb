@@ -12,19 +12,27 @@ describe Option do
     it_should_behave_like 'Option'
 
     it "should render a single flag with an optional value" do
+      value = 'foo'
+
       @option.arguments('foo').should == ['-f', 'foo']
     end
 
     it "should render a single flag with multiple values" do
-      @option.arguments(['foo','bar','baz']).should == ['-f','foo','bar','baz']
+      value = ['foo','bar','baz']
+
+      @option.arguments(value).should == ['-f','foo','bar','baz']
     end
 
     it "should render a single flag with a Hash of keys" do
-      @option.arguments({:foo => true, :bar => false}).should == ['-f','foo']
+      value = {:foo => true, :bar => false}
+
+      @option.arguments(value).should == ['-f','foo']
     end
 
     it "should render a single flag with a Hash of keys and values" do
-      @option.arguments({:foo => 'bar'}).should == ['-f','foo=bar']
+      value = {:foo => 'bar'}
+
+      @option.arguments(value).should == ['-f','foo=bar']
     end
   end
 
@@ -36,15 +44,21 @@ describe Option do
     it_should_behave_like 'Option'
 
     it "should render a single flag with a value" do
+      value = 'foo'
+
       @option.arguments('foo').should == ['-f=foo']
     end
 
     it "should render a single flag with multiple values" do
-      @option.arguments(['foo', 'bar', 'baz']).should == ['-f=foo bar baz']
+      value = ['foo', 'bar', 'baz']
+
+      @option.arguments(value).should == ['-f=foo bar baz']
     end
 
     it "should render a single flag with a Hash of keys" do
-      @option.arguments({:foo => true, :bar => false}).should == ['-f=foo']
+      value = {:foo => true, :bar => false}
+
+      @option.arguments(value).should == ['-f=foo']
     end
   end
 
@@ -56,19 +70,29 @@ describe Option do
     it_should_behave_like 'Option'
 
     it "should render a single flag with a value" do
-      @option.arguments('foo').should == ['-f', 'foo']
+      value = 'foo'
+
+      @option.arguments(value).should == ['-f', 'foo']
     end
 
     it "should render multiple flags for multiple values" do
-      @option.arguments(['foo','bar','baz']).should == ['-f', 'foo', '-f', 'bar', '-f', 'baz']
+      value = ['foo','bar','baz']
+
+      @option.arguments(value).should == ['-f', 'foo', '-f', 'bar', '-f', 'baz']
     end
 
     it "should render multiple flags for a Hash of keys" do
-      @option.arguments({:foo => true, :bar => true, :baz => false}).should == ['-f', 'foo', '-f', 'bar']
+      value = {:foo => true, :bar => true, :baz => false}
+      args = @option.arguments(value)
+      
+      (args & ['-f', 'foo']).should == ['-f', 'foo']
+      (args & ['-f', 'bar']).should == ['-f', 'bar']
     end
 
     it "should render multiple flags for a Hash of values" do
-      @option.arguments({:foo => 'bar'}).should == ['-f', 'foo=bar']
+      value = {:foo => 'bar'}
+
+      @option.arguments(value).should == ['-f', 'foo=bar']
     end
   end
 
@@ -80,19 +104,31 @@ describe Option do
     it_should_behave_like 'Option'
 
     it "should render a single flag with a value" do
-      @option.arguments('foo').should == ['-f=foo']
+      value = 'foo'
+
+      @option.arguments(value).should == ['-f=foo']
     end
 
     it "should render multiple equal flags for multiple values" do
-      @option.arguments(['foo', 'bar']).should == ['-f=foo', '-f=bar']
+      value = ['foo', 'bar']
+
+      @option.arguments(value).should == ['-f=foo', '-f=bar']
     end
 
     it "should render multiple equal flags for a Hash of keys" do
-      @option.arguments({:foo => true, :bar => true, :baz => false}).should == ['-f=foo', '-f=bar']
+      value = {:foo => true, :bar => true, :baz => false}
+      args = @option.arguments(value)
+      
+      args.include?('-f=foo').should == true
+      args.include?('-f=bar').should == true
     end
 
     it "should render multiple equal flags for a Hash of values" do
-      @option.arguments({:foo => 'bar', :bar => 'baz'}).should == ['-f=foo=bar', '-f=bar=baz']
+      value = {:foo => 'bar', :bar => 'baz'}
+      args = @option.arguments(value)
+
+      args.include?('-f=foo=bar').should == true
+      args.include?('-f=bar=baz').should == true
     end
   end
 
@@ -104,19 +140,39 @@ describe Option do
     it_should_behave_like 'Option'
 
     it "should render a single flag with a value" do
+      value = 'foo'
+
       @option.arguments('foo').should == ['-f', 'foo']
     end
 
     it "should render a single flag with multiple values" do
-      @option.arguments(['foo', 'bar', 'baz']).should == ['-f', 'foo,bar,baz']
+      value = ['foo', 'bar', 'baz']
+
+      @option.arguments(value).should == ['-f', 'foo,bar,baz']
     end
 
     it "should render a single flag with a Hash of keys" do
-      @option.arguments({:foo => true, :bar => true, :baz => false}).should == ['-f', 'foo,bar']
+      value = {:foo => true, :bar => true, :baz => false}
+      args = @option.arguments(value)
+      
+      args[0].should == '-f'
+
+      sub_args = args[1].split(',')
+      
+      sub_args.include?('foo').should == true
+      sub_args.include?('bar').should == true
     end
 
     it "should render a single flag with a Hash of values" do
-      @option.arguments({:foo => 'bar', :bar => 'baz'}).should == ['-f', 'foo=bar,bar=baz']
+      value = {:foo => 'bar', :bar => 'baz'}
+      args = @option.arguments(value)
+      
+      args[0].should == '-f'
+
+      sub_args = args[1].split(',')
+
+      sub_args.include?('foo=bar').should == true
+      sub_args.include?('bar=baz').should == true
     end
   end
 end
