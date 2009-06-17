@@ -60,5 +60,12 @@ module RProgram
     def program_aliases
       self.class.program_aliases
     end
+
+    #
+    # Returns the program names.
+    #
+    def program_names
+      self.class.program_names
+    end
   end
 end
