@@ -21,7 +21,7 @@ module RProgram
       # the PATH variable does not exist
       return [] unless ENV['PATH']
 
-      if self.platform =~ /mswin(32|64)/
+      if Compat.platform =~ /mswin(32|64)/
         return ENV['PATH'].split(';')
       else
         return ENV['PATH'].split(':')
