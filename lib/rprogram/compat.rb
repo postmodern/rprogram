@@ -5,7 +5,7 @@ module RProgram
     #
     #   Compat.arch  #=> "linux"
     #
-    def self.platform
+    def Compat.platform
       RUBY_PLATFORM.split('-').last
     end
 
@@ -16,7 +16,7 @@ module RProgram
     #
     #   Compat.paths #=> ["/bin", "/usr/bin"]
     #
-    def self.paths
+    def Compat.paths
       # return an empty array in case
       # the PATH variable does not exist
       return [] unless ENV['PATH']
@@ -34,8 +34,8 @@ module RProgram
     #
     #   Compat.find_program('as')  #=> "/usr/bin/as"
     #
-    def self.find_program(name)
-      self.paths.each do |dir|
+    def Compat.find_program(name)
+      Compat.paths.each do |dir|
         full_path = File.expand_path(File.join(dir,name))
 
         return full_path if File.file?(full_path)
@@ -51,8 +51,8 @@ module RProgram
     #
     #   Compat.find_program_by_names("gas","as")  #=> "/usr/bin/as"
     #
-    def self.find_program_by_names(*names)
-      names.map { |name| self.find_program(name) }.compact.first
+    def Compat.find_program_by_names(*names)
+      names.map { |name| Compat.find_program(name) }.compact.first
     end
   end
 end
