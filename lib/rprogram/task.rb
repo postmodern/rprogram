@@ -141,19 +141,19 @@ module RProgram
     end
 
     #
-    # Defines a non-option with the given _opts_.
+    # Defines a non-option with the given _options_.
     #
     #   non_option :name => 'input_file', :tailing => true
     #
     #   non_option :name => 'file', :tailing => true, :multiple => true
     #
-    def self.non_option(opts={})
-      name = opts[:name].to_sym
+    def self.non_option(options={})
+      name = options[:name].to_sym
 
-      self.non_options[name] = NonOption.new(opts)
+      self.non_options[name] = NonOption.new(options)
 
       class_def(name) do
-        if opts[:multiple]
+        if options[:multiple]
           @options[name] ||= []
         else
           @options[name]
@@ -166,14 +166,14 @@ module RProgram
     end
 
     #
-    # Defines a long-option with the specified _opts_.
+    # Defines a long-option with the specified _options_.
     #
-    # _opts_ must contain the following keys:
+    # _options_ must contain the following keys:
     # <tt>:flag</tt>:: The flag to use for the option.
     #
-    # _opts_ may also contain the following keys:
+    # _options_ may also contain the following keys:
     # <tt>:name</tt>:: The name of the option. Defaults to the
-    #                  flag_namify'ed form of <tt>opts[:flag]</tt>, if not
+    #                  flag_namify'ed form of <tt>options[:flag]</tt>, if not
     #                  given.
     # <tt>:multiply</tt>:: Specifies that the option may appear multiple
     #                      times in the arguments.
@@ -184,20 +184,20 @@ module RProgram
     #
     #   long_option :flag => '-f', :name => :file
     #
-    def self.long_option(opts={},&block)
-      opts[:name] ||= Task.flag_namify(opts[:flag])
+    def self.long_option(options={},&block)
+      options[:name] ||= Task.flag_namify(options[:flag])
 
-      define_option(opts,&block)
+      define_option(options,&block)
     end
 
     #
-    # Defines a short_option with the specified _opts_.
+    # Defines a short_option with the specified _options_.
     #
-    # _opts_ must contain the following keys:
+    # _options_ must contain the following keys:
     # <tt>:name</tt>:: The name of the option.
     # <tt>:flag</tt>:: The flag to use for the option.
     #
-    # _opts_ may also contain the following keys:
+    # _options_ may also contain the following keys:
     # <tt>:multiply</tt>:: Specifies that the option may appear multiple
     #                      times in the arguments.
     # <tt>:sub_options</tt>:: Specifies that the option contains multiple
@@ -205,32 +205,32 @@ module RProgram
     #
     #   short_option :flag => '-c', :name => :count
     #
-    def self.short_option(opts,&block)
-      define_option(opts,&block)
+    def self.short_option(options,&block)
+      define_option(options,&block)
     end
 
     #
-    # Defines an option with the specified _opts_ and the given _block_.
+    # Defines an option with the specified _options_ and the given _block_.
     #
-    # _opts_ must contain the following keys:
+    # _options_ must contain the following keys:
     # <tt>:name</tt>:: The name of the option.
     # <tt>:flag</tt>:: The flag to use for the option.
     #
-    # _opts_ may also contain the following keys:
+    # _options_ may also contain the following keys:
     # <tt>:multiply</tt>:: Specifies that the option may appear multiple
     #                      times in the arguments.
     # <tt>:sub_options</tt>:: Specifies that the option contains multiple
     #                  sub-options.
     #
-    def self.define_option(opts,&block)
-      method_name = opts[:name].to_sym
+    def self.define_option(options,&block)
+      method_name = options[:name].to_sym
 
-      self.options[method_name] = Option.new(opts,&block)
+      self.options[method_name] = Option.new(options,&block)
 
       class_def(method_name) do
-        if opts[:sub_options]
+        if options[:sub_options]
           @options[method_name] ||= OptionList.new
-        elsif opts[:multiple]
+        elsif options[:multiple]
           @options[method_name] ||= []
         else
           @options[method_name]
@@ -238,7 +238,7 @@ module RProgram
       end
 
       class_def("#{method_name}=") do |value|
-        if opts[:sub_options]
+        if options[:sub_options]
           @options[method_name] = OptionList.new(value)
         else
           @options[method_name] = value
