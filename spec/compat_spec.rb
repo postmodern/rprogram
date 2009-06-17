@@ -6,7 +6,7 @@ describe Compat do
   it "should have a list of directories that contain programs" do
     Compat.paths.should_not be_empty
 
-    Compat.paths.all? { |dir|
+    Compat.paths.any? { |dir|
       File.directory?(dir)
     }.should == true
   end
