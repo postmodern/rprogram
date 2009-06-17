@@ -185,9 +185,11 @@ module RProgram
     #   long_option :flag => '-f', :name => :file
     #
     def self.long_option(options={},&block)
-      options[:name] ||= Task.flag_namify(options[:flag])
+      if (options[:name].nil? && options[:flag])
+        options[:name] = Task.flag_namify(options[:flag])
+      end
 
-      define_option(options,&block)
+      return define_option(options,&block)
     end
 
     #
