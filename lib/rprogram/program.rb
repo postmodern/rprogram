@@ -37,29 +37,29 @@ module RProgram
 
     #
     # Creates a new program object with the specified _path_, if _path_
-    # is a valid file. Any given _args_ or a given _block_ will be used
+    # is a valid file. Any given _arguments_ or a given _block_ will be used
     # in creating the new program.
     #
     #   Program.find_with_path('/bin/cd') # => Program
     #
     #   Program.find_with_path('/obviously/fake') # => nil
     #
-    def self.find_with_path(path,*args,&block)
-      return self.new(path,*args,&block) if File.file?(path)
+    def self.find_with_path(path,*arguments,&block)
+      return self.new(path,*arguments,&block) if File.file?(path)
     end
 
     #
     # Creates a new program object with the specified _paths_,
-    # if a path within _paths_ is a valid file. Any given _args_ or
+    # if a path within _paths_ is a valid file. Any given _arguments_ or
     # a given _block_ will be used in creating the new program.
     #
     #   Program.find_with_paths(['/bin/cd','/usr/bin/cd']) # => Program
     #
     #   Program.find_with_paths(['/obviously/fake','/bla']) # => nil
     #
-    def self.find_with_paths(paths,*args,&block)
+    def self.find_with_paths(paths,*arguments,&block)
       paths.each do |path|
-        return self.new(path,*args,&block) if File.file?(path)
+        return self.new(path,*arguments,&block) if File.file?(path)
       end
     end
 
@@ -67,7 +67,7 @@ module RProgram
     # Finds and creates the program using it's +program_names+ and returns
     # a new Program object. If the program cannot be found by any of it's
     # +program_names+, a ProramNotFound exception will be raised. Any given
-    # _args_ or a given _block_ will be used in creating the new program.
+    # _arguments_ or a given _block_ will be used in creating the new program.
     #
     #   Program.find # => Program
     #
@@ -75,7 +75,7 @@ module RProgram
     #     ...
     #   end
     #
-    def self.find(*args,&block)
+    def self.find(*arguments,&block)
       path = Compat.find_program_by_names(*self.program_names)
 
       unless path
@@ -84,11 +84,11 @@ module RProgram
         raise(ProgramNotFound,"programs #{names} were not found",caller)
       end
 
-      return self.new(path,*args,&block)
+      return self.new(path,*arguments,&block)
     end
 
     #
-    # Runs the program with the specified _args_ and returns
+    # Runs the program with the specified _arguments_ and returns
     # either +true+ or +false+, depending on the exit status of the
     # program.
     #
