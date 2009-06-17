@@ -1,5 +1,3 @@
-require 'rprogram/extensions/hash'
-
 module RProgram
   class OptionList < Hash
 
