@@ -21,7 +21,7 @@ module RProgram
           name = name.to_sym
 
           ancestors.each do |base|
-            if base.include?(Options)
+            if base.include?(RProgram::Options)
               return true if base.non_options.include?(name)
             end
           end
@@ -36,7 +36,7 @@ module RProgram
           name = name.to_sym
 
           ancestors.each do |base|
-            if base.include?(Options)
+            if base.include?(RProgram::Options)
               if base.non_options.has_key?(name)
                 return base.non_options[name]
               end
@@ -61,7 +61,7 @@ module RProgram
           name = name.to_sym
 
           ancestors.each do |base|
-            if base.include?(Options)
+            if base.include?(RProgram::Options)
               return true if base.options.has_key?(name)
             end
           end
@@ -77,7 +77,7 @@ module RProgram
           name = name.to_sym
 
           ancestors.each do |base|
-            if base.include?(Options)
+            if base.include?(RProgram::Options)
               return base.options[name] if base.options.has_key?(name)
             end
           end
