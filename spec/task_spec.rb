@@ -1,6 +1,7 @@
 require 'rprogram/task'
 
 require 'spec_helper'
+require 'classes/ls_task'
 
 describe Task do
   describe "flag_namify" do
@@ -31,5 +32,28 @@ describe Task do
     it "should namify long options" do
       Task.flag_namify('--long-option').should == 'long_option'
     end
+  end
+
+  before(:each) do
+    @task = LSTask.new
+  end
+
+  it "should have no arguments by default" do
+    @task.arguments.should be_empty
+  end
+
+  it "should define reader and writter methods for options" do
+    @task.all.should be_nil
+
+    @task.all = true
+    @task.all.should == true
+  end
+
+  it "should default the name of long options to the flag" do
+    LSTask.options[:author].flag.should == '--author'
+  end
+
+  it "should allow the name of long options to be overridden" do
+    LSTask.options[:group_dirs_first].flag.should == '--group-directories-first'
   end
 end
