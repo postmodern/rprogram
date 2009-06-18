@@ -35,7 +35,7 @@ describe Program do
   end
 
   it "should find a program from given paths" do
-    prog = Program.find_with_paths('/usr/bin/ls','/bin/ls')
+    prog = Program.find_with_paths(['/usr/bin/ls','/bin/ls'])
 
     prog.should_not be_nil
   end
