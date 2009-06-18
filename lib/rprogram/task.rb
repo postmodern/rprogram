@@ -254,7 +254,7 @@ module RProgram
     #   Task.flag_namify('--output-file')  # => "output_file"
     #
     def Task.flag_namify(flag)
-      flag = flag.to_s
+      flag = flag.to_s.downcase
 
       # remove leading dashes
       if flag[0..1] == '--'
