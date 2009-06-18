@@ -50,6 +50,10 @@ describe Task do
     @task.all.should == true
   end
 
+  it "should default the value of multi-options to an empty Array" do
+    @task.hide.should be_empty
+  end
+
   it "should define reader and writter methods for non-options" do
     @task.files.should be_empty
 
