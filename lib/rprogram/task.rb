@@ -266,7 +266,7 @@ module RProgram
       end
 
       # replace remaining dashes with underscores
-      return method_name.gsub(/[-_.\s]+/,'_')
+      return method_name.gsub(/[-_\.\s]+/,'_')
     end
 
   end
