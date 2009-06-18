@@ -173,8 +173,8 @@ module RProgram
     #
     # _options_ may also contain the following keys:
     # <tt>:name</tt>:: The name of the option. Defaults to the
-    #                  flag_namify'ed form of <tt>options[:flag]</tt>, if not
-    #                  given.
+    #                  flag_namify'ed form of <tt>options[:flag]</tt>,
+    #                  if not given.
     # <tt>:multiply</tt>:: Specifies that the option may appear multiple
     #                      times in the arguments.
     # <tt>:sub_options</tt>:: Specifies that the option contains multiple
