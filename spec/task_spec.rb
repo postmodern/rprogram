@@ -2,6 +2,7 @@ require 'rprogram/task'
 
 require 'spec_helper'
 require 'classes/ls_task'
+require 'classes/ls_selinux_task'
 
 describe Task do
   describe "flag_namify" do
@@ -55,5 +56,11 @@ describe Task do
 
   it "should allow the name of long options to be overridden" do
     LSTask.options[:group_dirs_first].flag.should == '--group-directories-first'
+  end
+
+  it "should allow options to be inherited" do
+    LSTask.has_option?(:security_context).should == false
+    LSSELinuxTask.has_option?(:all).should == true
+    LSSELinuxTask.has_option?(:security_context).should == true
   end
 end

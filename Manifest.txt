@@ -23,6 +23,7 @@ spec/classes/named_program.rb
 spec/classes/aliased_program.rb
 spec/classes/ls_program.rb
 spec/classes/ls_task.rb
+spec/classes/ls_selinux_task.rb
 spec/rprogram_spec.rb
 spec/compat_spec.rb
 spec/option_examples.rb
