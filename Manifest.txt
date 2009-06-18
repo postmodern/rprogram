@@ -30,3 +30,4 @@ spec/non_option_spec.rb
 spec/option_list_spec.rb
 spec/nameable_spec.rb
 spec/program_spec.rb
+spec/task_spec.rb
