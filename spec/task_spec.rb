@@ -50,6 +50,21 @@ describe Task do
     @task.all.should == true
   end
 
+  it "should define reader and writter methods for non-options" do
+    @task.files.should be_empty
+
+    @task.files << 'file.txt'
+    @task.files.should == ['file.txt']
+  end
+
+  it "should provide access to the defined options" do
+    LSTask.options.should_not be_empty
+  end
+
+  it "should provide access to the defined non-options" do
+    LSTask.non_options.should_not be_empty
+  end
+
   it "should default the name of long options to the flag" do
     LSTask.options[:author].flag.should == '--author'
   end

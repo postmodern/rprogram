@@ -6,4 +6,6 @@ class LSTask < RProgram::Task
   long_option :flag => '--author'
   long_option :flag => '--group-directories-first', :name => :group_dirs_first
 
+  non_option :tailing => true, :multiple => true, :name => :files
+
 end
