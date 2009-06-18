@@ -4,6 +4,10 @@ require 'spec_helper'
 
 describe Task do
   describe "flag_namify" do
+    it "should downcase all characters" do
+      Task.flag_namify('-SHORT-option').should == 'short_option'
+    end
+
     it "should replace dashes with underscores" do
       Task.flag_namify('-short-option').should == 'short_option'
     end
