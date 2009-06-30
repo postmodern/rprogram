@@ -11,11 +11,11 @@ describe NonOption do
     leading = NonOption.new(:name => 'files', :leading => true)
     tailing = NonOption.new(:name => 'files', :tailing => true)
 
-    leading.leading.should == true
-    leading.tailing.should == false
+    leading.should be_leading
+    leading.should_not be_tailing
 
-    tailing.leading.should == false
-    tailing.tailing.should == true
+    tailing.should_not be_leading
+    tailing.should be_tailing
   end
 
   it "should return an empty Array when passed nil" do

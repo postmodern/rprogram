@@ -49,7 +49,7 @@ module RProgram
       @options.each do |name,value|
         non_opt = get_non_option(name)
 
-        if (non_opt && non_opt.leading)
+        if (non_opt && non_opt.leading?)
           args += non_opt.arguments(value)
         end
       end
@@ -99,7 +99,7 @@ module RProgram
       @options.each do |name,value|
         non_opt = get_non_option(name)
 
-        if (non_opt && non_opt.tailing)
+        if (non_opt && non_opt.tailing?)
           args += non_opt.arguments(value)
         end
       end

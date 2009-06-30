@@ -4,9 +4,6 @@ module RProgram
     # Name of the argument(s)
     attr_reader :name
 
-    # Is the argument a tailing argument(s)
-    attr_reader :tailing
-
     # Can the argument be specified multiple times
     attr_reader :multiple
 
@@ -37,10 +34,18 @@ module RProgram
     end
 
     #
+    # Returns +true+ if the non-options arguments are tailing, returns
+    # +false+ otherwise.
+    #
+    def tailing?
+      @tailing == true
+    end
+
+    #
     # Returns +true+ if the non-options arguments are leading, returns
     # +false+ otherwise.
     #
-    def leading
+    def leading?
       !(@tailing)
     end
 
