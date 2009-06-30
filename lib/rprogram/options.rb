@@ -4,7 +4,7 @@ require 'rprogram/option'
 
 module RProgram
   module Options
-    def self.included(base)
+    def self.included(base) # :nodoc:
       base.metaclass_eval do
         #
         # Returns a Hash of all defined non-options.
