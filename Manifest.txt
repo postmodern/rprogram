@@ -1,5 +1,6 @@
 History.txt
 Manifest.txt
+LICENSE.txt
 README.txt
 Rakefile
 lib/rprogram.rb
