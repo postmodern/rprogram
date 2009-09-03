@@ -8,16 +8,19 @@ module RProgram
     attr_reader :multiple
 
     #
-    # Creates a new NonOption object with the specified _options_.
+    # Creates a new NonOption object.
     #
-    # _options_ may contain the following keys:
-    # <tt>:name</tt>:: The name of the non-option.
-    # <tt>:leading</tt>:: Implies the non-option is a leading non-option.
-    #                     Defaults to +false+, if not given.
-    # <tt>:tailing</tt>:: Implies the non-option is a tailing non-option.
-    #                     Defaults to +true+, if not given.
-    # <tt>:multiple</tt>:: Implies the non-option maybe given an Array
-    #                      of values. Defaults to +false+, if not given.
+    # @param [Hash] options Additional options.
+    # @option options [String] :name The name of the non-option.
+    # @option options [true, false] :leading (true)
+    #                                        Implies the non-option is a
+    #                                        leading non-option.
+    # @option options [false, true] :tailing (false)
+    #                                        Implies the non-option is a
+    #                                        tailing non-option.
+    # @option options [false, true] :multiple (false)
+    #                                         Implies the non-option maybe
+    #                                         given an Array of values.
     #
     def initialize(options={})
       @name = options[:name]
@@ -34,24 +37,32 @@ module RProgram
     end
 
     #
-    # Returns +true+ if the non-options arguments are tailing, returns
-    # +false+ otherwise.
+    # Determines whether the non-option's arguments are tailing.
+    #
+    # @return [true, false] Specifies whether the non-option's arguments are
+    #                       tailing.
     #
     def tailing?
       @tailing == true
     end
 
     #
-    # Returns +true+ if the non-options arguments are leading, returns
-    # +false+ otherwise.
+    # Determines whether the non-option's arguments are leading.
+    #
+    # @return [true, false] Specifies whether the non-option's arguments are
+    #                       leading.
     #
     def leading?
       !(@tailing)
     end
 
     #
-    # Returns an +Array+ of the arguments for the non-option with the
-    # specified _value_.
+    # Formats the arguments for the non-option.
+    #
+    # @param [Hash, Array, String, nil] value The value to use for the
+    #                                         arguments of the non-option.
+    #                                   
+    # @return [Array] The arguments for the non-option.
     #
     def arguments(value)
       return [] unless value
