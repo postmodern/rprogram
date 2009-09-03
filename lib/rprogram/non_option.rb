@@ -11,7 +11,7 @@ module RProgram
     # Creates a new NonOption object.
     #
     # @param [Hash] options Additional options.
-    # @option options [String] :name The name of the non-option.
+    # @option options [Symbol] :name The name of the non-option.
     # @option options [true, false] :leading (true)
     #                                        Implies the non-option is a
     #                                        leading non-option.
