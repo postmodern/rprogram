@@ -1,8 +1,11 @@
 module RProgram
   module Compat
     #
-    # Returns the native _platform_.
+    # Determines the native platform.
     #
+    # @return [String] The native platform.
+    #
+    # @example
     #   Compat.arch  #=> "linux"
     #
     def Compat.platform
@@ -10,10 +13,11 @@ module RProgram
     end
 
     #
-    # Returns an array representing the +PATH+ environment variable.
-    # If the +PATH+ environment variable is not setup, an empty array will
-    # be returned.
+    # Determines the contents of the +PATH+ environment variable.
     #
+    # @return [Array] The contents of the +PATH+ environment variable.
+    #
+    # @example
     #   Compat.paths #=> ["/bin", "/usr/bin"]
     #
     def Compat.paths
@@ -29,9 +33,13 @@ module RProgram
     end
 
     #
-    # Finds the program matching _name_ and returns it's full path.
-    # If the program was not found, +nil+ will be returned.
+    # Finds the full-path of the program with the matching name.
     #
+    # @param [String] name The name of the program to find.
+    #
+    # @return [String, nil] The full-path of the desired program.
+    #
+    # @example
     #   Compat.find_program('as')  #=> "/usr/bin/as"
     #
     def Compat.find_program(name)
@@ -45,10 +53,14 @@ module RProgram
     end
 
     #
-    # Finds the program matching one of the names within _names_ and
-    # returns it's full path. If no program was found matching any of
-    # the names, the +nil+ will be returned.
+    # Finds the program matching one of the matching names.
     #
+    # @param [Array] names The names of the program to use while
+    #                      searching for the program.
+    #
+    # @return [String, nil] The first full-path for the program.
+    #
+    # @example
     #   Compat.find_program_by_names("gas","as")  #=> "/usr/bin/as"
     #
     def Compat.find_program_by_names(*names)
