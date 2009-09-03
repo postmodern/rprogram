@@ -16,10 +16,18 @@ module RProgram
     attr_reader :name
 
     #
-    # Creates a new Program object from _path_. If _path_ is not a valid
-    # file, a ProgramNotFound exception will be thrown. If a _block_ is
-    # given, it will be passed the newly created Program.
+    # Creates a new Program object.
     #
+    # @param [String] path The full-path of the program.
+    #
+    # @yield [prog] If a block is given, it will be passed the newly
+    #               created Program object.
+    # @yieldparam [Program] prog The newly created program object.
+    #
+    # @raise [ProgramNotFound] Specifies the given path was not a valid
+    #                          file.
+    #
+    # @example
     #   Program.new('/usr/bin/ls')
     #
     def initialize(path,&block)
@@ -36,13 +44,27 @@ module RProgram
     end
 
     #
-    # Creates a new program object with the specified _path_, if _path_
-    # is a valid file. Any given _arguments_ or a given _block_ will be used
-    # in creating the new program.
+    # Creates a new program object.
     #
-    #   Program.find_with_path('/bin/cd') # => Program
+    # @param [String] path The full-path of the program.
+    # @param [Array] arguments Additional arguments to initialize the
+    #                          program with.
     #
-    #   Program.find_with_path('/obviously/fake') # => nil
+    # @yield [prog] If a block is given, it will be passed the newly
+    #               created Program object.
+    # @yieldparam [Program] prog The newly created program object.
+    #
+    # @return [Program, nil] Returns the newly created Program object.
+    #                        If the given path was not a valid file,
+    #                        +nil+ will be returned.
+    #
+    # @example
+    #   Program.find_with_path('/bin/cd')
+    #   # => Program
+    #
+    # @example
+    #   Program.find_with_path('/obviously/fake')
+    #   # => nil
     #
     def self.find_with_path(path,*arguments,&block)
       return self.new(path,*arguments,&block) if File.file?(path)
@@ -53,9 +75,25 @@ module RProgram
     # if a path within _paths_ is a valid file. Any given _arguments_ or
     # a given _block_ will be used in creating the new program.
     #
-    #   Program.find_with_paths(['/bin/cd','/usr/bin/cd']) # => Program
+    # @param [Array] paths The Array of paths to search for the program.
+    # @param [Array] arguments Additional arguments to initialize
+    #                          the program with.
     #
-    #   Program.find_with_paths(['/obviously/fake','/bla']) # => nil
+    # @yield [prog] If a block is given, it will be passed the newly
+    #               created Program object.
+    # @yieldparam [Program] prog The newly created program object.
+    #
+    # @return [Program, nil] Returns the newly created Program object.
+    #                        If none of the given paths were valid files,
+    #                        +nil+ will be returned.
+    #
+    # @example
+    #   Program.find_with_paths(['/bin/cd','/usr/bin/cd'])
+    #   # => Program
+    #
+    # @example
+    #   Program.find_with_paths(['/obviously/fake','/bla'])
+    #   # => nil
     #
     def self.find_with_paths(paths,*arguments,&block)
       paths.each do |path|
@@ -64,15 +102,27 @@ module RProgram
     end
 
     #
-    # Finds and creates the program using it's +program_names+ and returns
-    # a new Program object. If the program cannot be found by any of it's
-    # +program_names+, a ProramNotFound exception will be raised. Any given
-    # _arguments_ or a given _block_ will be used in creating the new program.
+    # Finds and creates the program using it's +program_names+.
     #
-    #   Program.find # => Program
+    # @param [Array] arguments Additional arguments to initialize the
+    #                          program object with.
     #
+    # @yield [prog] If a block is given, it will be passed the newly
+    #               created Program object.
+    # @yieldparam [Program] prog The newly created program object.
+    #
+    # @return [Program] The newly created program object.
+    #
+    # @raise [ProgramNotFound] Non of the +program_names+ represented
+    #                          valid programs on the system.
+    #
+    # @example
+    #   Program.find
+    #   # => Program
+    #
+    # @example
     #   MyProgram.find('stuff','here') do |prog|
-    #     ...
+    #     # ...
     #   end
     #
     def self.find(*arguments,&block)
@@ -88,14 +138,19 @@ module RProgram
     end
 
     #
-    # Runs the program with the specified _arguments_ and returns
-    # either +true+ or +false+, depending on the exit status of the
-    # program.
+    # Runs the program.
     #
+    # @param [Array] args Addition arguments to run the program with.
+    #
+    # @return [true, false] Specifies the exit status of the program.
+    #
+    # @example
     #   echo = Program.find_by_name('echo')
     #   echo.run('hello')
     #   # hello
     #   # => true
+    #
+    # @see Kernel.system
     #
     def run(*args)
       args = args.map { |arg| arg.to_s }
@@ -108,15 +163,25 @@ module RProgram
     end
 
     #
-    # Runs the program with the specified _task_ object.
+    # Runs the program with the arguments from the given task.
+    #
+    # @param [Task] task The task who's arguments will be used to run the
+    #                    program.
+    #
+    # @return [true, false] Specifies the exit status of the program.
+    #
+    # @see Kernel.system
     #
     def run_task(task)
       run(*(task.arguments))
     end
 
     #
-    # Returns the path of the program.
+    # Converts the program to a String.
     #
+    # @return [String] The path of the program.
+    #
+    # @example
     #   Program.find_by_name('echo').to_s
     #   # => "/usr/bin/echo"
     #
