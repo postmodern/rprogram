@@ -2,7 +2,9 @@ module RProgram
   class OptionList < Hash
 
     #
-    # Creates a new OptionList object with the given _options_.
+    # Creates a new OptionList object.
+    #
+    # @param [Hash{Symbol => String}] options The options to start with.
     #
     def initialize(options={})
       super(options)
@@ -13,6 +15,7 @@ module RProgram
     #
     # Provides transparent access to the options within the option list.
     #
+    # @example
     #   opt_list = OptionList.new(:name => 'test')
     #   opt_list.name
     #   # => "test"
