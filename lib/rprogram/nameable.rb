@@ -6,30 +6,34 @@ module RProgram
     def self.included(base) # :nodoc:
       base.metaclass_eval do
         #
-        # Returns the name of the program.
+        # @return [String] The name of the program.
         #
         def program_name
           @program_name ||= nil
         end
 
         #
-        # Returns an Array of the program's aliases.
+        # @return [Array] The program's aliases.
         #
         def program_aliases
           @program_aliases ||= []
         end
 
         #
-        # Returns an Array of all names the program is known by, combining
-        # both program_name and program_aliases.
+        # Combines program_name with program_aliases.
+        #
+        # @return [Array] Names the program is known by.
         #
         def program_names
           ([program_name] + program_aliases).compact
         end
 
         #
-        # Sets the program name for a class to the specified _name_.
+        # Sets the program name for the class.
         #
+        # @param [String, Symbol] name The new program name.
+        #
+        # @example
         #   name_program 'ls'
         #
         def name_program(name)
@@ -37,8 +41,11 @@ module RProgram
         end
 
         #
-        # Sets the program aliases for a class to the specified _aliases_.
+        # Sets the program aliases for the class.
         #
+        # @param [Array] aliases The new program aliases.
+        #
+        # @example
         #   alias_program 'vim', 'vi'
         #
         def alias_program(*aliases)
@@ -48,21 +55,21 @@ module RProgram
     end
 
     #
-    # Returns the program name of a class.
+    # @return [String] The program name of the class.
     #
     def program_name
       self.class.program_name
     end
 
     #
-    # Returns the program aliases.
+    # @return [Array] The program aliases of the class.
     #
     def program_aliases
       self.class.program_aliases
     end
 
     #
-    # Returns the program names.
+    # @return [Array] The program names of the class.
     #
     def program_names
       self.class.program_names
