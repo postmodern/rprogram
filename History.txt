@@ -1,3 +1,17 @@
+=== 0.1.6 / 2009-06-30
+
+* Use Hoe 2.2.0.
+* Removed requirement for 'open3'.
+* Renamed Compat.PATHS to Compat.paths.
+* Refactored Option#arguments.
+* Removed Option#format.
+* Refactored NonOption#arguments.
+* Renamed NonOption#leading to NonOption#leading?.
+* Removed NonOption#tailing.
+* Added NonOption#tailing?.
+* Added specs.
+* All specs pass on Ruby 1.9.1-p0 and 1.8.6-p287.
+
 === 0.1.5 / 2009-01-14
 
 * Use Kernel.system in RProgram::Program#run, instead of Open3.popen3:
