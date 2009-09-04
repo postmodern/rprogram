@@ -3,7 +3,7 @@ require 'rprogram/compat'
 
 module RProgram
   module Nameable
-    def self.included(base) # :nodoc:
+    def self.included(base)
       base.metaclass_eval do
         #
         # @return [String] The name of the program.
