@@ -1,0 +1,1 @@
+require 'rprogram/yard/handlers'

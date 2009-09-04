@@ -19,6 +19,12 @@ lib/rprogram/nameable.rb
 lib/rprogram/program.rb
 lib/rprogram/rprogram.rb
 lib/rprogram/version.rb
+lib/rprogram/yard.rb
+lib/rprogram/yard/handlers.rb
+lib/rprogram/yard/handlers/ruby.rb
+lib/rprogram/yard/handlers/ruby/metaclass_eval_handler.rb
+lib/rprogram/yard/handlers/ruby/legacy.rb
+lib/rprogram/yard/handlers/ruby/legacy/metaclass_eval_handler.rb
 spec/spec_helper.rb
 spec/classes/named_program.rb
 spec/classes/aliased_program.rb
