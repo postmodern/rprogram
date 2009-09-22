@@ -3,6 +3,7 @@
 * Require Hoe >= 2.3.3.
 * Require YARD >= 0.2.3.5.
 * Require RSpec >= 1.2.8.
+* Use 'hoe/signing' for signed RubyGems.
 * Moved to YARD based documentation.
 * All specs pass on JRuby 1.3.1.
 
