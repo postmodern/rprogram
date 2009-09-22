@@ -19,6 +19,10 @@ system.
 * Supports leading/tailing non-options.
 * Supports long-options and short-options.
 * Supports custom formating of options.
+
+== REQUIREMENTS:
+
+* {YARD}[http://yard.soen.ca/] >= 0.2.3.5
   
 == INSTALL:
 
