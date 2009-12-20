@@ -157,6 +157,19 @@ module RProgram
     end
 
     #
+    # Runs the program under sudo.
+    #
+    # @param [Array] args
+    #   Additional arguments to run the program with.
+    #
+    # @return [Boolean]
+    #   Specifies whether the program exited successfully.
+    #
+    def sudo(*args)
+      Compat.sudo(@path,*args)
+    end
+
+    #
     # Runs the program with the arguments from the given task.
     #
     # @param [Task] task The task who's arguments will be used to run the
