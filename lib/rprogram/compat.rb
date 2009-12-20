@@ -111,6 +111,8 @@ module RProgram
     # @raise [ProgramNotFound]
     #   Indicates that the +sudo+ program could not be located.
     #
+    # @since 0.1.8
+    #
     def Compat.sudo(path,*args)
       sudo_path = Compat.find_program('sudo')
 

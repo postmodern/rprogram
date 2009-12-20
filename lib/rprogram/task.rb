@@ -74,6 +74,8 @@ module RProgram
     # @return [Boolean]
     #   Returns +true+ if sudo is enabled, returns +false+ otherwise.
     #
+    # @since 0.1.8
+    #
     def sudo?
       @sudo == true
     end
