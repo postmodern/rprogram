@@ -22,30 +22,35 @@ module RProgram
     # _block_ is not given, the option will use the default_format when
     # generating the arguments.
     #
-    # @param [Hash] options Additional options.
-    # @option options [String] :flag The command-line flag to use.
+    # @param [Hash] options
+    #   Additional options.
+    #
+    # @option options [String] :flag
+    #   The command-line flag to use.
+    #
     # @option options [true, false] :equals (false)
-    #                                       Implies the option maybe
-    #                                       formated as
-    #                                       <tt>"--flag=value"</tt>.
+    #   Implies the option maybe formated as <tt>"--flag=value"</tt>.
     #
     # @option options [true, false] :multiple (false)
-    #                                         Specifies the option maybe
-    #                                         given an Array of values.
-    # @option options [String] :separator The separator to use for
-    #                                     formating multiple arguments into
-    #                                     one +String+. Cannot be used with
-    #                                     the +:multiple+ option.
-    # @option options [true, false] :sub_options (false)
-    #                                            Specifies that the option
-    #                                            contains sub-options.
+    #   Specifies the option maybe given an Array of values.
     #
-    # @yield [option, value] If a block is given, it will be used to format
-    #                        each value of the option.
-    # @yieldparam [Option] option The option that is being formatted.
-    # @yieldparam [String, Array] value The value to format for the
-    #                                   option. May be an Array, if multiple
-    #                                   values are allowed with the option.
+    # @option options [String] :separator
+    #   The separator to use for formating multiple arguments into one
+    #   +String+. Cannot be used with the +:multiple+ option.
+    #
+    # @option options [true, false] :sub_options (false)
+    #   Specifies that the option contains sub-options.
+    #
+    # @yield [option, value]
+    #   If a block is given, it will be used to format each value of the
+    #   option.
+    #
+    # @yieldparam [Option] option
+    #   The option that is being formatted.
+    #
+    # @yieldparam [String, Array] value
+    #   The value to format for the option. May be an Array, if multiple
+    #   values are allowed with the option.
     #
     def initialize(options={},&block)
       @flag = options[:flag]
@@ -75,9 +80,11 @@ module RProgram
     #
     # Formats the arguments for the option.
     #
-    # @param [Hash, Array, String] value The arguments to format.
+    # @param [Hash, Array, String] value
+    #   The arguments to format.
     #
-    # @return [Array] The formatted arguments of the option.
+    # @return [Array]
+    #   The formatted arguments of the option.
     #
     def arguments(value)
       return [@flag] if value == true

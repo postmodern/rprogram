@@ -18,14 +18,18 @@ module RProgram
     #
     # Creates a new Program object.
     #
-    # @param [String] path The full-path of the program.
+    # @param [String] path
+    #   The full-path of the program.
     #
-    # @yield [prog] If a block is given, it will be passed the newly
-    #               created Program object.
-    # @yieldparam [Program] prog The newly created program object.
+    # @yield [prog]
+    #   If a block is given, it will be passed the newly created Program
+    #   object.
     #
-    # @raise [ProgramNotFound] Specifies the given path was not a valid
-    #                          file.
+    # @yieldparam [Program] prog
+    #   The newly created program object.
+    #
+    # @raise [ProgramNotFound]
+    #   Specifies the given path was not a valid file.
     #
     # @example
     #   Program.new('/usr/bin/ls')
@@ -46,17 +50,22 @@ module RProgram
     #
     # Creates a new program object.
     #
-    # @param [String] path The full-path of the program.
-    # @param [Array] arguments Additional arguments to initialize the
-    #                          program with.
+    # @param [String] path
+    #   The full-path of the program.
     #
-    # @yield [prog] If a block is given, it will be passed the newly
-    #               created Program object.
-    # @yieldparam [Program] prog The newly created program object.
+    # @param [Array] arguments
+    #   Additional arguments to initialize the program with.
     #
-    # @return [Program, nil] Returns the newly created Program object.
-    #                        If the given path was not a valid file,
-    #                        +nil+ will be returned.
+    # @yield [prog]
+    #   If a block is given, it will be passed the newly created Program
+    #   object.
+    #
+    # @yieldparam [Program] prog
+    #   The newly created program object.
+    #
+    # @return [Program, nil]
+    #   Returns the newly created Program object. If the given path was
+    #   not a valid file, +nil+ will be returned.
     #
     # @example
     #   Program.find_with_path('/bin/cd')
@@ -75,17 +84,22 @@ module RProgram
     # if a path within _paths_ is a valid file. Any given _arguments_ or
     # a given _block_ will be used in creating the new program.
     #
-    # @param [Array] paths The Array of paths to search for the program.
-    # @param [Array] arguments Additional arguments to initialize
-    #                          the program with.
+    # @param [Array] paths
+    #   The Array of paths to search for the program.
     #
-    # @yield [prog] If a block is given, it will be passed the newly
-    #               created Program object.
-    # @yieldparam [Program] prog The newly created program object.
+    # @param [Array] arguments
+    #   Additional arguments to initialize the program with.
     #
-    # @return [Program, nil] Returns the newly created Program object.
-    #                        If none of the given paths were valid files,
-    #                        +nil+ will be returned.
+    # @yield [prog]
+    #   If a block is given, it will be passed the newly created Program
+    #   object.
+    #
+    # @yieldparam [Program] prog
+    #   The newly created program object.
+    #
+    # @return [Program, nil]
+    #   Returns the newly created Program object. If none of the given
+    #   paths were valid files, +nil+ will be returned.
     #
     # @example
     #   Program.find_with_paths(['/bin/cd','/usr/bin/cd'])
@@ -104,17 +118,21 @@ module RProgram
     #
     # Finds and creates the program using it's +program_names+.
     #
-    # @param [Array] arguments Additional arguments to initialize the
-    #                          program object with.
+    # @param [Array] arguments
+    #   Additional arguments to initialize the program object with.
     #
-    # @yield [prog] If a block is given, it will be passed the newly
-    #               created Program object.
-    # @yieldparam [Program] prog The newly created program object.
+    # @yield [prog]
+    #   If a block is given, it will be passed the newly created Program
+    #   object.
     #
-    # @return [Program] The newly created program object.
+    # @yieldparam [Program] prog
+    #   The newly created program object.
     #
-    # @raise [ProgramNotFound] Non of the +program_names+ represented
-    #                          valid programs on the system.
+    # @return [Program]
+    #   The newly created program object.
+    #
+    # @raise [ProgramNotFound]
+    #   Non of the +program_names+ represented valid programs on the system.
     #
     # @example
     #   Program.find
@@ -140,9 +158,11 @@ module RProgram
     #
     # Runs the program.
     #
-    # @param [Array] args Addition arguments to run the program with.
+    # @param [Array] args
+    #   Addition arguments to run the program with.
     #
-    # @return [true, false] Specifies the exit status of the program.
+    # @return [true, false]
+    #   Specifies the exit status of the program.
     #
     # @example
     #   echo = Program.find_by_name('echo')
@@ -172,10 +192,11 @@ module RProgram
     #
     # Runs the program with the arguments from the given task.
     #
-    # @param [Task] task The task who's arguments will be used to run the
-    #                    program.
+    # @param [Task] task
+    #   The task who's arguments will be used to run the program.
     #
-    # @return [true, false] Specifies the exit status of the program.
+    # @return [true, false]
+    #   Specifies the exit status of the program.
     #
     # @see Kernel.system
     #
@@ -190,7 +211,8 @@ module RProgram
     #
     # Converts the program to a String.
     #
-    # @return [String] The path of the program.
+    # @return [String]
+    #   The path of the program.
     #
     # @example
     #   Program.find_by_name('echo').to_s

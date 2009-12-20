@@ -4,7 +4,8 @@ module RProgram
     #
     # Creates a new OptionList object.
     #
-    # @param [Hash{Symbol => String}] options The options to start with.
+    # @param [Hash{Symbol => String}] options
+    #   The options to start with.
     #
     def initialize(options={})
       super(options)

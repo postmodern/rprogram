@@ -12,11 +12,14 @@ module RProgram
     #
     # Creates a new Task object.
     #
-    # @param [Hash{Symbol => Object}] options Additional task options.
+    # @param [Hash{Symbol => Object}] options
+    #   Additional task options.
     #
-    # @yield [task] If a block is given, it will be passed the newly
-    #               created task.
-    # @yieldparam [Task] task The newly created Task object.
+    # @yield [task]
+    #   If a block is given, it will be passed the newly created task.
+    #
+    # @yieldparam [Task] task
+    #   The newly created Task object.
     #
     # @example
     #   Task.new(:test => 'example', :count => 2, :verbose => true)
@@ -38,13 +41,17 @@ module RProgram
     # Creates a new Task object, then formats command-line arguments
     # using the Task object.
     #
-    # @param [Hash{Symbol => Object}] options Additional task options.
+    # @param [Hash{Symbol => Object}] options
+    #   Additional task options.
     #
-    # @yield [task] If a block is given, it will be passed the newly
-    #               created task.
-    # @yieldparam [Task] task The newly created Task object.
+    # @yield [task]
+    #   If a block is given, it will be passed the newly created task.
     #
-    # @return [Array] The formatted arguments from a Task object.
+    # @yieldparam [Task] task
+    #   The newly created Task object.
+    #
+    # @return [Array]
+    #   The formatted arguments from a Task object.
     #
     # @example
     #   MyTask.arguments(:verbose => true, :count => 2)
@@ -74,8 +81,9 @@ module RProgram
     #
     # Generates the command-line arguments for all leading non-options.
     #
-    # @return [Array] The command-line arguments generated from all the
-    #                 leading non-options of the task and it's sub-tasks.
+    # @return [Array]
+    #   The command-line arguments generated from all the leading
+    #   non-options of the task and it's sub-tasks.
     #
     def leading_non_options
       args = []
@@ -100,8 +108,9 @@ module RProgram
     #
     # Generates the command-line arguments from all options.
     #
-    # @return [Array] The command-line arguments generated from all the
-    #                 options of the task and it's sub-tasks.
+    # @return [Array]
+    #   The command-line arguments generated from all the options of the
+    #   task and it's sub-tasks.
     #
     def options
       args = []
@@ -123,8 +132,9 @@ module RProgram
     #
     # Generates the command-line arguments from all tailing non-options.
     #
-    # @return [Array] The command-line arguments generated from all the
-    #                 tailing non-options of the task and it's sub-tasks.
+    # @return [Array]
+    #   The command-line arguments generated from all the tailing
+    #   non-options of the task and it's sub-tasks.
     #
     def tailing_non_options
       args = []
@@ -149,9 +159,9 @@ module RProgram
     #
     # Generates the command-line arguments from the task.
     #
-    # @return [Array] The command-line arguments compiled from the
-    #                 leading non-options, options and tailing non-options
-    #                 of the task and it's sub-tasks.
+    # @return [Array]
+    #   The command-line arguments compiled from the leading non-options,
+    #   options and tailing non-options of the task and it's sub-tasks.
     #
     def arguments
       leading_non_options + options + tailing_non_options
@@ -162,8 +172,11 @@ module RProgram
     #
     # Defines a sub-task.
     #
-    # @param [String, Symbol] name The name of the sub-task.
-    # @param [Task] task The task class of the sub-task.
+    # @param [String, Symbol] name
+    #   The name of the sub-task.
+    #
+    # @param [Task] task
+    #   The task class of the sub-task.
     #
     # @example
     #   subtask :extra, ExtraTask
@@ -189,17 +202,20 @@ module RProgram
     #
     # Defines a non-option.
     #
-    # @param [Hash] options Additional options for the non-option.
-    # @option options [Symbol] :name The name of the non-option.
+    # @param [Hash] options
+    #   Additional options for the non-option.
+    #
+    # @option options [Symbol] :name
+    #   The name of the non-option.
+    #
     # @option options [true, false] :leading (true)
-    #                                        Implies the non-option is a
-    #                                        leading non-option.
+    #   Implies the non-option is a leading non-option.
+    #
     # @option options [false, true] :tailing (false)
-    #                                        Implies the non-option is a
-    #                                        tailing non-option.
+    #   Implies the non-option is a tailing non-option.
+    #
     # @option options [false, true] :multiple (false)
-    #                                         Implies the non-option maybe
-    #                                         given an Array of values.
+    #   Implies the non-option maybe given an Array of values.
     #
     # @example
     #   non_option :name => 'input_file', :tailing => true
@@ -228,19 +244,22 @@ module RProgram
     #
     # Defines a long-option.
     #
-    # @param [Hash] options Additional options of the long-option.
-    # @option options [String] :flag The flag to use for the option.
-    # @option options [Symbol] :name The name of the option. Defaults to
-    #                                the flag_namify'ed form of
-    #                                <tt>options[:flag]</tt>, if not given.
+    # @param [Hash] options
+    #   Additional options of the long-option.
+    #
+    # @option options [String] :flag
+    #   The flag to use for the option.
+    #
+    # @option options [Symbol] :name
+    #   The name of the option. Defaults to the flag_namify'ed form of
+    #   <tt>options[:flag]</tt>, if not given.
+    #
     # @option options [true, false] :multiply (false)
-    #                                         Specifies that the option may
-    #                                         appear multiple times in the
-    #                                         arguments.
+    #   Specifies that the option may appear multiple times in the
+    #   arguments.
+    #
     # @option options [true, false] :sub_options (false)
-    #                                            Specifies that the option
-    #                                            contains multiple
-    #                                            sub-options.
+    #   Specifies that the option contains multiple sub-options.
     #
     # @example
     #   long_option :flag => '--output'
@@ -259,17 +278,21 @@ module RProgram
     #
     # Defines a short_option.
     #
-    # @param [Hash] options Additional options for the short-option.
-    # @option options [Symbol, String] :name The name of the short-option.
-    # @option options [String] :flag The flag to use for the short-option.
+    # @param [Hash] options
+    #   Additional options for the short-option.
+    #
+    # @option options [Symbol, String] :name
+    #   The name of the short-option.
+    #
+    # @option options [String] :flag
+    #   The flag to use for the short-option.
+    #
     # @option options [true, false] :multiply (false)
-    #                                         Specifies that the option may
-    #                                         appear multiple times in the
-    #                                         arguments.
+    #   Specifies that the option may appear multiple times in the
+    #   arguments.
+    #
     # @option options [true, false] :sub_options (false)
-    #                                            Specifies that the option
-    #                                            contains multiple
-    #                                            sub-options.
+    #   Specifies that the option contains multiple sub-options.
     #
     # @example
     #   short_option :flag => '-c', :name => :count
@@ -281,17 +304,21 @@ module RProgram
     #
     # Defines an option.
     #
-    # @param [Hash] options Additional options.
-    # @option options [Symbol, String] :name The name of the option.
-    # @option options [String] :flag The flag to use for the option.
+    # @param [Hash] options
+    #   Additional options.
+    #
+    # @option options [Symbol, String] :name
+    #   The name of the option.
+    #
+    # @option options [String] :flag
+    #   The flag to use for the option.
+    #
     # @option options [true, false] :multiple (false)
-    #                                         Specifies that the option may
-    #                                         appear multiple times in the
-    #                                         arguments.
+    #   Specifies that the option may appear multiple times in the
+    #   arguments.
+    #
     # @option options [true, false] :sub_options (false)
-    #                                            Specifies that the option
-    #                                            contains multiple
-    #                                            sub-options.
+    #   Specifies that the option contains multiple sub-options.
     #
     def self.define_option(options,&block)
       method_name = options[:name].to_sym
@@ -320,9 +347,11 @@ module RProgram
     #
     # Converts a long-option flag to a Ruby method name.
     #
-    # @param [String] flag The command-line flag to convert.
+    # @param [String] flag
+    #   The command-line flag to convert.
     #
-    # @return [String] A method-name compatible version of the given flag.
+    # @return [String]
+    #   A method-name compatible version of the given flag.
     # 
     # @example
     #   Task.flag_namify('--output-file')

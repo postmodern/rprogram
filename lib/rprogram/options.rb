@@ -7,7 +7,8 @@ module RProgram
     def self.included(base)
       base.metaclass_eval do
         #
-        # @return [Hash] All defined non-options of the class.
+        # @return [Hash]
+        #   All defined non-options of the class.
         #
         def non_options
           @non_options ||= {}
@@ -17,10 +18,12 @@ module RProgram
         # Searches for the non-option with the matching name in the class
         # and it's ancestors.
         #
-        # @param [Symbol, String] name The name to search for.
+        # @param [Symbol, String] name
+        #   The name to search for.
         #
-        # @return [true, false] Specifies whether the non-option with the
-        #                       matching name was defined.
+        # @return [true, false]
+        #   Specifies whether the non-option with the matching name was
+        #   defined.
         #
         def has_non_option?(name)
           name = name.to_sym
@@ -38,9 +41,11 @@ module RProgram
         # Searches for the non-option with the matching name in the class
         # and it's ancestors.
         #
-        # @param [Symbol, String] name The name to search for.
+        # @param [Symbol, String] name
+        #   The name to search for.
         #
-        # @return [NonOption] The non-option with the matching name.
+        # @return [NonOption]
+        #   The non-option with the matching name.
         #
         def get_non_option(name)
           name = name.to_sym
@@ -57,7 +62,8 @@ module RProgram
         end
 
         #
-        # @return [Hash] All defined options for the class.
+        # @return [Hash]
+        #   All defined options for the class.
         #
         def options
           @options ||= {}
@@ -67,10 +73,11 @@ module RProgram
         # Searches for the option with the matching name in the class and
         # it's ancestors.
         #
-        # @param [Symbol, String] name The name to search for.
+        # @param [Symbol, String] name
+        #   The name to search for.
         #
-        # @return [true, false] Specifies whether the option with the
-        #                       matching name was defined.
+        # @return [true, false]
+        #   Specifies whether the option with the matching name was defined.
         #
         def has_option?(name)
           name = name.to_sym
@@ -88,9 +95,11 @@ module RProgram
         # Searches for the option with the matching name in the class and
         # it's ancestors.
         #
-        # @param [Symbol, String] name The name to search for.
+        # @param [Symbol, String] name
+        #   The name to search for.
         #
-        # @return [Option] The option with the matching name.
+        # @return [Option]
+        #   The option with the matching name.
         #
         def get_option(name)
           name = name.to_sym
