@@ -15,6 +15,7 @@ system.
 
 * Uses Kernel.system for safe execution of individual programs and their
   separate command-line arguments.
+* Allows running programs under +sudo+.
 * Provides cross-platform access to the PATH variable.
 * Supports leading/tailing non-options.
 * Supports long-options and short-options.
