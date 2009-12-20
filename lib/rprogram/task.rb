@@ -6,6 +6,9 @@ module RProgram
 
     include Options
 
+    # Specifies whether the task will be run under sudo
+    attr_accessor :sudo
+
     #
     # Creates a new Task object.
     #
@@ -24,6 +27,7 @@ module RProgram
     #   end
     #
     def initialize(options={},&block)
+      @sudo = (options.delete(:sudo) || false)
       @subtasks = {}
       @options = options
 
@@ -55,6 +59,16 @@ module RProgram
     #
     def self.arguments(options={},&block)
       self.new(options,&block).arguments
+    end
+
+    #
+    # Specifies whether the task will be ran under sudo.
+    #
+    # @return [Boolean]
+    #   Returns +true+ if sudo is enabled, returns +false+ otherwise.
+    #
+    def sudo?
+      @sudo == true
     end
 
     #
