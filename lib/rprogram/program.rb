@@ -185,6 +185,9 @@ module RProgram
     # @return [Boolean]
     #   Specifies whether the program exited successfully.
     #
+    # @raise [ProgramNotFound]
+    #   Indicates that the +sudo+ program could not be located.
+    #
     def sudo(*args)
       Compat.sudo(@path,*args)
     end
