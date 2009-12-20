@@ -66,5 +66,27 @@ module RProgram
     def Compat.find_program_by_names(*names)
       names.map { |name| Compat.find_program(name) }.compact.first
     end
+
+    #
+    # Runs a program.
+    #
+    # @param [String] path
+    #   The path to the program.
+    #
+    # @param [Array] args
+    #   Additional arguments to run the program with.
+    #
+    # @return [Boolean]
+    #   Specifies whether the program exited successfully.
+    #
+    def Compat.run(path,*args)
+      args = args.map { |arg| arg.to_s }
+
+      if RProgram.debug
+        STDERR.puts ">>> #{path} #{args.join(' ')}"
+      end
+
+      return Kernel.system(path,*args)
+    end
   end
 end

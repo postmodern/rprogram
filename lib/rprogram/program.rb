@@ -153,13 +153,7 @@ module RProgram
     # @see Kernel.system
     #
     def run(*args)
-      args = args.map { |arg| arg.to_s }
-
-      if RProgram.debug
-        STDERR.puts ">>> #{@path} #{args.join(' ')}"
-      end
-
-      return Kernel.system(@path,*args)
+      Compat.run(@path,*args)
     end
 
     #
