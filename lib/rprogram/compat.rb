@@ -1,3 +1,5 @@
+require 'rprogram/exceptions/program_not_found'
+
 module RProgram
   module Compat
     #
@@ -87,6 +89,28 @@ module RProgram
       end
 
       return Kernel.system(path,*args)
+    end
+
+    #
+    # Runs a program under sudo.
+    #
+    # @param [String] path
+    #   Path of the program to run.
+    #
+    # @param [Array] args
+    #   Additional arguments to run the program with.
+    #
+    # @return [Boolean]
+    #   Specifies whether the program exited successfully.
+    #
+    def Compat.sudo(path,*args)
+      sudo_path = Compat.find_program('sudo')
+
+      unless sudo_path
+        raise(ProgramNotFound,'could not find the "sudo" program',caller)
+      end
+
+      return Compat.run(sudo_path,path,*args)
     end
   end
 end
