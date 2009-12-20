@@ -180,7 +180,11 @@ module RProgram
     # @see Kernel.system
     #
     def run_task(task)
-      run(*(task.arguments))
+      if task.sudo?
+        return sudo(*(task.arguments))
+      else
+        return run(*(task.arguments))
+      end
     end
 
     #
