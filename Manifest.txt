@@ -25,6 +25,8 @@ lib/rprogram/yard/handlers/ruby.rb
 lib/rprogram/yard/handlers/ruby/metaclass_eval_handler.rb
 lib/rprogram/yard/handlers/ruby/legacy.rb
 lib/rprogram/yard/handlers/ruby/legacy/metaclass_eval_handler.rb
+tasks/spec.rb
+tasks/yard.rb
 spec/spec_helper.rb
 spec/classes/named_program.rb
 spec/classes/aliased_program.rb
