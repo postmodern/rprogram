@@ -27,7 +27,7 @@ system.
 
 == LICENSE:
 
-The MIT License
+(The MIT License)
 
 Copyright (c) 2007-2009 Hal Brodigan
 
