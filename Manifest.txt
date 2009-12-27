@@ -1,7 +1,7 @@
-History.txt
+History.rdoc
 Manifest.txt
 LICENSE.txt
-README.txt
+README.rdoc
 Rakefile
 lib/rprogram.rb
 lib/rprogram/compat.rb
