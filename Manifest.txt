@@ -1,6 +1,5 @@
 History.rdoc
 Manifest.txt
-LICENSE.txt
 README.rdoc
 Rakefile
 lib/rprogram.rb
