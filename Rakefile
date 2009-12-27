@@ -7,7 +7,6 @@ require './tasks/spec.rb'
 require './tasks/yard.rb'
 
 Hoe.spec('rprogram') do
-  self.rubyforge_name = 'rprogram'
   self.developer('Postmodern', 'postmodern.mod3@gmail.com')
   self.remote_rdoc_dir = ''
 
