@@ -21,6 +21,76 @@ system.
 * Supports long-options and short-options.
 * Supports custom formating of options.
 
+== EXAMPLES:
+
+First, create the class to represent the options of the program, using
+{RProgram::Task} as the base class:
+
+  require 'rprogram/task'
+
+  class MyProgTask < RProgram::Task
+
+    # map in the short-options
+    short_option :flag => '-o', :name => :output
+    short_option :flag => '-oX', :name => :xml_output
+
+    # map in long options
+    long_option :flag => '--no-resolv', :name => :disable_resolv
+
+    # long_option can infer the :name option, based on the :flag
+    long_option :flag => '--mode'
+
+    # options can also take multiple values
+    long_option :flag => '--includes', :multiple => true
+
+    # options with multiple values can have a custom separator character
+    long_option :flag => '--ops',
+                :multiple => true,
+		:separator => ','
+
+    # define any non-options (aka additional arguments)
+    non_option :tailing => true, :name => :files
+
+  end
+
+Next, create the class to represent the program you wish to interface with,
+using {RProgram::Program} as the base class:
+
+  require 'my_prog_task'
+
+  require 'rprogram/program'
+
+  class MyProg < RProgram::Program
+
+    # identify the file-name of the program
+    name_program 'my_prg'
+
+    # add a top-level method which finds and runs your program.
+    def self.my_run(options={},&block)
+      self.find.my_run(options,&block)
+    end
+
+    # add a method which runs the program with MyProgTask.
+    def my_run(options={},&block)
+      run_task(MyProgTask.new(options,&block))
+    end
+
+  end
+
+Finally, run your program with options or a block:
+
+  MyProgram.my_run(:mode => :fast, :files => ['test1'])
+  # => true
+
+  MyProgram.my_run do |my_prog|
+    my_prog.includes = ['one', 'two', 'three']
+    my_prog.mode == :safe
+
+    my_prog.output = 'output.txt'
+    my_prog.files = ['test1.txt', 'test2.txt']
+  end
+  # => true
+
 == INSTALL:
 
   $ sudo gem install rprogram
