@@ -1,6 +1,7 @@
 = RProgram
 
 * http://rprogram.rubyforge.org/
+* http://rprogram.rubyforge.org/issues
 * http://github.com/postmodern/rprogram/
 * Postmodern (postmodern.mod3 at gmail.com)
 
