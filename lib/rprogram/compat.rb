@@ -16,10 +16,10 @@ module RProgram
     end
 
     #
-    # Determines the contents of the +PATH+ environment variable.
+    # Determines the contents of the `PATH` environment variable.
     #
     # @return [Array]
-    #   The contents of the +PATH+ environment variable.
+    #   The contents of the `PATH` environment variable.
     #
     # @example
     #   Compat.paths #=> ["/bin", "/usr/bin"]
@@ -109,7 +109,7 @@ module RProgram
     #   Specifies whether the program exited successfully.
     #
     # @raise [ProgramNotFound]
-    #   Indicates that the +sudo+ program could not be located.
+    #   Indicates that the `sudo` program could not be located.
     #
     # @since 0.1.8
     #

@@ -1,102 +1,102 @@
-= RProgram
+# RProgram
 
 * http://rprogram.rubyforge.org/
 * http://rprogram.rubyforge.org/issues
 * http://github.com/postmodern/rprogram/
 * Postmodern (postmodern.mod3 at gmail.com)
 
-== DESCRIPTION:
+## DESCRIPTION:
   
 RProgram is a library for creating wrappers around command-line programs.
 RProgram provides a Rubyful interface to programs and all their options
 or non-options. RProgram can also search for programs installed on a
 system.
 
-== FEATURES/PROBLEMS:
+## FEATURES/PROBLEMS:
 
 * Uses Kernel.system for safe execution of individual programs and their
   separate command-line arguments.
-* Allows running programs under +sudo+.
+* Allows running programs under `sudo`.
 * Provides cross-platform access to the PATH variable.
 * Supports leading/tailing non-options.
 * Supports long-options and short-options.
 * Supports custom formating of options.
 
-== EXAMPLES:
+## EXAMPLES:
 
 First, create the class to represent the options of the program, using
 {RProgram::Task} as the base class:
 
-  require 'rprogram/task'
+    require 'rprogram/task'
 
-  class MyProgTask < RProgram::Task
+    class MyProgTask < RProgram::Task
 
-    # map in the short-options
-    short_option :flag => '-o', :name => :output
-    short_option :flag => '-oX', :name => :xml_output
+      # map in the short-options
+      short_option :flag => '-o', :name => :output
+      short_option :flag => '-oX', :name => :xml_output
 
-    # map in long options
-    long_option :flag => '--no-resolv', :name => :disable_resolv
+      # map in long options
+      long_option :flag => '--no-resolv', :name => :disable_resolv
 
-    # long_option can infer the :name option, based on the :flag
-    long_option :flag => '--mode'
+      # long_option can infer the :name option, based on the :flag
+      long_option :flag => '--mode'
 
-    # options can also take multiple values
-    long_option :flag => '--includes', :multiple => true
+      # options can also take multiple values
+      long_option :flag => '--includes', :multiple => true
 
-    # options with multiple values can have a custom separator character
-    long_option :flag => '--ops',
-                :multiple => true,
-		:separator => ','
+      # options with multiple values can have a custom separator character
+      long_option :flag => '--ops',
+                  :multiple => true,
+                  :separator => ','
 
-    # define any non-options (aka additional arguments)
-    non_option :tailing => true, :name => :files
+      # define any non-options (aka additional arguments)
+      non_option :tailing => true, :name => :files
 
-  end
+    end
 
 Next, create the class to represent the program you wish to interface with,
 using {RProgram::Program} as the base class:
 
-  require 'my_prog_task'
+    require 'my_prog_task'
 
-  require 'rprogram/program'
+    require 'rprogram/program'
 
-  class MyProg < RProgram::Program
+    class MyProg < RProgram::Program
 
-    # identify the file-name of the program
-    name_program 'my_prg'
+      # identify the file-name of the program
+      name_program 'my_prg'
 
-    # add a top-level method which finds and runs your program.
-    def self.my_run(options={},&block)
-      self.find.my_run(options,&block)
+      # add a top-level method which finds and runs your program.
+      def self.my_run(options={},&block)
+        self.find.my_run(options,&block)
+      end
+
+      # add a method which runs the program with MyProgTask.
+      def my_run(options={},&block)
+        run_task(MyProgTask.new(options,&block))
+      end
+
     end
-
-    # add a method which runs the program with MyProgTask.
-    def my_run(options={},&block)
-      run_task(MyProgTask.new(options,&block))
-    end
-
-  end
 
 Finally, run your program with options or a block:
 
-  MyProgram.my_run(:mode => :fast, :files => ['test1'])
-  # => true
+    MyProgram.my_run(:mode => :fast, :files => ['test1'])
+    # => true
 
-  MyProgram.my_run do |my_prog|
-    my_prog.includes = ['one', 'two', 'three']
-    my_prog.mode == :safe
+    MyProgram.my_run do |my_prog|
+      my_prog.includes = ['one', 'two', 'three']
+      my_prog.mode == :safe
 
-    my_prog.output = 'output.txt'
-    my_prog.files = ['test1.txt', 'test2.txt']
-  end
-  # => true
+      my_prog.output = 'output.txt'
+      my_prog.files = ['test1.txt', 'test2.txt']
+    end
+    # => true
 
-== INSTALL:
+## INSTALL:
 
-  $ sudo gem install rprogram
+    $ sudo gem install rprogram
 
-== LICENSE:
+## LICENSE:
 
 (The MIT License)
 

@@ -29,14 +29,14 @@ module RProgram
     #   The command-line flag to use.
     #
     # @option options [true, false] :equals (false)
-    #   Implies the option maybe formated as <tt>"--flag=value"</tt>.
+    #   Implies the option maybe formated as `--flag=value`.
     #
     # @option options [true, false] :multiple (false)
     #   Specifies the option maybe given an Array of values.
     #
     # @option options [String] :separator
     #   The separator to use for formating multiple arguments into one
-    #   +String+. Cannot be used with the +:multiple+ option.
+    #   `String`. Cannot be used with the `:multiple` option.
     #
     # @option options [true, false] :sub_options (false)
     #   Specifies that the option contains sub-options.

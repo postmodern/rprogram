@@ -72,7 +72,7 @@ module RProgram
     # Specifies whether the task will be ran under sudo.
     #
     # @return [Boolean]
-    #   Returns +true+ if sudo is enabled, returns +false+ otherwise.
+    #   Returns `true` if sudo is enabled, returns `false` otherwise.
     #
     # @since 0.1.8
     #
@@ -254,7 +254,7 @@ module RProgram
     #
     # @option options [Symbol] :name
     #   The name of the option. Defaults to the flag_namify'ed form of
-    #   <tt>options[:flag]</tt>, if not given.
+    #   `options[:flag]`, if not given.
     #
     # @option options [true, false] :multiply (false)
     #   Specifies that the option may appear multiple times in the

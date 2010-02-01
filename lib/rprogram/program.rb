@@ -65,7 +65,7 @@ module RProgram
     #
     # @return [Program, nil]
     #   Returns the newly created Program object. If the given path was
-    #   not a valid file, +nil+ will be returned.
+    #   not a valid file, `nil` will be returned.
     #
     # @example
     #   Program.find_with_path('/bin/cd')
@@ -99,7 +99,7 @@ module RProgram
     #
     # @return [Program, nil]
     #   Returns the newly created Program object. If none of the given
-    #   paths were valid files, +nil+ will be returned.
+    #   paths were valid files, `nil` will be returned.
     #
     # @example
     #   Program.find_with_paths(['/bin/cd','/usr/bin/cd'])
@@ -116,7 +116,7 @@ module RProgram
     end
 
     #
-    # Finds and creates the program using it's +program_names+.
+    # Finds and creates the program using it's `program_names`.
     #
     # @param [Array] arguments
     #   Additional arguments to initialize the program object with.
@@ -132,7 +132,7 @@ module RProgram
     #   The newly created program object.
     #
     # @raise [ProgramNotFound]
-    #   Non of the +program_names+ represented valid programs on the system.
+    #   Non of the `program_names` represented valid programs on the system.
     #
     # @example
     #   Program.find
@@ -186,7 +186,7 @@ module RProgram
     #   Specifies whether the program exited successfully.
     #
     # @raise [ProgramNotFound]
-    #   Indicates that the +sudo+ program could not be located.
+    #   Indicates that the `sudo` program could not be located.
     #
     # @since 0.1.8
     #
