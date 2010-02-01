@@ -67,12 +67,12 @@
 
 * Added support for the Option argument separators.
 
-  #
-  # Creates arguments of the form:
-  #
-  #   ["-opts","value1:value2:value3"]
-  #
-  long_option :flag => '-opts', :separator => ':'
+        #
+        # Creates arguments of the form:
+        #
+        #   ["-opts","value1:value2:value3"]
+        #
+        long_option :flag => '-opts', :separator => ':'
 
 * Fixed lib/rprogram.rb file.
 
