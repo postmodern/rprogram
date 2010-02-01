@@ -15,7 +15,7 @@ Hoe.spec('rprogram') do
   self.remote_yard_dir = ''
 
   self.extra_dev_deps = [
-    ['rspec', '>=1.2.8'],
+    ['rspec', '>=1.3.0'],
     ['yard', '>=0.5.3']
   ]
 end
