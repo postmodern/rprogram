@@ -16,7 +16,7 @@ Hoe.spec('rprogram') do
 
   self.extra_dev_deps = [
     ['rspec', '>=1.2.8'],
-    ['yard', '>=0.5.2']
+    ['yard', '>=0.5.3']
   ]
 end
 
