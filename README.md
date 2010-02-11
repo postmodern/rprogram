@@ -1,18 +1,18 @@
 # RProgram
 
-* http://rprogram.rubyforge.org/
-* http://rprogram.rubyforge.org/issues
-* http://github.com/postmodern/rprogram/
+* [rprogram.rubyforge.org](http://rprogram.rubyforge.org/)
+* [github.com/postmodern/rprogram](http://github.com/postmodern/rprogram)
+* [github.com/postmodern/rprogram/issues](http://github.com/postmodern/rprogram/issues)
 * Postmodern (postmodern.mod3 at gmail.com)
 
-## DESCRIPTION:
+## Description
   
 RProgram is a library for creating wrappers around command-line programs.
 RProgram provides a Rubyful interface to programs and all their options
 or non-options. RProgram can also search for programs installed on a
 system.
 
-## FEATURES/PROBLEMS:
+## Features
 
 * Uses Kernel.system for safe execution of individual programs and their
   separate command-line arguments.
@@ -22,7 +22,7 @@ system.
 * Supports long-options and short-options.
 * Supports custom formating of options.
 
-## EXAMPLES:
+## Examples
 
 First, create the class to represent the options of the program, using
 {RProgram::Task} as the base class:
@@ -92,31 +92,11 @@ Finally, run your program with options or a block:
     end
     # => true
 
-## INSTALL:
+## Install
 
     $ sudo gem install rprogram
 
-## LICENSE:
+## License
 
-(The MIT License)
+See {file:LICENSE.txt} for license information.
 
-Copyright (c) 2007-2010 Hal Brodigan
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-'Software'), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
-CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
-TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
-SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
