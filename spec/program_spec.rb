@@ -5,6 +5,7 @@ require 'classes/ls_program'
 
 describe Program do
   subject { Program.new('/usr/bin/cc') }
+  after(:all) { LS.path = nil }
 
   it "should create a Program from a path" do
     subject.should_not be_nil
@@ -46,5 +47,11 @@ describe Program do
     lambda {
       Program.find
     }.should raise_error(ProgramNotFound)
+  end
+
+  it "should allow using a default path" do
+    LS.path = '/usr/bin/dir'
+
+    LS.find.path.should == LS.path
   end
 end

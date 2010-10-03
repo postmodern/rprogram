@@ -52,6 +52,33 @@ module RProgram
       def alias_program(*aliases)
         @program_aliases = aliases.map { |name| name.to_s }
       end
+
+      #
+      # The default path of the program.
+      #
+      # @return [String, nil]
+      #   The path to the program.
+      #
+      # @since 0.2.0
+      #
+      def path
+        @program_path
+      end
+
+      #
+      # Sets the default path to the program.
+      #
+      # @param [String] new_path
+      #   The new path to the program.
+      #
+      # @return [String, nil]
+      #   The path to the program.
+      #
+      # @since 0.2.0
+      #
+      def path=(new_path)
+        @program_path = (File.expand_path(new_path) if new_path)
+      end
     end
   end
 end

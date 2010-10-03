@@ -144,7 +144,8 @@ module RProgram
     #   end
     #
     def self.find(*arguments,&block)
-      path = Compat.find_program_by_names(*self.program_names)
+      path = self.path
+      path ||= Compat.find_program_by_names(*self.program_names)
 
       unless path
         names = self.program_names.map { |name| name.dump }.join(', ')
