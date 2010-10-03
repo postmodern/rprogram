@@ -82,7 +82,7 @@
   * `RProgram::Program.find_by_name`
   * `RProgram::Program.find_by_names`
 * Added `RProgram::Program#create`.
-* Made {Program::Program} nameable by default.
+* Made {RProgram::Program} nameable by default.
 * Prevented arbitrary command-injection in {RProgram::Program#run}.
 
 ### 0.0.9 / 2008-01-09
