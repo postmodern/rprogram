@@ -1,3 +1,11 @@
+### 0.2.0 / 2010-10-03
+
+* Added {RProgram::Nameable::ClassMethods}.
+* Added {RProgram::Options::ClassMethods}.
+* Added {RProgram::Nameable::ClassMethods#path}:
+  * {RProgram::Program.find} will default to
+    {RProgram::Nameable::ClassMethods#path} if set.
+
 ### 0.1.8 / 2009-12-24
  
 * Allow Program to run commands under sudo:
