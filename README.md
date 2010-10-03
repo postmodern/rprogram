@@ -1,6 +1,5 @@
 # RProgram
 
-* [rprogram.rubyforge.org](http://rprogram.rubyforge.org/)
 * [github.com/postmodern/rprogram](http://github.com/postmodern/rprogram)
 * [github.com/postmodern/rprogram/issues](http://github.com/postmodern/rprogram/issues)
 * Postmodern (postmodern.mod3 at gmail.com)
