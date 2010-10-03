@@ -37,12 +37,14 @@ describe Program do
   end
 
   it "should be able to find a program based on the program names" do
-    ls = nil
-
-    lambda {
-      ls = LS.find
-    }.should_not raise_error(ProgramNotFound)
+    ls = LS.find
 
     File.executable?(ls.path).should == true
+  end
+
+  it "should raise a ProgramNotFound exception if no path/name is valid" do
+    lambda {
+      Program.find
+    }.should raise_error(ProgramNotFound)
   end
 end
