@@ -4,22 +4,18 @@ require 'spec_helper'
 require 'classes/ls_program'
 
 describe Program do
-  it "should create a Program from a path" do
-    prog = Program.new('/usr/bin/ruby')
+  subject { Program.new('/usr/bin/cc') }
 
-    prog.should_not be_nil
+  it "should create a Program from a path" do
+    subject.should_not be_nil
   end
 
   it "should derive the program name from a path" do
-    prog = Program.new('/usr/bin/ruby')
-
-    prog.name.should == 'ruby'
+    subject.name.should == 'cc'
   end
 
   it "should return the program path when converted to a String" do
-    prog = Program.new('/usr/bin/ruby')
-
-    prog.to_s.should == '/usr/bin/ruby'
+    subject.to_s.should == '/usr/bin/cc'
   end
 
   it "should raise an exception for invalid paths" do
@@ -29,7 +25,7 @@ describe Program do
   end
 
   it "should find a program from a path" do
-    prog = Program.find_with_path('/usr/bin/dir')
+    prog = Program.find_with_path('/usr/bin/cc')
 
     prog.should_not be_nil
   end
