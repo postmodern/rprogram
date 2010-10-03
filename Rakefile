@@ -3,7 +3,9 @@ require 'rake'
 require './lib/rprogram/version.rb'
 
 begin
+  gem 'jeweler', '~> 1.4.0'
   require 'jeweler'
+
   Jeweler::Tasks.new do |gem|
     gem.name = 'rprogram'
     gem.version = RProgram::VERSION
@@ -33,7 +35,6 @@ task :default => :spec
 
 begin
   require 'yard'
-
   YARD::Rake::YardocTask.new
 rescue LoadError
   task :yard do
