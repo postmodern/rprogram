@@ -230,7 +230,7 @@ module RProgram
 
       self.non_options[name] = NonOption.new(options)
 
-      class_def(name) do
+      define_method(name) do
         if options[:multiple]
           @options[name] ||= []
         else
@@ -238,7 +238,7 @@ module RProgram
         end
       end
 
-      class_def("#{name}=") do |value|
+      define_method("#{name}=") do |value|
         @options[name] = value
       end
     end
@@ -327,7 +327,7 @@ module RProgram
 
       self.options[method_name] = Option.new(options,&block)
 
-      class_def(method_name) do
+      define_method(method_name) do
         if options[:sub_options]
           @options[method_name] ||= OptionList.new
         elsif options[:multiple]
@@ -337,7 +337,7 @@ module RProgram
         end
       end
 
-      class_def("#{method_name}=") do |value|
+      define_method("#{method_name}=") do |value|
         if options[:sub_options]
           @options[method_name] = OptionList.new(value)
         else
