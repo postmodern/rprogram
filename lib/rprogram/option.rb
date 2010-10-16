@@ -110,12 +110,15 @@ module RProgram
 
       if @multiple
         return value.inject([]) do |args,value|
-          args + @formatter.call(self,[value])
+          arg = @formatter.call(self,[value])
+
+          args += arg if arg
+          args
         end
       else
         value = [value.join(@separator)] if @separator
 
-        return @formatter.call(self,value)
+        return (@formatter.call(self,value) || [])
       end
     end
 

@@ -4,6 +4,14 @@ require 'spec_helper'
 require 'option_examples'
 
 describe Option do
+  describe "custom formatting" do
+    it "should allow the format block to return nil" do
+      opt = Option.new(:flag => '-f') { |opt,value| }
+
+      opt.arguments('bla').should == []
+    end
+  end
+
   describe "single flag" do
     before(:all) do
       @option = Option.new(:flag => '-f')
