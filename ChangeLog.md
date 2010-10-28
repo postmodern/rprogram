@@ -1,3 +1,7 @@
+### 0.2.1 / 2010-10-27
+
+* Allow the formatter block passed to {RProgram::Option} to return `nil`.
+
 ### 0.2.0 / 2010-10-03
 
 * Added {RProgram::Nameable::ClassMethods}.
