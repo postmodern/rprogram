@@ -28,17 +28,18 @@ module RProgram
     # @param [String] name
     #   The name of the program to find.
     #
-    # @return [String, nil]
+    # @return [Pathname, nil]
     #   The full-path of the desired program.
     #
     # @example
-    #   Compat.find_program('as')  #=> "/usr/bin/as"
+    #   Compat.find_program('as')
+    #   #=> #<Pathname:/usr/bin/as>
     #
     def Compat.find_program(name)
       paths.each do |dir|
-        full_path = File.expand_path(File.join(dir,name))
+        full_path = dir.join(name).expand_path
 
-        return full_path if File.file?(full_path)
+        return full_path if full_path.file?
       end
 
       return nil
