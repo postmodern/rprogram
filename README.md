@@ -1,7 +1,8 @@
 # RProgram
 
-* [github.com/postmodern/rprogram](http://github.com/postmodern/rprogram)
-* [github.com/postmodern/rprogram/issues](http://github.com/postmodern/rprogram/issues)
+* [Source](http://github.com/postmodern/rprogram)
+* [Issues](http://github.com/postmodern/rprogram/issues)
+* [Documentation](http://rubydoc.info/gems/rprogram)
 * Postmodern (postmodern.mod3 at gmail.com)
 
 ## Description
@@ -16,7 +17,7 @@ system.
 * Uses Kernel.system for safe execution of individual programs and their
   separate command-line arguments.
 * Allows running programs under `sudo`.
-* Provides cross-platform access to the PATH variable.
+* Provides cross-platform access to the `PATH` environment variable.
 * Supports leading/tailing non-options.
 * Supports long-options and short-options.
 * Supports custom formating of options.
