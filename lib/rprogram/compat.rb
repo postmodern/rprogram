@@ -11,6 +11,8 @@ module RProgram
     # @example
     #   Compat.arch  #=> "linux"
     #
+    # @deprecated Will be removed in 0.3.0.
+    #
     def Compat.platform
       RUBY_PLATFORM.split('-').last
     end
