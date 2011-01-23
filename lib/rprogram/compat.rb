@@ -69,7 +69,13 @@ module RProgram
     #   Compat.find_program_by_names("gas","as")  #=> "/usr/bin/as"
     #
     def Compat.find_program_by_names(*names)
-      names.map { |name| Compat.find_program(name) }.compact.first
+      names.each do |name|
+        if (path = Compat.find_program(name))
+          return path
+        end
+      end
+
+      return nil
     end
 
     #
