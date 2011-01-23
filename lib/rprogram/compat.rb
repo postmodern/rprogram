@@ -25,14 +25,10 @@ module RProgram
     #   Compat.paths #=> ["/bin", "/usr/bin"]
     #
     def Compat.paths
-      # return an empty array in case
-      # the PATH variable does not exist
-      return [] unless ENV['PATH']
-
-      if Compat.platform =~ /mswin(32|64)/
-        return ENV['PATH'].split(';')
+      if ENV['PATH']
+        ENV['PATH'].split(File::PATH_SEPARATOR)
       else
-        return ENV['PATH'].split(':')
+        []
       end
     end
 
