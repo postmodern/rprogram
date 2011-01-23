@@ -1,3 +1,9 @@
+### 0.2.2 / 2011-01-22
+
+* Deprecated {RProgram::Compat.platform}.
+* Use `File::PATH_SEPARATOR` to separate the `PATH` environment variable
+  in {RProgram::Compat.paths}.
+
 ### 0.2.1 / 2010-10-27
 
 * Allow the formatter block passed to {RProgram::Option} to return `nil`.
