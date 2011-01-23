@@ -1,8 +1,12 @@
 require 'rprogram/exceptions/program_not_found'
 require 'rprogram/rprogram'
 
+require 'env/variables'
+
 module RProgram
   module Compat
+    extend Env::Variables
+
     #
     # Determines the native platform.
     #
@@ -16,23 +20,6 @@ module RProgram
     #
     def Compat.platform
       RUBY_PLATFORM.split('-').last
-    end
-
-    #
-    # Determines the contents of the `PATH` environment variable.
-    #
-    # @return [Array]
-    #   The contents of the `PATH` environment variable.
-    #
-    # @example
-    #   Compat.paths #=> ["/bin", "/usr/bin"]
-    #
-    def Compat.paths
-      if ENV['PATH']
-        ENV['PATH'].split(File::PATH_SEPARATOR)
-      else
-        []
-      end
     end
 
     #

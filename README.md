@@ -92,6 +92,10 @@ Finally, run your program with options or a block:
     end
     # => true
 
+## Requirements
+
+* [env](http://github.com/postmodern/env) ~> 0.1.2
+
 ## Install
 
     $ sudo gem install rprogram
