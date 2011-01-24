@@ -2,7 +2,7 @@
 
 * Deprecated {RProgram::Compat.platform}.
 * Use `File::PATH_SEPARATOR` to separate the `PATH` environment variable
-  in {RProgram::Compat.paths}.
+  in 1RProgram::Compat.paths1.
 
 ### 0.2.1 / 2010-10-27
 
