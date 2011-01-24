@@ -17,10 +17,9 @@ module RProgram
     attr_reader :sub_options
 
     #
-    # Creates a new Option object with. If a _block_
-    # is given it will be used for the custom formating of the option. If a
-    # _block_ is not given, the option will use the default_format when
-    # generating the arguments.
+    # Creates a new Option object with. If a block is given it will be
+    # used for the custom formatting of the option. If a block is not given,
+    # the option will use the default_format when generating the arguments.
     #
     # @param [Hash] options
     #   Additional options.
