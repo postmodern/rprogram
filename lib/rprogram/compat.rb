@@ -1,4 +1,5 @@
 require 'rprogram/exceptions/program_not_found'
+require 'rprogram/rprogram'
 
 module RProgram
   module Compat
