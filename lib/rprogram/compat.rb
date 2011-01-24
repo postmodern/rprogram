@@ -47,7 +47,7 @@ module RProgram
     #   Compat.find_program('as')  #=> "/usr/bin/as"
     #
     def Compat.find_program(name)
-      Compat.paths.each do |dir|
+      paths.each do |dir|
         full_path = File.expand_path(File.join(dir,name))
 
         return full_path if File.file?(full_path)
@@ -70,7 +70,7 @@ module RProgram
     #
     def Compat.find_program_by_names(*names)
       names.each do |name|
-        if (path = Compat.find_program(name))
+        if (path = find_program(name))
           return path
         end
       end
@@ -118,13 +118,13 @@ module RProgram
     # @since 0.1.8
     #
     def Compat.sudo(path,*args)
-      sudo_path = Compat.find_program('sudo')
+      sudo_path = find_program('sudo')
 
       unless sudo_path
         raise(ProgramNotFound,'could not find the "sudo" program',caller)
       end
 
-      return Compat.run(sudo_path,path,*args)
+      return run(sudo_path,path,*args)
     end
   end
 end
