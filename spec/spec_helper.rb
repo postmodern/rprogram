@@ -1,5 +1,4 @@
-require 'rubygems'
-gem 'rspec', '~> 2.4.0'
+gem 'rspec', '~> 2.4'
 require 'rspec'
 
 require 'rprogram/version'
