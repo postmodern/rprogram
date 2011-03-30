@@ -36,6 +36,11 @@ module RProgram
     #   #=> #<Pathname:/usr/bin/as>
     #
     def Compat.find_program(name)
+      # add the `.exe` suffix to the name, if running on Windows
+      if platform =~ /mswin/
+        name = "#{name}.exe"
+      end
+
       paths.each do |dir|
         full_path = dir.join(name).expand_path
 
