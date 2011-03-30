@@ -56,7 +56,7 @@ module RProgram
     # @param [Array] names
     #   The names of the program to use while searching for the program.
     #
-    # @return [String, nil]
+    # @return [Pathname, nil]
     #   The first full-path for the program.
     #
     # @example
