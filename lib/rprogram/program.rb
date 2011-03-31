@@ -271,7 +271,7 @@ module RProgram
     #   # hello
     #   # => true
     #
-    # @see Compat.run
+    # @see System.run
     #
     def run(*arguments)
       System.run(@path,*arguments)
