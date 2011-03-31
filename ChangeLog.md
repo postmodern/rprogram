@@ -10,7 +10,7 @@
 
 * Deprecated {RProgram::Compat.platform}.
 * Use `File::PATH_SEPARATOR` to separate the `PATH` environment variable
-  in 1RProgram::Compat.paths1.
+  in `RProgram::Compat.paths`.
 
 ### 0.2.1 / 2010-10-27
 
@@ -46,7 +46,7 @@
 
 * Use Hoe 2.2.0.
 * Removed requirement for 'open3'.
-* Renamed PRogram::Compat.PATHS to {RProgram::Compat.paths}.
+* Renamed PRogram::Compat.PATHS to `RProgram::Compat.paths`.
 * Refactored {RProgram::Option#arguments}.
 * Removed `RProgram::Option#format`.
 * Refactored {RProgram::NonOption#arguments}.
