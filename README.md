@@ -102,5 +102,6 @@ Finally, run your program with options or a block:
 
 ## License
 
-See {file:LICENSE.txt} for license information.
+Copyright (c) 2007-2011 Hal Brodigan
 
+See {file:LICENSE.txt} for license information.
