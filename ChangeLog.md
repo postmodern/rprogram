@@ -1,3 +1,11 @@
+### 0.2.3 / 2011-03-30
+
+* Require env ~> 0.1, >= 0.1.2.
+* Automatically search for programs with a `.exe` suffix, when running on
+  Windows.
+* {RProgram::Compat.find_program} and {RProgram::Compat.find_program_by_names}
+  now return a `Pathname` object.
+
 ### 0.2.2 / 2011-01-22
 
 * Deprecated {RProgram::Compat.platform}.
