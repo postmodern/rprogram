@@ -3,7 +3,7 @@
 * [Source](http://github.com/postmodern/rprogram)
 * [Issues](http://github.com/postmodern/rprogram/issues)
 * [Documentation](http://rubydoc.info/gems/rprogram)
-* Postmodern (postmodern.mod3 at gmail.com)
+* [Email](mailto:postmodern.mod3 at gmail.com)
 
 ## Description
   
