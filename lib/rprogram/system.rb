@@ -4,7 +4,7 @@ require 'rprogram/rprogram'
 require 'env/variables'
 
 module RProgram
-  module Compat
+  module System
     extend Env::Variables
 
     #
@@ -14,11 +14,11 @@ module RProgram
     #   The native platform.
     #
     # @example
-    #   Compat.arch  #=> "linux"
+    #   System.platform #=> "linux"
     #
     # @deprecated Will be removed in 0.3.0.
     #
-    def Compat.platform
+    def System.platform
       RUBY_PLATFORM.split('-').last
     end
 
@@ -32,10 +32,10 @@ module RProgram
     #   The full-path of the desired program.
     #
     # @example
-    #   Compat.find_program('as')
+    #   System.find_program('as')
     #   #=> #<Pathname:/usr/bin/as>
     #
-    def Compat.find_program(name)
+    def System.find_program(name)
       # add the `.exe` suffix to the name, if running on Windows
       if platform =~ /mswin/
         name = "#{name}.exe"
@@ -60,9 +60,9 @@ module RProgram
     #   The first full-path for the program.
     #
     # @example
-    #   Compat.find_program_by_names("gas","as")  #=> "/usr/bin/as"
+    #   System.find_program_by_names("gas","as")  #=> "/usr/bin/as"
     #
-    def Compat.find_program_by_names(*names)
+    def System.find_program_by_names(*names)
       names.each do |name|
         if (path = find_program(name))
           return path
@@ -88,7 +88,7 @@ module RProgram
     # @see http://rubydoc.info/stdlib/core/1.9.2/Kernel#system-instance_method
     # @see http://rubydoc.info/stdlib/core/1.9.2/Kernel#spawn-instance_method
     #
-    def Compat.run(path,*arguments)
+    def System.run(path,*arguments)
       if arguments.last.kind_of?(Hash)
         options = arguments[-1..-1]
         arguments = arguments[0..-2]
@@ -126,7 +126,7 @@ module RProgram
     #
     # @see Compat.run
     #
-    def Compat.sudo(path,*arguments)
+    def System.sudo(path,*arguments)
       sudo_path = find_program('sudo')
 
       unless sudo_path

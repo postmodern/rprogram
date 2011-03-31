@@ -1,5 +1,5 @@
 require 'rprogram/rprogram'
-require 'rprogram/compat'
+require 'rprogram/system'
 require 'rprogram/task'
 require 'rprogram/exceptions/program_not_found'
 
@@ -221,7 +221,7 @@ module RProgram
     #
     def self.find(*arguments,&block)
       path = self.path
-      path ||= Compat.find_program_by_names(*self.program_names)
+      path ||= System.find_program_by_names(*self.program_names)
 
       unless path
         names = self.program_names.map { |name| name.dump }.join(', ')
@@ -274,7 +274,7 @@ module RProgram
     # @see Compat.run
     #
     def run(*arguments)
-      Compat.run(@path,*arguments)
+      System.run(@path,*arguments)
     end
 
     #
@@ -291,10 +291,10 @@ module RProgram
     #
     # @since 0.1.8
     #
-    # @see Compat.sudo
+    # @see System.sudo
     #
     def sudo(*arguments)
-      Compat.sudo(@path,*arguments)
+      System.sudo(@path,*arguments)
     end
 
     #
