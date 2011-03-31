@@ -120,7 +120,9 @@ module RProgram
     # @since 0.2.0
     #
     def self.path=(new_path)
-      @program_path = (File.expand_path(new_path) if new_path)
+      @program_path = if new_path
+                        File.expand_path(new_path)
+                      end
     end
 
     #
@@ -152,7 +154,7 @@ module RProgram
     #   # => nil
     #
     def self.find_with_path(path,*arguments,&block)
-      return self.new(path,*arguments,&block) if File.file?(path)
+      self.new(path,*arguments,&block) if File.file?(path)
     end
 
     #
@@ -187,7 +189,9 @@ module RProgram
     #
     def self.find_with_paths(paths,*arguments,&block)
       paths.each do |path|
-        return self.new(path,*arguments,&block) if File.file?(path)
+        if File.file?(path)
+          return self.new(path,*arguments,&block)
+        end
       end
     end
 
