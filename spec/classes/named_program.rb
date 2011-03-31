@@ -1,8 +1,4 @@
-require 'rprogram/nameable'
-
-class NamedProgram
-
-  include RProgram::Nameable
+class NamedProgram < RProgram::Program
 
   name_program 'ls'
 

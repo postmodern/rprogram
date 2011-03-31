@@ -25,15 +25,15 @@ describe Program do
     end
 
     it "should provide an instance method for the program name" do
-      obj = subject.new
+      program = subject.find
 
-      obj.program_name.should == 'ls'
+      program.program_name.should == 'ls'
     end
 
     it "should provide an instance method for the program names" do
-      obj = subject.new
+      program = subject.find
 
-      obj.program_names.should == ['ls']
+      program.program_names.should == ['ls']
     end
   end
 
@@ -49,15 +49,15 @@ describe Program do
     end
 
     it "should provide an instance method for the program aliases" do
-      obj = subject.new
+      program = subject.find
 
-      obj.program_aliases.should == ['dir']
+      program.program_aliases.should == ['dir']
     end
 
     it "should provide an instance method for the program names" do
-      obj = subject.new
+      program = subject.find
 
-      obj.program_names.should == ['ls', 'dir']
+      program.program_names.should == ['ls', 'dir']
     end
   end
 

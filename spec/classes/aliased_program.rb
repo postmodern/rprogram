@@ -1,8 +1,4 @@
-require 'rprogram/nameable'
-
-class AliasedProgram
-
-  include RProgram::Nameable
+class AliasedProgram < RProgram::Program
 
   name_program 'ls'
   alias_program 'dir'
