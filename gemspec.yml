@@ -14,7 +14,7 @@ homepage: http://github.com/postmodern/rprogram
 has_yard: true
 
 dependencies:
-  env: ~> 0.1.2
+  env: ~> 0.1, >= 0.1.2
 
 development_dependencies:
   ore-tasks: ~> 0.4

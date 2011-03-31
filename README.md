@@ -94,7 +94,7 @@ Finally, run your program with options or a block:
 
 ## Requirements
 
-* [env](http://github.com/postmodern/env) ~> 0.1.2
+* [env](http://github.com/postmodern/env) ~> 0.1, >= 0.1.2
 
 ## Install
 
