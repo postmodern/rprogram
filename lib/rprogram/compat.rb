@@ -111,7 +111,7 @@ module RProgram
     # @param [String] path
     #   Path of the program to run.
     #
-    # @param [Array] args
+    # @param [Array] arguments
     #   Additional arguments to run the program with.
     #
     # @return [Boolean]
@@ -122,14 +122,14 @@ module RProgram
     #
     # @since 0.1.8
     #
-    def Compat.sudo(path,*args)
+    def Compat.sudo(path,*arguments)
       sudo_path = find_program('sudo')
 
       unless sudo_path
-        raise(ProgramNotFound,'could not find the "sudo" program',caller)
+        raise(ProgramNotFound,'could not find the "sudo" program')
       end
 
-      return run(sudo_path,path,*args)
+      return run(sudo_path,path,*arguments)
     end
   end
 end

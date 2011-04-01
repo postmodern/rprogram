@@ -159,7 +159,7 @@ module RProgram
     #
     # Runs the program.
     #
-    # @param [Array] args
+    # @param [Array] arguments
     #   Addition arguments to run the program with.
     #
     # @return [true, false]
@@ -173,14 +173,14 @@ module RProgram
     #
     # @see Kernel.system
     #
-    def run(*args)
-      Compat.run(@path,*args)
+    def run(*arguments)
+      Compat.run(@path,*arguments)
     end
 
     #
     # Runs the program under sudo.
     #
-    # @param [Array] args
+    # @param [Array] arguments
     #   Additional arguments to run the program with.
     #
     # @return [Boolean]
@@ -191,8 +191,8 @@ module RProgram
     #
     # @since 0.1.8
     #
-    def sudo(*args)
-      Compat.sudo(@path,*args)
+    def sudo(*arguments)
+      Compat.sudo(@path,*arguments)
     end
 
     #
