@@ -113,6 +113,7 @@ module RProgram
     #
     # @param [Array] arguments
     #   Additional arguments to run the program with.
+    #   The last argument of `arguments` may be a `Hash` of options.
     #
     # @return [Boolean]
     #   Specifies whether the program exited successfully.
@@ -121,6 +122,8 @@ module RProgram
     #   Indicates that the `sudo` program could not be located.
     #
     # @since 0.1.8
+    #
+    # @see Compat.run
     #
     def Compat.sudo(path,*arguments)
       sudo_path = find_program('sudo')

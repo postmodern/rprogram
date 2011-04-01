@@ -171,7 +171,7 @@ module RProgram
     #   # hello
     #   # => true
     #
-    # @see Kernel.system
+    # @see Compat.run
     #
     def run(*arguments)
       Compat.run(@path,*arguments)
@@ -191,6 +191,8 @@ module RProgram
     #
     # @since 0.1.8
     #
+    # @see Compat.sudo
+    #
     def sudo(*arguments)
       Compat.sudo(@path,*arguments)
     end
@@ -204,7 +206,8 @@ module RProgram
     # @return [true, false]
     #   Specifies the exit status of the program.
     #
-    # @see Kernel.system
+    # @see #run
+    # @see #sudo
     #
     def run_task(task)
       if task.sudo?
