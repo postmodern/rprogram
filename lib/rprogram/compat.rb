@@ -96,6 +96,7 @@ module RProgram
         options = []
       end
 
+      path = path.to_s
       arguments = arguments.map { |arg| arg.to_s }
 
       if RProgram.debug
