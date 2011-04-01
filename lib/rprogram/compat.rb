@@ -78,20 +78,31 @@ module RProgram
     # @param [String] path
     #   The path to the program.
     #
-    # @param [Array] args
+    # @param [Array] arguments
     #   Additional arguments to run the program with.
+    #   The last argument of `arguments` may be a `Hash` of options.
     #
     # @return [Boolean]
     #   Specifies whether the program exited successfully.
     #
-    def Compat.run(path,*args)
-      args = args.map { |arg| arg.to_s }
-
-      if RProgram.debug
-        STDERR.puts ">>> #{path} #{args.join(' ')}"
+    # @see http://rubydoc.info/stdlib/core/1.9.2/Kernel#system-instance_method
+    # @see http://rubydoc.info/stdlib/core/1.9.2/Kernel#spawn-instance_method
+    #
+    def Compat.run(path,*arguments)
+      if arguments.last.kind_of?(Hash)
+        options = arguments[-1..-1]
+        arguments = arguments[0..-2]
+      else
+        options = []
       end
 
-      return Kernel.system(path,*args)
+      arguments = arguments.map { |arg| arg.to_s }
+
+      if RProgram.debug
+        STDERR.puts ">>> #{path} #{arguments.join(' ')}"
+      end
+
+      return Kernel.system(path,*(arguments + options))
     end
 
     #
