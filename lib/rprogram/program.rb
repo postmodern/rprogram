@@ -203,17 +203,23 @@ module RProgram
     # @param [Task] task
     #   The task who's arguments will be used to run the program.
     #
+    # @param [Hash] options
+    #   Spawn options for the program to be ran.
+    #
     # @return [true, false]
     #   Specifies the exit status of the program.
     #
     # @see #run
     # @see #sudo
     #
-    def run_task(task)
+    def run_task(task,options={})
+      arguments = task.arguments
+      arguments << options unless options.empty?
+
       if task.sudo?
-        return sudo(*(task.arguments))
+        return sudo(*arguments)
       else
-        return run(*(task.arguments))
+        return run(*arguments)
       end
     end
 
