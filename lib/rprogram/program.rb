@@ -1,6 +1,7 @@
 require 'rprogram/rprogram'
 require 'rprogram/system'
 require 'rprogram/task'
+require 'rprogram/sudo_task'
 require 'rprogram/exceptions/program_not_found'
 
 module RProgram
@@ -287,6 +288,12 @@ module RProgram
     # @param [Array] arguments
     #   Additional arguments to run the program with.
     #
+    # @yield [sudo]
+    #   If a block is given, it will be passed the sudo task.
+    #
+    # @yieldparam [SudoTask] sudo
+    #   The sudo tasks.
+    #
     # @return [Boolean]
     #   Specifies whether the program exited successfully.
     #
@@ -297,8 +304,11 @@ module RProgram
     #
     # @see System.sudo
     #
-    def sudo(*arguments)
-      System.sudo(@path,*arguments)
+    def sudo(*arguments,&block)
+      task = SudoTask.new(&block)
+      task.command = [@path] + arguments
+
+      return System.sudo(*task.arguments)
     end
 
     #
@@ -314,17 +324,41 @@ module RProgram
     #   Specifies the exit status of the program.
     #
     # @see #run
-    # @see #sudo
     #
     def run_task(task,options={})
       arguments = task.arguments
       arguments << options unless options.empty?
 
-      if task.sudo?
-        return sudo(*arguments)
-      else
-        return run(*arguments)
-      end
+      return run(arguments)
+    end
+
+    #
+    # Runs the program under `sudo` with the arguments from the given task.
+    #
+    # @param [Task] task
+    #   The task who's arguments will be used to run the program.
+    #
+    # @param [Hash] options
+    #   Spawn options for the program to be ran.
+    #
+    # @yield [sudo]
+    #   If a block is given, it will be passed the sudo task.
+    #
+    # @yieldparam [SudoTask] sudo
+    #   The sudo tasks.
+    #
+    # @return [true, false]
+    #   Specifies the exit status of the program.
+    #
+    # @see #sudo
+    #
+    # @since 0.3.0
+    #
+    def sudo_task(task,options={},&block)
+      arguments = task.arguments
+      arguments << options unless options.empty?
+
+      return sudo(arguments,&block)
     end
 
     #
