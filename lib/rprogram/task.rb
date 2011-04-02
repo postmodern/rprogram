@@ -323,6 +323,8 @@ module RProgram
     #
     def self.subtask(name,task)
       name = name.to_s
+      file = __FILE__
+      line = __LINE__ + 3
 
       class_eval %{
         def #{name}(options={},&block)
@@ -336,7 +338,7 @@ module RProgram
 
           return @subtasks[#{name.dump}]
         end
-      }
+      }, file, line
     end
 
     #
