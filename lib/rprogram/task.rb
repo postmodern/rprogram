@@ -1,10 +1,9 @@
+require 'rprogram/option'
 require 'rprogram/option_list'
+require 'rprogram/non_option'
 
 module RProgram
   class Task
-
-    # Specifies whether the task will be run under sudo
-    attr_accessor :sudo
 
     #
     # Creates a new Task object.
@@ -27,7 +26,6 @@ module RProgram
     #   end
     #
     def initialize(options={},&block)
-      @sudo = (options.delete(:sudo) || false)
       @subtasks = {}
       @options = options
 
@@ -201,18 +199,6 @@ module RProgram
     end
 
     #
-    # Specifies whether the task will be ran under sudo.
-    #
-    # @return [Boolean]
-    #   Returns `true` if sudo is enabled, returns `false` otherwise.
-    #
-    # @since 0.1.8
-    #
-    def sudo?
-      @sudo == true
-    end
-
-    #
     # Generates the command-line arguments for all leading non-options.
     #
     # @return [Array]
@@ -327,7 +313,7 @@ module RProgram
       line = __LINE__ + 3
 
       class_eval %{
-        def #{name}(options={},&block)
+        def #{name}(options={})
           if @subtasks[#{name.dump}]
             @subtasks[#{name.dump}].options.merge!(options)
 

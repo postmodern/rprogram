@@ -35,21 +35,6 @@ describe Task do
     end
   end
 
-  describe "sudo" do
-    it "should allow passing in the :sudo option" do
-      task = LSTask.new(:sudo => true)
-
-      task.should be_sudo
-    end
-
-    it "should allow enabling sudo after the task has been initialized" do
-      task = LSTask.new
-
-      task.sudo = true
-      task.should be_sudo
-    end
-  end
-
   before(:each) do
     @task = LSTask.new
   end
