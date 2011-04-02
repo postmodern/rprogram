@@ -1,6 +1,11 @@
 require 'rpgrogram/task'
 
 module RProgram
+  #
+  # Represents the options for `sudo`.
+  #
+  # @since 0.3.0
+  #
   class SudoTask < Task
 
     short_option :name => :ask_password, :flag => '-A'
