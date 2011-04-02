@@ -298,7 +298,13 @@ module RProgram
     #   options and tailing non-options of the task and it's sub-tasks.
     #
     def arguments
-      leading_non_options + options + tailing_non_options
+      tailing_args = tailing_non_options
+
+      if tailing_args.any? { |arg| arg[0,1] == '-' }
+        tailing_args.unshift('--')
+      end
+
+      return leading_non_options + options + tailing_args
     end
 
     protected
