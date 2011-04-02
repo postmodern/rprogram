@@ -1,10 +1,7 @@
-require 'rprogram/options'
 require 'rprogram/option_list'
 
 module RProgram
   class Task
-
-    include Options
 
     # Specifies whether the task will be run under sudo
     attr_accessor :sudo
@@ -38,6 +35,113 @@ module RProgram
     end
 
     #
+    # @return [Hash]
+    #   All defined non-options of the class.
+    #
+    def self.non_options
+      @non_options ||= {}
+    end
+
+    #
+    # Searches for the non-option with the matching name in the class
+    # and it's ancestors.
+    #
+    # @param [Symbol, String] name
+    #   The name to search for.
+    #
+    # @return [true, false]
+    #   Specifies whether the non-option with the matching name was
+    #   defined.
+    #
+    def self.has_non_option?(name)
+      name = name.to_sym
+
+      ancestors.each do |base|
+        if base < RProgram::Task
+          return true if base.non_options.include?(name)
+        end
+      end
+
+      return false
+    end
+
+    #
+    # Searches for the non-option with the matching name in the class
+    # and it's ancestors.
+    #
+    # @param [Symbol, String] name
+    #   The name to search for.
+    #
+    # @return [NonOption]
+    #   The non-option with the matching name.
+    #
+    def self.get_non_option(name)
+      name = name.to_sym
+
+      ancestors.each do |base|
+        if base < RProgram::Task
+          if base.non_options.has_key?(name)
+            return base.non_options[name]
+          end
+        end
+      end
+
+      return nil
+    end
+
+    #
+    # @return [Hash]
+    #   All defined options for the class.
+    #
+    def self.options
+      @options ||= {}
+    end
+
+    #
+    # Searches for the option with the matching name in the class and
+    # it's ancestors.
+    #
+    # @param [Symbol, String] name
+    #   The name to search for.
+    #
+    # @return [true, false]
+    #   Specifies whether the option with the matching name was defined.
+    #
+    def self.has_option?(name)
+      name = name.to_sym
+
+      ancestors.each do |base|
+        if base < RProgram::Task
+          return true if base.options.has_key?(name)
+        end
+      end
+
+      return false
+    end
+
+    #
+    # Searches for the option with the matching name in the class and
+    # it's ancestors.
+    #
+    # @param [Symbol, String] name
+    #   The name to search for.
+    #
+    # @return [Option]
+    #   The option with the matching name.
+    #
+    def self.get_option(name)
+      name = name.to_sym
+
+      ancestors.each do |base|
+        if base < RProgram::Task
+          return base.options[name] if base.options.has_key?(name)
+        end
+      end
+
+      return nil
+    end
+
+    #
     # Creates a new Task object, then formats command-line arguments
     # using the Task object.
     #
@@ -66,6 +170,34 @@ module RProgram
     #
     def self.arguments(options={},&block)
       self.new(options,&block).arguments
+    end
+
+    #
+    # @see has_non_option?
+    #
+    def has_non_option?(name)
+      self.class.has_non_option?(name)
+    end
+
+    #
+    # @see get_non_option
+    #
+    def get_non_option(name)
+      self.class.get_non_option(name)
+    end
+
+    #
+    # @see has_option?
+    #
+    def has_option?(name)
+      self.class.has_option?(name)
+    end
+
+    #
+    # @see get_option
+    #
+    def get_option(name)
+      self.class.get_option(name)
     end
 
     #
