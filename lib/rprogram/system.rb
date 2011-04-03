@@ -143,32 +143,34 @@ module RProgram
     #   For acceptable options.
     #
     def System.run(*arguments)
-      options = if arguments.last.kind_of?(Hash)
-                  arguments.pop
-                else
-                  {}
-                end
-
-      env = (options.delete(:env) || {})
+      if arguments.last.kind_of?(Hash)
+        options = arguments.pop
+        env = options.delete(:env)
+      end
 
       arguments = arguments.map { |arg| arg.to_s }
 
       if RProgram.debug
-        STDERR.puts ">>> #{arguments.join(' ')}"
+        command = ''
+
+        if env
+          env.each do |name,value|
+            command << "#{name}=#{value} "
+          end
+        end
+        
+        command << arguments.join(' ')
+        command << " #{options.inspect}" if options
+
+        STDERR.puts ">>> #{command}"
       end
 
-      if RUBY_VERSION < '1.9'
-        unless env.empty?
-          raise("cannot pass ENV variables to Kernel.system in #{RUBY_VERSION}")
-        end
-
-        unless options.empty?
-          raise("cannot pass exec options to Kernel.system in #{RUBY_VERSION}")
-        end
-      else
-        arguments.unshift(env)
-        arguments.push(options)
+      if (options && RUBY_VERSION < '1.9')
+        raise("cannot pass exec options to Kernel.system in #{RUBY_VERSION}")
       end
+
+      arguments.unshift(env) if env
+      arguments.push(options) if options
 
       return Kernel.system(*arguments)
     end
