@@ -7,6 +7,24 @@ module RProgram
   module System
     extend Env::Variables
 
+    @arch, @platform = RUBY_PLATFORM.split('-',2)
+
+    #
+    # Determines the native architecture.
+    #
+    # @return [String]
+    #   The native architecture.
+    #
+    # @example
+    #   System.arch
+    #   # => "x86-64"
+    #
+    # @since 0.3.0
+    #
+    def System.arch
+      @arch
+    end
+
     #
     # Determines the native platform.
     #
@@ -14,12 +32,23 @@ module RProgram
     #   The native platform.
     #
     # @example
-    #   System.platform #=> "linux"
-    #
-    # @deprecated Will be removed in 0.3.0.
+    #   System.platform
+    #   # => "linux"
     #
     def System.platform
-      RUBY_PLATFORM.split('-').last
+      @platform
+    end
+
+    #
+    # Determines if the platform is Windows.
+    #
+    # @return [Boolean]
+    #   Specifies whether the platform is Windows.
+    #
+    # @since 0.3.0
+    #
+    def System.windows?
+      platform.include?('mingw') || platform.include?('mswin')
     end
 
     #
@@ -37,7 +66,7 @@ module RProgram
     #
     def System.find_program(name)
       # add the `.exe` suffix to the name, if running on Windows
-      if platform =~ /mswin/
+      if windows?
         name = "#{name}.exe"
       end
 
