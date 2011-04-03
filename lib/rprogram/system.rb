@@ -48,7 +48,11 @@ module RProgram
     # @since 0.3.0
     #
     def System.windows?
-      @platform.include?('mingw') || @platform.include?('mswin')
+      if @platform
+        @platform.include?('mingw') || @platform.include?('mswin')
+      else
+        false
+      end
     end
 
     #
