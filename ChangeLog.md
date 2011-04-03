@@ -3,12 +3,12 @@
 * Require env ~> 0.1, >= 0.1.2.
 * Automatically search for programs with a `.exe` suffix, when running on
   Windows.
-* {RProgram::Compat.find_program} and {RProgram::Compat.find_program_by_names}
+* `RProgram::Compat.find_program` and `RProgram::Compat.find_program_by_names`
   now return a `Pathname` object.
 
 ### 0.2.2 / 2011-01-22
 
-* Deprecated {RProgram::Compat.platform}.
+* Deprecated `RProgram::Compat.platform`.
 * Use `File::PATH_SEPARATOR` to separate the `PATH` environment variable
   in `RProgram::Compat.paths`.
 
@@ -18,19 +18,19 @@
 
 ### 0.2.0 / 2010-10-03
 
-* Added {RProgram::Nameable::ClassMethods}.
-* Added {RProgram::Options::ClassMethods}.
-* Added {RProgram::Nameable::ClassMethods#path}:
+* Added `RProgram::Nameable::ClassMethods`.
+* Added `RProgram::Options::ClassMethods`.
+* Added `RProgram::Nameable::ClassMethods#path`:
   * {RProgram::Program.find} will default to
-    {RProgram::Nameable::ClassMethods#path} if set.
+    `RProgram::Nameable::ClassMethods#path` if set.
 
 ### 0.1.8 / 2009-12-24
  
 * Allow Program to run commands under sudo:
-  * Added {RProgram::Compat.sudo}.
-  * Added {RProgram::Task#sudo}.
-  * Added {RProgram::Task#sudo=}.
-  * Added {RProgram::Task#sudo?}.
+  * Added `RProgram::Compat.sudo`.
+  * Added `RProgram::Task#sudo`.
+  * Added `RProgram::Task#sudo=`.
+  * Added `RProgram::Task#sudo?`.
   * Added {RProgram::Program#sudo}.
 
 ### 0.1.7 / 2009-09-21
@@ -46,7 +46,7 @@
 
 * Use Hoe 2.2.0.
 * Removed requirement for 'open3'.
-* Renamed PRogram::Compat.PATHS to `RProgram::Compat.paths`.
+* Renamed `PRogram::Compat.PATHS` to `RProgram::Compat.paths`.
 * Refactored {RProgram::Option#arguments}.
 * Removed `RProgram::Option#format`.
 * Refactored {RProgram::NonOption#arguments}.
