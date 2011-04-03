@@ -135,6 +135,10 @@ module RProgram
     # @return [Boolean]
     #   Specifies whether the program exited successfully.
     #
+    # @raise [RuntimeError]
+    #   Passing ENV variables or exec options to `Kernel.system` is not
+    #   supported before Ruby 1.9.1.
+    #
     # @see http://rubydoc.info/stdlib/core/1.9.2/Kernel#spawn-instance_method
     #   For acceptable options.
     #
