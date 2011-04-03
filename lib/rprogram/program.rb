@@ -308,13 +308,13 @@ module RProgram
       task = SudoTask.new(&block)
       task.command = [@path] + arguments
 
-      return System.sudo(*task.arguments)
+      return System.sudo(*task)
     end
 
     #
     # Runs the program with the arguments from the given task.
     #
-    # @param [Task] task
+    # @param [Task, #to_a] task
     #   The task who's arguments will be used to run the program.
     #
     # @param [Hash] options
@@ -326,7 +326,7 @@ module RProgram
     # @see #run
     #
     def run_task(task,options={})
-      arguments = task.arguments
+      arguments = task.to_a
       arguments << options unless options.empty?
 
       return run(arguments)
@@ -335,7 +335,7 @@ module RProgram
     #
     # Runs the program under `sudo` with the arguments from the given task.
     #
-    # @param [Task] task
+    # @param [Task, #to_a] task
     #   The task who's arguments will be used to run the program.
     #
     # @param [Hash] options
@@ -355,7 +355,7 @@ module RProgram
     # @since 0.3.0
     #
     def sudo_task(task,options={},&block)
-      arguments = task.arguments
+      arguments = task.to_a
       arguments << options unless options.empty?
 
       return sudo(arguments,&block)
