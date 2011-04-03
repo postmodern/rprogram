@@ -314,11 +314,8 @@ module RProgram
     #   @param [Hash] options
     #     Additional options to execute the program with.
     #
-    # @yield [sudo]
-    #   If a block is given, it will be passed the sudo task.
-    #
-    # @yieldparam [SudoTask] sudo
-    #   The sudo tasks.
+    #   @option options [Hash{Symbol => Object}] :sudo
+    #     Additional `sudo` options.
     #
     # @return [Boolean]
     #   Specifies whether the program exited successfully.
@@ -331,12 +328,17 @@ module RProgram
     # @see http://rubydoc.info/stdlib/core/1.9.2/Kernel#spawn-instance_method
     #   For acceptable options.
     #
-    def sudo(*arguments,&block)
+    # @see SudoTask
+    #   For `:sudo` options.
+    #
+    def sudo(*arguments)
       options = if arguments.last.kind_of?(Hash)
                   arguments.pop
+                else
+                  {}
                 end
 
-      task = SudoTask.new(&block)
+      task = SudoTask.new(options.delete(:sudo) || {})
       task.command = [@path] + arguments
 
       arguments = task.arguments
