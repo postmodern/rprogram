@@ -155,7 +155,20 @@ module RProgram
         STDERR.puts ">>> #{path} #{arguments.join(' ')}"
       end
 
-      return Kernel.system(*([env, path] + arguments + [options]))
+      if RUBY_VERSION < '1.9'
+        unless env.empty?
+          raise("cannot pass ENV variables to Kernel.system in #{RUBY_VERSION}")
+        end
+
+        unless options.empty?
+          raise("cannot pass exec options to Kernel.system in #{RUBY_VERSION}")
+        end
+      else
+        arguments.unshift(env, path)
+        arguments.push(options)
+      end
+
+      return Kernel.system(*arguments)
     end
 
     #

@@ -345,7 +345,7 @@ module RProgram
       task.command = [@path] + arguments
 
       arguments = task.arguments
-      arguments << options if options
+      arguments << options unless options.empty?
 
       return System.sudo(*arguments)
     end
@@ -366,7 +366,7 @@ module RProgram
     #
     def run_task(task,options={})
       arguments = task.arguments
-      arguments << options
+      arguments << options unless options.empty?
 
       return run(*arguments)
     end
@@ -395,7 +395,7 @@ module RProgram
     #
     def sudo_task(task,options={},&block)
       arguments = task.arguments
-      arguments << options
+      arguments << options unless options.empty?
 
       return sudo(*arguments,&block)
     end
