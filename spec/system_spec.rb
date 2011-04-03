@@ -39,12 +39,14 @@ describe System do
       subject.run(dir,'-zzzzzz').should == false
     end
 
-    it "should allow passing spawn options as the last argument" do
-      output = Tempfile.new('rprogram_compat_run')
+    unless RUBY_VERSION < '1.9'
+      it "should allow passing spawn options as the last argument" do
+        output = Tempfile.new('rprogram_compat_run')
 
-      subject.run(dir, '-l', :out => [output.path, 'w'])
+        subject.run(dir, '-l', :out => [output.path, 'w'])
 
-      output.read.should_not be_empty
+        output.read.should_not be_empty
+      end
     end
   end
 end
