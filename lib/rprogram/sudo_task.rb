@@ -4,6 +4,35 @@ module RProgram
   #
   # Represents the options for `sudo`.
   #
+  # ## Sudo options:
+  #
+  # * `-A` - `sudo.ask_password`
+  # * `-b` - `sudo.background`
+  # * `-C` - `sudo.close_from`
+  # * `-E` - `sudo.preserve_env`
+  # * `-e` - `sudo.edit`
+  # * `-g` - `sudo.group`
+  # * `-H` - `sudo.home`
+  # * `-h` - `sudo.help`
+  # * `-i` - `sudo.simulate_initial_login`
+  # * `-k` - `sudo.kill`
+  # * `-K` - `sudo.sure_kill`
+  # * `-L` - `sudo.list_defaults`
+  # * `-l` - `sudo.list`
+  # * `-n` - `sudo.non_interactive`
+  # * `-P` - `sudo.preserve_group`
+  # * `-p` - `sudo.prompt`
+  # * `-r` - `sudo.role`
+  # * `-S` - `sudo.stdin`
+  # * `-s` - `sudo.shell`
+  # * `-t` - `sudo.type`
+  # * `-U` - `sudo.other_user`
+  # * `-u` - `sudo.user`
+  # * `-V` - `sudo.version`
+  # * `-v` - `sudo.validate`
+  #
+  # * `[command]` - `sudo.command`
+  #
   # @since 0.3.0
   #
   class SudoTask < Task
