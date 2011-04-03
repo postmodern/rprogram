@@ -315,11 +315,11 @@ module RProgram
       line = __LINE__ + 3
 
       class_eval %{
-        def #{name}(options={})
+        def #{name}(options={},&block)
           if @subtasks[#{name.dump}]
             @subtasks[#{name.dump}].options.merge!(options)
 
-            block.call(@subtasks[#{name.dump}]) if block
+            yield(@subtasks[#{name.dump}]) if block_given?
           else
             @subtasks[#{name.dump}] = #{task}.new(options,&block)
           end
