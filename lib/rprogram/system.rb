@@ -75,46 +75,73 @@ module RProgram
     #
     # Runs a program.
     #
-    # @param [String] path
-    #   The path to the program.
+    # @overload run(path,*arguments)
+    #   Run the program with the given arguments.
     #
-    # @param [Array] arguments
-    #   Additional arguments to run the program with.
-    #   The last argument of `arguments` may be a `Hash` of options.
+    #   @param [Pathname, String] path
+    #     The path of the program to run.
+    #
+    #   @param [Array] arguments
+    #     Additional arguments to run the program with.
+    #
+    # @overload run(path,*arguments,options)
+    #   Run the program with the given arguments and options.
+    #
+    #   @param [Pathname, String] path
+    #     The path of the program to run.
+    #
+    #   @param [Array] arguments
+    #     Additional arguments to run the program with.
+    #
+    #   @param [Hash] options
+    #     Additional options to execute the program with.
     #
     # @return [Boolean]
     #   Specifies whether the program exited successfully.
     #
-    # @see http://rubydoc.info/stdlib/core/1.9.2/Kernel#system-instance_method
     # @see http://rubydoc.info/stdlib/core/1.9.2/Kernel#spawn-instance_method
+    #   For acceptable options.
     #
-    def System.run(path,*arguments)
-      if arguments.last.kind_of?(Hash)
-        options = arguments[-1..-1]
-        arguments = arguments[0..-2]
-      else
-        options = []
-      end
+    def System.run(*arguments)
+      path = arguments.shift.to_s
+      options = if arguments.last.kind_of?(Hash)
+                  arguments.pop
+                else
+                  {}
+                end
 
-      path = path.to_s
       arguments = arguments.map { |arg| arg.to_s }
 
       if RProgram.debug
         STDERR.puts ">>> #{path} #{arguments.join(' ')}"
       end
 
-      return Kernel.system(path,*(arguments + options))
+      return Kernel.system(*([path] + arguments + [options]))
     end
 
     #
     # Runs a program under sudo.
     #
-    # @param [String] path
-    #   Path of the program to run.
+    # @overload run(path,*arguments)
+    #   Run the program with the given arguments.
     #
-    # @param [Array] arguments
-    #   Additional arguments to run the program with.
-    #   The last argument of `arguments` may be a `Hash` of options.
+    #   @param [Pathname, String] path
+    #     The path of the program to run.
+    #
+    #   @param [Array] arguments
+    #     Additional arguments to run the program with.
+    #
+    # @overload run(path,*arguments,options)
+    #   Run the program with the given arguments and options.
+    #
+    #   @param [Pathname, String] path
+    #     The path of the program to run.
+    #
+    #   @param [Array] arguments
+    #     Additional arguments to run the program with.
+    #
+    #   @param [Hash] options
+    #     Additional options to execute the program with.
     #
     # @return [Boolean]
     #   Specifies whether the program exited successfully.
@@ -124,7 +151,7 @@ module RProgram
     #
     # @since 0.1.8
     #
-    # @see Compat.run
+    # @see run
     #
     def System.sudo(path,*arguments)
       sudo_path = find_program('sudo')

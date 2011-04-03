@@ -264,8 +264,20 @@ module RProgram
     #
     # Runs the program.
     #
-    # @param [Array] arguments
-    #   Addition arguments to run the program with.
+    # @overload run(*arguments)
+    #   Run the program with the given arguments.
+    #
+    #   @param [Array] arguments
+    #     Additional arguments to run the program with.
+    #
+    # @overload run(*arguments,options)
+    #   Run the program with the given arguments and options.
+    #
+    #   @param [Array] arguments
+    #     Additional arguments to run the program with.
+    #
+    #   @param [Hash] options
+    #     Additional options to execute the program with.
     #
     # @return [true, false]
     #   Specifies the exit status of the program.
@@ -276,7 +288,8 @@ module RProgram
     #   # hello
     #   # => true
     #
-    # @see System.run
+    # @see http://rubydoc.info/stdlib/core/1.9.2/Kernel#spawn-instance_method
+    #   For acceptable options.
     #
     def run(*arguments)
       System.run(@path,*arguments)
@@ -285,8 +298,21 @@ module RProgram
     #
     # Runs the program under sudo.
     #
-    # @param [Array] arguments
-    #   Additional arguments to run the program with.
+    # @overload sudo(*arguments)
+    #   Run the program under `sudo` with the given arguments.
+    #
+    #   @param [Array] arguments
+    #     Additional arguments to run the program with.
+    #
+    # @overload sudo(*arguments,options)
+    #   Run the program under `sudo` with the given arguments
+    #   and options.
+    #
+    #   @param [Array] arguments
+    #     Additional arguments to run the program with.
+    #
+    #   @param [Hash] options
+    #     Additional options to execute the program with.
     #
     # @yield [sudo]
     #   If a block is given, it will be passed the sudo task.
@@ -302,13 +328,21 @@ module RProgram
     #
     # @since 0.1.8
     #
-    # @see System.sudo
+    # @see http://rubydoc.info/stdlib/core/1.9.2/Kernel#spawn-instance_method
+    #   For acceptable options.
     #
     def sudo(*arguments,&block)
+      options = if arguments.last.kind_of?(Hash)
+                  arguments.pop
+                end
+
       task = SudoTask.new(&block)
       task.command = [@path] + arguments
 
-      return System.sudo(*task)
+      arguments = task.arguments
+      arguments << options if options
+
+      return System.sudo(*arguments)
     end
 
     #
@@ -318,7 +352,7 @@ module RProgram
     #   The task who's arguments will be used to run the program.
     #
     # @param [Hash] options
-    #   Spawn options for the program to be ran.
+    #   Additional options to execute the program with.
     #
     # @return [true, false]
     #   Specifies the exit status of the program.
@@ -326,10 +360,10 @@ module RProgram
     # @see #run
     #
     def run_task(task,options={})
-      arguments = task.to_a
-      arguments << options unless options.empty?
+      arguments = task.arguments
+      arguments << options
 
-      return run(arguments)
+      return run(*arguments)
     end
 
     #
@@ -355,10 +389,10 @@ module RProgram
     # @since 0.3.0
     #
     def sudo_task(task,options={},&block)
-      arguments = task.to_a
-      arguments << options unless options.empty?
+      arguments = task.arguments
+      arguments << options
 
-      return sudo(arguments,&block)
+      return sudo(*arguments,&block)
     end
 
     #
