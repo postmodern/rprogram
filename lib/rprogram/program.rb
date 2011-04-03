@@ -279,6 +279,9 @@ module RProgram
     #   @param [Hash] options
     #     Additional options to execute the program with.
     #
+    #   @option options [Hash{String => String}] :env
+    #     Environment variables to execute the program with.
+    #
     # @return [true, false]
     #   Specifies the exit status of the program.
     #

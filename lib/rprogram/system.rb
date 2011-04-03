@@ -125,6 +125,9 @@ module RProgram
     #   @param [Hash] options
     #     Additional options to execute the program with.
     #
+    #   @option options [Hash{String => String}] :env
+    #     Environment variables to execute the program with.
+    #
     # @return [Boolean]
     #   Specifies whether the program exited successfully.
     #
@@ -132,20 +135,23 @@ module RProgram
     #   For acceptable options.
     #
     def System.run(*arguments)
-      path = arguments.shift.to_s
+      path = arguments.shift
       options = if arguments.last.kind_of?(Hash)
                   arguments.pop
                 else
                   {}
                 end
 
+      env = (options.delete(:env) || {})
+
+      path = path.to_s
       arguments = arguments.map { |arg| arg.to_s }
 
       if RProgram.debug
         STDERR.puts ">>> #{path} #{arguments.join(' ')}"
       end
 
-      return Kernel.system(*([path] + arguments + [options]))
+      return Kernel.system(*([env, path] + arguments + [options]))
     end
 
     #
