@@ -209,14 +209,14 @@ module RProgram
     #
     # @see run
     #
-    def System.sudo(path,*arguments)
+    def System.sudo(*arguments)
       sudo_path = find_program('sudo')
 
       unless sudo_path
         raise(ProgramNotFound,'could not find the "sudo" program')
       end
 
-      return run(sudo_path,path,*arguments)
+      return run(sudo_path,*arguments)
     end
   end
 end
