@@ -132,6 +132,10 @@ module RProgram
     #   @option options [Hash{String => String}] :env
     #     Environment variables to execute the program with.
     #
+    #   @option options [String] :popen
+    #     Specifies to run the program using `IO.popen` with the given
+    #     IO mode.
+    #
     # @return [Boolean]
     #   Specifies whether the program exited successfully.
     #
@@ -147,6 +151,7 @@ module RProgram
       if arguments.last.kind_of?(Hash)
         options = arguments.pop
         env = options.delete(:env)
+        popen = options.delete(:popen)
       end
 
       # all arguments must be Strings
@@ -177,7 +182,11 @@ module RProgram
       arguments.unshift(env) if env
       arguments.push(options) if options
 
-      return Kernel.system(*arguments)
+      if popen
+        IO.popen(arguments,popen)
+      else
+        Kernel.system(*arguments)
+      end
     end
 
     #

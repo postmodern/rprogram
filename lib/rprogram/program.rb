@@ -282,6 +282,10 @@ module RProgram
     #   @option options [Hash{String => String}] :env
     #     Environment variables to execute the program with.
     #
+    #   @option options [String] :popen
+    #     Specifies to run the program using `IO.popen` with the given
+    #     IO mode.
+    #
     # @return [true, false]
     #   Specifies the exit status of the program.
     #
