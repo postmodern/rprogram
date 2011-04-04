@@ -143,13 +143,16 @@ module RProgram
     #   For acceptable options.
     #
     def System.run(*arguments)
+      # extra tailing options and ENV variables from arguments
       if arguments.last.kind_of?(Hash)
         options = arguments.pop
         env = options.delete(:env)
       end
 
+      # all arguments must be Strings
       arguments = arguments.map { |arg| arg.to_s }
 
+      # print debugging information
       if RProgram.debug
         command = ''
 
@@ -165,10 +168,12 @@ module RProgram
         STDERR.puts ">>> #{command}"
       end
 
+      # passing ENV variables or exec options is not supported before 1.9.1
       if (options && RUBY_VERSION < '1.9')
         raise("cannot pass exec options to Kernel.system in #{RUBY_VERSION}")
       end
 
+      # re-add ENV variables and exec options
       arguments.unshift(env) if env
       arguments.push(options) if options
 
