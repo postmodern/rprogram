@@ -2,7 +2,7 @@
 
 * [Source](http://github.com/postmodern/rprogram)
 * [Issues](http://github.com/postmodern/rprogram/issues)
-* [Documentation](http://rubydoc.info/gems/rprogram)
+* [Documentation](http://rubydoc.info/gems/rprogram/frames)
 * [Email](mailto:postmodern.mod3 at gmail.com)
 
 ## Description
