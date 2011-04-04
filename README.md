@@ -14,8 +14,10 @@ system.
 
 ## Features
 
-* Uses Kernel.system for safe execution of individual programs and their
-  separate command-line arguments.
+* Safely executes individual programs and their separate command-line
+  arguments, to prevent command or option injection.
+* Supports Ruby 1.9 exec options.
+* Allows running programs with `IO.popen`.
 * Allows running programs under `sudo`.
 * Provides cross-platform access to the `PATH` environment variable.
 * Supports leading/tailing non-options.
