@@ -48,6 +48,12 @@ describe System do
 
         output.read.should_not be_empty
       end
+    else
+      it "should raise an exception when passing exec options" do
+        lambda {
+          subject.run(dir, '-l', :out => ['foo', 'w'])
+        }.should raise_error
+      end
     end
 
     unless (System.windows? && !System.jruby?)
