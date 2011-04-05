@@ -191,6 +191,11 @@ module RProgram
         raise("cannot pass exec options to Kernel.system in #{RUBY_VERSION}")
       end
 
+      # :popen can only be used on Unix, or on Windows with JRuby
+      if (popen && windows? && !jruby?)
+        raise("cannot use :popen on Windows, unless under JRuby")
+      end
+
       # re-add ENV variables and exec options
       arguments.unshift(env) if env
       arguments.push(options) if options

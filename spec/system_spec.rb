@@ -64,6 +64,12 @@ describe System do
         io.puts(data)
         io.readline.should include(data)
       end
+    else
+      it "should raise an exception when specifying :popen" do
+        lambda {
+          subject.run(cat,'-n', :popen => 'w+')
+        }.should raise_error
+      end
     end
   end
 end
