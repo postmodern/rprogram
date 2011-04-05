@@ -228,6 +228,45 @@ module RProgram
     end
 
     #
+    # The path to the `sudo` program.
+    #
+    # @return [Pathname, nil]
+    #   The path to the `sudo` program.
+    #
+    # @since 0.3.0
+    #
+    def System.sudo_path
+      @sudo ||= find_program('sudo')
+    end
+
+    #
+    # Sets the path to the `sudo` program.
+    #
+    # @param [String, Pathname] path
+    #   The new path to use.
+    #
+    # @return [Pathanme]
+    #   The new path to the `sudo` program.
+    #
+    # @since 0.3.0
+    #
+    def System.sudo_path=(path)
+      @sudo = Pathname.new(path)
+    end
+
+    #
+    # Determines whether `sudo` is available on the system.
+    #
+    # @return [Boolean]
+    #   Specifies whether the `sudo` program is installed on the system.
+    #
+    # @since 0.3.0
+    #
+    def System.sudo?
+      !sudo_path.nil?
+    end
+
+    #
     # Runs a program under sudo.
     #
     # @overload run(path,*arguments)
@@ -262,9 +301,7 @@ module RProgram
     # @see run
     #
     def System.sudo(*arguments)
-      sudo_path = find_program('sudo')
-
-      unless sudo_path
+      unless sudo?
         raise(ProgramNotFound,'could not find the "sudo" program')
       end
 
