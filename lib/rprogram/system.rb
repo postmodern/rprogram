@@ -56,6 +56,19 @@ module RProgram
     end
 
     #
+    # Determines if the current Ruby VM is JRuby.
+    #
+    # @return [Boolean]
+    #   Specifies whether the Ruby VM is JRuby.
+    #
+    # @since 0.3.0
+    #
+    def System.jruby?
+      Object.const_defined?(:RUBY_ENGINE) && \
+        Object.const_get(:RUBY_ENGINE) == 'jruby'
+    end
+
+    #
     # Finds the full-path of the program with the matching name.
     #
     # @param [String] name
