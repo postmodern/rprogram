@@ -21,7 +21,7 @@ describe System do
   end
 
   it "should be able to find programs" do
-    subject.find_program('dir').should be_executable
+    subject.find_program('ls').should be_executable
   end
 
   it "should be able to find programs by multiple names" do
@@ -29,30 +29,34 @@ describe System do
   end
 
   describe "run" do
-    let(:ls) { subject.find_program('ls') }
-    let(:echo) { subject.find_program('echo') }
-    let(:cat) { subject.find_program('cat') }
+    let(:scripts_dir) { File.join(File.dirname(__FILE__),'scripts') }
+
+    let(:fail_script) { File.join(scripts_dir,'fail.rb') }
+    let(:success_script) { File.join(scripts_dir,'success.rb') }
+
+    let(:print_script) { File.join(scripts_dir,'print.rb') }
+    let(:echo_script) { File.join(scripts_dir,'echo.rb') }
     let(:data) { 'hello' }
 
     it "should return true when programs succeed" do
-      subject.run(ls).should == true
+      subject.run(success_script).should == true
     end
 
     it "should return false when programs fail" do
-      subject.run(ls,'-zzzzzz').should == false
+      subject.run(fail_script).should == false
     end
 
     unless System.ruby_1_8?
       it "should allow passing exec options as the last argument" do
-        output = Tempfile.new('rprogram_compat_run')
-        subject.run(echo, data, :out => [output.path, 'w'])
+        output = Tempfile.new('rprogram_system_run')
+        subject.run(print_script, data, :out => [output.path, 'w'])
 
         output.read.chomp.should == data
       end
     else
       it "should raise an exception when passing exec options" do
         lambda {
-          subject.run(echo, data, :out => ['foo', 'w'])
+          subject.run(print_script, data, :out => ['foo', 'w'])
         }.should raise_error
       end
     end
@@ -60,15 +64,15 @@ describe System do
 
     unless (System.ruby_1_8? || (System.windows? && !System.jruby?))
       it "should allow running programs with IO.popen" do
-        io = subject.run(cat, '-n', :popen => 'w+')
+        io = subject.run(echo_script, :popen => 'w+')
 
         io.puts(data)
-        io.readline.should include(data)
+        io.readline.chomp.should == data
       end
     else
       it "should raise an exception when specifying :popen" do
         lambda {
-          subject.run(cat, '-n', :popen => 'w+')
+          subject.run(echo_script, :popen => 'w+')
         }.should raise_error
       end
     end
