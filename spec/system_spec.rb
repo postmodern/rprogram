@@ -40,7 +40,7 @@ describe System do
       subject.run(dir,'-zzzzzz').should == false
     end
 
-    unless RUBY_VERSION < '1.9'
+    unless System.ruby_1_8?
       it "should allow passing spawn options as the last argument" do
         output = Tempfile.new('rprogram_compat_run')
 

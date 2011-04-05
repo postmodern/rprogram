@@ -56,6 +56,18 @@ module RProgram
     end
 
     #
+    # Determines if the current Ruby VM is from the 1.8.x family.
+    #
+    # @return [Boolean]
+    #   Specifies if the current Ruby VM is from the 1.8.x family.
+    #
+    # @since 0.3.0
+    #  
+    def System.ruby_1_8?
+      RUBY_VERSION[0,4] == '1.8.'
+    end
+
+    #
     # Determines if the current Ruby VM is JRuby.
     #
     # @return [Boolean]
@@ -188,7 +200,7 @@ module RProgram
       end
 
       # passing ENV variables or exec options is not supported before 1.9.1
-      if (!options.empty? && RUBY_VERSION < '1.9')
+      if (!options.empty? && ruby_1_8?)
         raise("cannot pass exec options to Kernel.system in #{RUBY_VERSION}")
       end
 
