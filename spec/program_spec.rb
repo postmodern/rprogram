@@ -69,14 +69,14 @@ describe Program do
     end
 
     it "should allow setting the path" do
-      new_path = '/usr/bin/ls'
+      new_path = '/bin/ls'
 
       subject.path = new_path
       subject.path.should == new_path
     end
 
     it "should expand paths" do
-      subject.path = '/usr/../bin/ls'
+      subject.path = '/../bin/ls'
 
       subject.path.should == '/bin/ls'
     end
