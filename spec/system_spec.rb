@@ -29,29 +29,30 @@ describe System do
   end
 
   describe "run" do
-    let(:dir) { subject.find_program('dir') }
+    let(:ls) { subject.find_program('ls') }
+    let(:echo) { subject.find_program('echo') }
     let(:cat) { subject.find_program('cat') }
+    let(:data) { 'hello' }
 
     it "should return true when programs succeed" do
-      subject.run(dir).should == true
+      subject.run(ls).should == true
     end
 
     it "should return false when programs fail" do
-      subject.run(dir,'-zzzzzz').should == false
+      subject.run(ls,'-zzzzzz').should == false
     end
 
     unless System.ruby_1_8?
       it "should allow passing exec options as the last argument" do
         output = Tempfile.new('rprogram_compat_run')
+        subject.run(echo, data, :out => [output.path, 'w'])
 
-        subject.run(dir, '-l', :out => [output.path, 'w'])
-
-        output.read.should_not be_empty
+        output.read.chomp.should == data
       end
     else
       it "should raise an exception when passing exec options" do
         lambda {
-          subject.run(dir, '-l', :out => ['foo', 'w'])
+          subject.run(echo, data, :out => ['foo', 'w'])
         }.should raise_error
       end
     end
@@ -59,8 +60,7 @@ describe System do
 
     unless (System.ruby_1_8? || (System.windows? && !System.jruby?))
       it "should allow running programs with IO.popen" do
-        io = subject.run(cat,'-n', :popen => 'w+')
-        data = 'hello'
+        io = subject.run(cat, '-n', :popen => 'w+')
 
         io.puts(data)
         io.readline.should include(data)
@@ -68,7 +68,7 @@ describe System do
     else
       it "should raise an exception when specifying :popen" do
         lambda {
-          subject.run(cat,'-n', :popen => 'w+')
+          subject.run(cat, '-n', :popen => 'w+')
         }.should raise_error
       end
     end
