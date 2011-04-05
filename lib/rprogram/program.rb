@@ -336,7 +336,7 @@ module RProgram
     #   For acceptable options.
     #
     # @see SudoTask
-    #   For `:sudo` options.
+    #   For valid `:sudo` options.
     #
     def sudo(*arguments)
       options = if arguments.last.kind_of?(Hash)
