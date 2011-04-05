@@ -133,7 +133,7 @@ describe Program do
   end
 
   it "should allow using a default path" do
-    LS.path = '/usr/bin/dir'
+    LS.path = '/bin/ls'
 
     LS.find.path.should == LS.path
   end
