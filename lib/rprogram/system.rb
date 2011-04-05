@@ -163,8 +163,11 @@ module RProgram
       # extra tailing options and ENV variables from arguments
       if arguments.last.kind_of?(Hash)
         options = arguments.pop
-        env = options.delete(:env)
+        env = (options.delete(:env) || {})
         popen = options.delete(:popen)
+      else
+        options = {}
+        env = {}
       end
 
       # all arguments must be Strings
@@ -174,20 +177,18 @@ module RProgram
       if RProgram.debug
         command = ''
 
-        if env
-          env.each do |name,value|
-            command << "#{name}=#{value} "
-          end
+        env.each do |name,value|
+          command << "#{name}=#{value} "
         end
         
         command << arguments.join(' ')
-        command << " #{options.inspect}" if options
+        command << " #{options.inspect}" unless options.empty?
 
         STDERR.puts ">>> #{command}"
       end
 
       # passing ENV variables or exec options is not supported before 1.9.1
-      if (options && RUBY_VERSION < '1.9')
+      if (!options.empty? && RUBY_VERSION < '1.9')
         raise("cannot pass exec options to Kernel.system in #{RUBY_VERSION}")
       end
 
@@ -197,8 +198,8 @@ module RProgram
       end
 
       # re-add ENV variables and exec options
-      arguments.unshift(env) if env
-      arguments.push(options) if options
+      arguments.unshift(env) unless env.empty?
+      arguments.push(options) unless options.empty?
 
       if popen
         IO.popen(arguments,popen)
