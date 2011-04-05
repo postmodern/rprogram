@@ -56,7 +56,8 @@ describe System do
       end
     end
 
-    unless (System.windows? && !System.jruby?)
+
+    unless (System.ruby_1_8? || (System.windows? && !System.jruby?))
       it "should allow running programs with IO.popen" do
         io = subject.run(cat,'-n', :popen => 'w+')
         data = 'hello'
