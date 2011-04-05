@@ -30,6 +30,7 @@ describe System do
 
   describe "run" do
     let(:dir) { subject.find_program('dir') }
+    let(:cat) { subject.find_program('cat') }
 
     it "should return true when programs succeed" do
       subject.run(dir).should == true
@@ -46,6 +47,16 @@ describe System do
         subject.run(dir, '-l', :out => [output.path, 'w'])
 
         output.read.should_not be_empty
+      end
+    end
+
+    unless System.windows?
+      it "should allow running programs with IO.popen" do
+        io = subject.run(cat,'-n', :popen => 'w+')
+        data = 'hello'
+
+        io.puts(data)
+        io.readline.should include(data)
       end
     end
   end
