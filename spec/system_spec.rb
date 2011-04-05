@@ -41,7 +41,7 @@ describe System do
     end
 
     unless System.ruby_1_8?
-      it "should allow passing spawn options as the last argument" do
+      it "should allow passing exec options as the last argument" do
         output = Tempfile.new('rprogram_compat_run')
 
         subject.run(dir, '-l', :out => [output.path, 'w'])
