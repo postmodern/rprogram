@@ -1,3 +1,23 @@
+### 0.3.0 / 2011-04-08
+
+* Merged `RProgram::Nameable` into {RProgram::Program}.
+* Merged `RProgram::Options` into {RProgram::Task}.
+* Renamed `RProgram::Compat` to {RProgram::System}.
+* Added {RProgram::System.arch}.
+* Added {RProgram::System.platform}.
+* Added {RProgram::System.windows?}.
+* Added {RProgram::System.ruby_1_8?}.
+* Added {RProgram::System.jruby?}.
+* Added {RProgram::System.sudo_path}.
+* Added {RProgram::System.sudo_path=}.
+* Added {RProgram::System.sudo?}.
+* Added {RProgram::Sudo}.
+* Added {RProgram::SudoTask}.
+* Allow passing tailing [exec-options](http://rubydoc.info/stdlib/core/1.9.2/Kernel#spawn-instance_method)
+  to {RProgram::System.run} (only supported on Ruby 1.9).
+* Allow using `IO.popen` in {RProgram::System.run} if the `:popen` option
+  is specified (only supported on Ruby 1.9).
+
 ### 0.2.3 / 2011-03-30
 
 * Require env ~> 0.1, >= 0.1.2.
