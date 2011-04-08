@@ -48,7 +48,7 @@ describe System do
 
     unless System.ruby_1_8?
       it "should allow passing exec options as the last argument" do
-        output = Tempfile.new('rprogram_system_run')
+        output = Tempfile.new('rprogram_run_with_options')
         subject.run(print_script, data, :out => [output.path, 'w'])
 
         output.read.chomp.should == data
