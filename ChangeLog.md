@@ -16,9 +16,9 @@
 * Allow passing tailing [exec-options](http://rubydoc.info/stdlib/core/1.9.2/Kernel#spawn-instance_method)
   to {RProgram::System.run} (only supported on Ruby 1.9).
 * Allow using `IO.popen` in {RProgram::System.run} if the `:popen` option
-  is specified (only supported on Ruby 1.9).
+  is specified (only available on Ruby 1.9).
 * Allow specifying the environment variables in {RProgram::System.run}
-  if the `:env` option is specified (only supported on Ruby 1.9).
+  if the `:env` option is specified (only available on Ruby 1.9).
 
 ### 0.2.3 / 2011-03-30
 
