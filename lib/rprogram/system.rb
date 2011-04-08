@@ -122,7 +122,8 @@ module RProgram
     #   The first full-path for the program.
     #
     # @example
-    #   System.find_program_by_names("gas","as")  #=> "/usr/bin/as"
+    #   System.find_program_by_names("gas","as")
+    #   # => #<Pathname:/usr/bin/as>
     #
     def System.find_program_by_names(*names)
       names.each do |name|
