@@ -8,6 +8,7 @@ module RProgram
     extend Env::Variables
 
     @arch, @platform = RUBY_PLATFORM.split('-',2)
+    @platform ||= @arch
 
     #
     # Determines the native architecture.
