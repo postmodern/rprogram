@@ -17,6 +17,7 @@ system.
 * Safely executes individual programs and their separate command-line
   arguments, to prevent command or option injection.
 * Supports using Ruby 1.9 [exec options](http://rubydoc.info/stdlib/core/1.9.2/Kernel#spawn-instance_method).
+* Supports specifying environment variables of a process (on Ruby 1.9).
 * Allows running programs with `IO.popen` (on Ruby 1.9).
 * Allows running programs under `sudo`.
 * Provides cross-platform access to the `PATH` environment variable.

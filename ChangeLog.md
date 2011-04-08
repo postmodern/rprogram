@@ -17,6 +17,8 @@
   to {RProgram::System.run} (only supported on Ruby 1.9).
 * Allow using `IO.popen` in {RProgram::System.run} if the `:popen` option
   is specified (only supported on Ruby 1.9).
+* Allow specifying the environment variables in {RProgram::System.run}
+  if the `:env` option is specified (only supported on Ruby 1.9).
 
 ### 0.2.3 / 2011-03-30
 
