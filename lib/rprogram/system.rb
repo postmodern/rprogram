@@ -4,6 +4,9 @@ require 'rprogram/rprogram'
 require 'env/variables'
 
 module RProgram
+  #
+  # @since 0.3.0
+  #
   module System
     extend Env::Variables
 
