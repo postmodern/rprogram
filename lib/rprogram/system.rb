@@ -201,7 +201,7 @@ module RProgram
         command << arguments.join(' ')
         command << " #{options.inspect}" unless options.empty?
 
-        STDERR.puts ">>> #{command}"
+        warn ">>> #{command}"
       end
 
       # passing ENV variables or exec options is not supported before 1.9.1
