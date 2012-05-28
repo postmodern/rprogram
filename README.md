@@ -1,7 +1,7 @@
 # RProgram
 
-* [Source](http://github.com/postmodern/rprogram)
-* [Issues](http://github.com/postmodern/rprogram/issues)
+* [Source](https://github.com/postmodern/rprogram)
+* [Issues](https://github.com/postmodern/rprogram/issues)
 * [Documentation](http://rubydoc.info/gems/rprogram/frames)
 * [Email](mailto:postmodern.mod3 at gmail.com)
 
@@ -98,7 +98,7 @@ Finally, run your program with options or a block:
 
 ## Requirements
 
-* [env](http://github.com/postmodern/env) ~> 0.1, >= 0.1.2
+* [env](https://github.com/postmodern/env) ~> 0.1, >= 0.1.2
 
 ## Install
 
