@@ -1,3 +1,8 @@
+### 0.3.1 / 2012-05-27
+
+* Replaced ore-tasks with
+  [rubygems-tasks](https://github.com/postmodern/rubygems-tasks#readme).
+
 ### 0.3.0 / 2011-04-08
 
 * Merged `RProgram::Nameable` into {RProgram::Program}.
