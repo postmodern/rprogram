@@ -293,7 +293,12 @@ module RProgram
       return leading_non_options + options + tailing_args
     end
 
-    alias to_a arguments
+    #
+    # @see #arguments
+    #
+    def to_a
+      arguments
+    end
 
     protected
 
