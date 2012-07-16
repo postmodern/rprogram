@@ -31,11 +31,12 @@ describe System do
   describe "run" do
     let(:scripts_dir) { File.join(File.dirname(__FILE__),'scripts') }
 
-    let(:fail_script) { File.join(scripts_dir,'fail.rb') }
+    let(:fail_script)    { File.join(scripts_dir,'fail.rb') }
     let(:success_script) { File.join(scripts_dir,'success.rb') }
 
     let(:print_script) { File.join(scripts_dir,'print.rb') }
-    let(:echo_script) { File.join(scripts_dir,'echo.rb') }
+    let(:echo_script)  { File.join(scripts_dir,'echo.rb') }
+
     let(:data) { 'hello' }
 
     it "should return true when programs succeed" do

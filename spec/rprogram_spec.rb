@@ -1,18 +1,18 @@
+require 'spec_helper'
+
 require 'rprogram/version'
 require 'rprogram/rprogram'
 
-require 'spec_helper'
-
 describe RProgram do
   it "should have a VERSION constant" do
-    RProgram.const_defined?('VERSION').should == true
+    subject.const_defined?('VERSION').should == true
   end
 
   it "should have a debug mode" do
-    RProgram.debug = true
-    RProgram.debug.should == true
+    subject.debug = true
+    subject.debug.should be_true
 
-    RProgram.debug = false
-    RProgram.debug.should == false
+    subject.debug = false
+    subject.debug.should be_false
   end
 end

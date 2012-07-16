@@ -1,3 +1,5 @@
+require 'rprogram/program'
+
 class AliasedProgram < RProgram::Program
 
   name_program 'ls'

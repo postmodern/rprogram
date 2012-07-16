@@ -1,11 +1,9 @@
-require 'rprogram/non_option'
-
 require 'spec_helper'
 
+require 'rprogram/non_option'
+
 describe NonOption do
-  before(:all) do
-    @non_option = NonOption.new(:name => 'files')
-  end
+  subject { NonOption.new(:name => 'files') }
 
   it "should keep :leading and :tailing options mutually exclusive" do
     leading = NonOption.new(:name => 'files', :leading => true)
@@ -19,30 +17,30 @@ describe NonOption do
   end
 
   it "should return an empty Array when passed nil" do
-    @non_option.arguments(nil).should == []
+    subject.arguments(nil).should == []
   end
 
   it "should return an empty Array when passed false" do
-    @non_option.arguments(false).should == []
+    subject.arguments(false).should == []
   end
 
   it "should return an empty Array when passed []" do
-    @non_option.arguments([]).should == []
+    subject.arguments([]).should == []
   end
 
   it "should return an Array when passed a single value" do
-    @non_option.arguments('foo').should == ['foo']
+    subject.arguments('foo').should == ['foo']
   end
 
   it "should return an Array when passed multiple values" do
-    @non_option.arguments(['foo', 'bar']).should == ['foo', 'bar']
+    subject.arguments(['foo', 'bar']).should == ['foo', 'bar']
   end
 
   it "should return an Array when passed a Hash of keys" do
-    @non_option.arguments({:foo => true, :bar => false}).should == ['foo']
+    subject.arguments({:foo => true, :bar => false}).should == ['foo']
   end
 
   it "should return an Array when passed a Hash of values" do
-    @non_option.arguments({:foo => 'bar'}).should == ['foo=bar']
+    subject.arguments({:foo => 'bar'}).should == ['foo=bar']
   end
 end
