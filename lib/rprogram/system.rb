@@ -68,7 +68,7 @@ module RProgram
     # @since 0.3.0
     #  
     def self.ruby_1_8?
-      RUBY_VERSION[0,4] == '1.8.'
+      RUBY_VERSION.start_with?('1.8.')
     end
 
     #
