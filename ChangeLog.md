@@ -1,3 +1,11 @@
+### 0.3.2 / 2012-07-15
+
+* Require Ruby >= 1.8.7.
+* Removed env as a dependency.
+* Added {RProgram::Argument}.
+* Removed orphaned `rprogram/yard.rb` file.
+* Style improvements.
+
 ### 0.3.1 / 2012-05-27
 
 * Replaced ore-tasks with
