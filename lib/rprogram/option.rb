@@ -1,5 +1,7 @@
+require 'rprogram/argument'
+
 module RProgram
-  class Option
+  class Option < Argument
 
     # Flag of the option
     attr_reader :flag
@@ -84,39 +86,27 @@ module RProgram
     #   The formatted arguments of the option.
     #
     def arguments(value)
-      return [@flag] if value == true
-      return []      unless value
-
-      value = value.arguments if value.respond_to?(:arguments)
-
-      value = case value
-              when Hash
-                value.map { |key,sub_value|
-                  if sub_value == true
-                    key.to_s
-                  elsif sub_value
-                    "#{key}=#{sub_value}"
-                  end
-                }
-              when Array
-                value.flatten
-              else
-                [value]
-              end
-
-      value.compact!
-
-      if @multiple
-        return value.inject([]) do |args,value|
-          arg = @formatter.call(self,[value])
-
-          args += arg if arg
-          args
-        end
+      case value
+      when true
+        [@flag]
+      when false, nil
+        []
       else
-        value = [value.join(@separator)] if @separator
+        value = super(value)
 
-        return (@formatter.call(self,value) || [])
+        if @multiple
+          args = []
+
+          value.each do |arg|
+            args += Array(@formatter.call(self,[arg]))
+          end
+
+          return args
+        else
+          value = [value.join(@separator)] if @separator
+
+          return Array(@formatter.call(self,value))
+        end
       end
     end
 

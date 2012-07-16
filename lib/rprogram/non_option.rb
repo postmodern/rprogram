@@ -1,5 +1,7 @@
+require 'rprogram/argument'
+
 module RProgram
-  class NonOption
+  class NonOption < Argument
 
     # Name of the argument(s)
     attr_reader :name
@@ -54,36 +56,6 @@ module RProgram
     #
     def leading?
       !(@tailing)
-    end
-
-    #
-    # Formats the arguments for the non-option.
-    #
-    # @param [Hash, Array, String, nil] value
-    #   The value to use for the arguments of the non-option.
-    #                                   
-    # @return [Array]
-    #   The arguments for the non-option.
-    #
-    def arguments(value)
-      return [] unless value
-
-      value = case value
-              when Hash
-                value = value.map do |key,sub_value|
-                  if sub_value == true
-                    key.to_s
-                  elsif sub_value
-                    "#{key}=#{sub_value}"
-                  end
-                end
-              when Array
-                value.flatten
-              else
-                [value]
-              end
-
-      return value.compact
     end
 
   end
