@@ -1,14 +1,13 @@
 require 'rprogram/exceptions/program_not_found'
 require 'rprogram/rprogram'
 
-require 'env/variables'
+require 'pathname'
 
 module RProgram
   #
   # @since 0.3.0
   #
   module System
-    extend Env::Variables
 
     @arch, @platform = RUBY_PLATFORM.split('-',2)
     @platform ||= @arch
@@ -81,6 +80,18 @@ module RProgram
     #
     def self.jruby?
       const_defined?(:RUBY_ENGINE) && const_get(:RUBY_ENGINE) == 'jruby'
+    end
+
+    #
+    # The directories to search for programs.
+    #
+    # @return [Array<Pathname>]
+    #   The directories containing programs.
+    #
+    def self.paths
+      @paths ||= ENV['PATH'].split(File::PATH_SEPARATOR).map do |dir|
+        Pathname.new(dir)
+      end
     end
 
     #
