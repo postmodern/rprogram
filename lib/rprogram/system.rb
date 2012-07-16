@@ -186,7 +186,8 @@ module RProgram
     #
     def self.run(*arguments)
       # extra tailing options and ENV variables from arguments
-      if arguments.last.kind_of?(Hash)
+      case arguments.last
+      when Hash
         options = arguments.pop
         env     = (options.delete(:env) || {})
         popen   = options.delete(:popen)
