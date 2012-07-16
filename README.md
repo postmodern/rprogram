@@ -49,8 +49,8 @@ First, create the class to represent the options of the program, using
       long_option :flag => '--includes', :multiple => true
 
       # options with multiple values can have a custom separator character
-      long_option :flag => '--ops',
-                  :multiple => true,
+      long_option :flag      => '--ops',
+                  :multiple  => true,
                   :separator => ','
 
       # define any non-options (aka additional arguments)
@@ -89,16 +89,16 @@ Finally, run your program with options or a block:
 
     MyProgram.my_run do |my_prog|
       my_prog.includes = ['one', 'two', 'three']
-      my_prog.mode == :safe
+      my_prog.mode     = :safe
 
       my_prog.output = 'output.txt'
-      my_prog.files = ['test1.txt', 'test2.txt']
+      my_prog.files  = ['test1.txt', 'test2.txt']
     end
     # => true
 
 ## Install
 
-    $ sudo gem install rprogram
+    $ gem install rprogram
 
 ## License
 
