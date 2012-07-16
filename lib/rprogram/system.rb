@@ -25,7 +25,7 @@ module RProgram
     #
     # @since 0.3.0
     #
-    def System.arch
+    def self.arch
       @arch
     end
 
@@ -39,7 +39,7 @@ module RProgram
     #   System.platform
     #   # => "linux"
     #
-    def System.platform
+    def self.platform
       @platform
     end
 
@@ -51,7 +51,7 @@ module RProgram
     #
     # @since 0.3.0
     #
-    def System.windows?
+    def self.windows?
       if @platform
         @platform.include?('mingw') || @platform.include?('mswin')
       else
@@ -67,7 +67,7 @@ module RProgram
     #
     # @since 0.3.0
     #  
-    def System.ruby_1_8?
+    def self.ruby_1_8?
       RUBY_VERSION[0,4] == '1.8.'
     end
 
@@ -79,7 +79,7 @@ module RProgram
     #
     # @since 0.3.0
     #
-    def System.jruby?
+    def self.jruby?
       Object.const_defined?(:RUBY_ENGINE) && \
         Object.const_get(:RUBY_ENGINE) == 'jruby'
     end
@@ -97,7 +97,7 @@ module RProgram
     #   System.find_program('as')
     #   #=> #<Pathname:/usr/bin/as>
     #
-    def System.find_program(name)
+    def self.find_program(name)
       # add the `.exe` suffix to the name, if running on Windows
       if windows?
         name = "#{name}.exe"
@@ -125,7 +125,7 @@ module RProgram
     #   System.find_program_by_names("gas","as")
     #   # => #<Pathname:/usr/bin/as>
     #
-    def System.find_program_by_names(*names)
+    def self.find_program_by_names(*names)
       names.each do |name|
         if (path = find_program(name))
           return path
@@ -176,7 +176,7 @@ module RProgram
     # @see http://rubydoc.info/stdlib/core/1.9.2/Kernel#spawn-instance_method
     #   For acceptable options.
     #
-    def System.run(*arguments)
+    def self.run(*arguments)
       # extra tailing options and ENV variables from arguments
       if arguments.last.kind_of?(Hash)
         options = arguments.pop
@@ -240,7 +240,7 @@ module RProgram
     #
     # @since 0.3.0
     #
-    def System.sudo_path
+    def self.sudo_path
       @sudo ||= find_program('sudo')
     end
 
@@ -255,7 +255,7 @@ module RProgram
     #
     # @since 0.3.0
     #
-    def System.sudo_path=(path)
+    def self.sudo_path=(path)
       @sudo = Pathname.new(path)
     end
 
@@ -267,7 +267,7 @@ module RProgram
     #
     # @since 0.3.0
     #
-    def System.sudo?
+    def self.sudo?
       !sudo_path.nil?
     end
 
@@ -305,7 +305,7 @@ module RProgram
     #
     # @see run
     #
-    def System.sudo(*arguments)
+    def self.sudo(*arguments)
       unless sudo?
         raise(ProgramNotFound,'could not find the "sudo" program')
       end
