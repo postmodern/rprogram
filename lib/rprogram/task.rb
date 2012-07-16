@@ -496,13 +496,10 @@ module RProgram
       flag = flag.to_s.downcase
 
       # remove leading dashes
-      if flag[0..1] == '--'
-        method_name = flag[2..-1]
-      elsif flag[0..0] == '-'
-        method_name = flag[1..-1]
-      else
-        method_name = flag
-      end
+      method_name = if    flag.start_with?('--') then flag[2..-1]
+                    elsif flag.start_with?('-')  then flag[1..-1]
+                    else                              flag
+                    end
 
       # replace remaining dashes with underscores
       return method_name.gsub(/[-_\.\s]+/,'_')
