@@ -80,8 +80,7 @@ module RProgram
     # @since 0.3.0
     #
     def self.jruby?
-      Object.const_defined?(:RUBY_ENGINE) && \
-        Object.const_get(:RUBY_ENGINE) == 'jruby'
+      const_defined?(:RUBY_ENGINE) && const_get(:RUBY_ENGINE) == 'jruby'
     end
 
     #
