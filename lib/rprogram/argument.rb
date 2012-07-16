@@ -8,7 +8,7 @@ module RProgram
     #   The value to format.
     #
     # @return [Array]
-    #   The formatted argments.
+    #   The formatted arguments.
     #
     def arguments(value)
       value = case value

@@ -76,7 +76,7 @@
 * Renamed `PRogram::Compat.PATHS` to `RProgram::Compat.paths`.
 * Refactored {RProgram::Option#arguments}.
 * Removed `RProgram::Option#format`.
-* Refactored {RProgram::NonOption#arguments}.
+* Refactored `RProgram::NonOption#arguments`.
 * Renamed `RProgram::NonOption#leading` to {RProgram::NonOption#leading?}.
 * Removed `RProgram::NonOption#tailing`.
 * Added {RProgram::NonOption#tailing?}.
