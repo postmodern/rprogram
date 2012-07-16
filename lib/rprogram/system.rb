@@ -179,7 +179,7 @@ module RProgram
     #
     # @raise [RuntimeError]
     #   Passing `:popen`, `:env` or exec options is not supported
-    #   before Ruby 1.9.1.
+    #   on Ruby 1.8.x.
     #
     # @see http://rubydoc.info/stdlib/core/1.9.2/Kernel#spawn-instance_method
     #   For acceptable options.
