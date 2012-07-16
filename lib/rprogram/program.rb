@@ -32,17 +32,17 @@ module RProgram
     # @example
     #   Program.new('/usr/bin/ls')
     #
-    def initialize(path,&block)
+    def initialize(path)
       path = File.expand_path(path)
 
       unless File.file?(path)
-        raise(ProgramNotFound,"program #{path.dump} does not exist",caller)
+        raise(ProgramNotFound,"program #{path.dump} does not exist")
       end
 
       @path = path
       @name = File.basename(path)
 
-      block.call(self) if block
+      yield self if block_given?
     end
 
     #
@@ -94,7 +94,7 @@ module RProgram
     #   alias_program 'vim', 'vi'
     #
     def self.alias_program(*aliases)
-      @program_aliases = aliases.map { |name| name.to_s }
+      @program_aliases = aliases.map(&:to_s)
     end
 
     #
@@ -229,9 +229,9 @@ module RProgram
       path ||= System.find_program_by_names(*self.program_names)
 
       unless path
-        names = self.program_names.map { |name| name.dump }.join(', ')
+        names = self.program_names.map(&:dump).join(', ')
 
-        raise(ProgramNotFound,"programs #{names} were not found",caller)
+        raise(ProgramNotFound,"programs #{names} were not found")
       end
 
       return self.new(path,*arguments,&block)
@@ -339,10 +339,9 @@ module RProgram
     #   For valid `:sudo` options.
     #
     def sudo(*arguments)
-      options = if arguments.last.kind_of?(Hash)
-                  arguments.pop
-                else
-                  {}
+      options = case arguments.last
+                when Hash then arguments.pop
+                else           {}
                 end
 
       task = SudoTask.new(options.delete(:sudo) || {})

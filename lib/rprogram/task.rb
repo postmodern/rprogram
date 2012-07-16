@@ -25,11 +25,11 @@ module RProgram
     #     # ...
     #   end
     #
-    def initialize(options={},&block)
+    def initialize(options={})
       @subtasks = {}
-      @options = options
+      @options  = options
 
-      block.call(self) if block
+      yield self if block_given?
     end
 
     #
@@ -487,7 +487,7 @@ module RProgram
     #   Task.flag_namify('--output-file')
     #   # => "output_file"
     #
-    def Task.flag_namify(flag)
+    def self.flag_namify(flag)
       flag = flag.to_s.downcase
 
       # remove leading dashes

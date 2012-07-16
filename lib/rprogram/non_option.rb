@@ -28,12 +28,9 @@ module RProgram
     def initialize(options={})
       @name = options[:name]
 
-      @tailing = if options[:leading]
-                   !(options[:leading])
-                 elsif options[:tailing]
-                   options[:tailing]
-                 else
-                   true
+      @tailing = if    options[:leading] then !options[:leading]
+                 elsif options[:tailing] then options[:tailing]
+                 else                         true
                  end
 
       @multiple = (options[:multiple] || false)
@@ -71,19 +68,20 @@ module RProgram
     def arguments(value)
       return [] unless value
 
-      if value.kind_of?(Hash)
-        value = value.map do |key,sub_value|
-          if sub_value == true
-            key.to_s
-          elsif sub_value
-            "#{key}=#{sub_value}"
-          end
-        end
-      elsif value.kind_of?(Array)
-        value = value.flatten
-      else
-        value = [value]
-      end
+      value = case value
+              when Hash
+                value = value.map do |key,sub_value|
+                  if sub_value == true
+                    key.to_s
+                  elsif sub_value
+                    "#{key}=#{sub_value}"
+                  end
+                end
+              when Array
+                value.flatten
+              else
+                [value]
+              end
 
       return value.compact
     end

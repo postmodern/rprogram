@@ -54,26 +54,24 @@ module RProgram
     def initialize(options={},&block)
       @flag = options[:flag]
 
-      @equals = (options[:equals] || false)
-      @multiple = (options[:multiple] || false)
-      @separator = if options[:separator]
-                     options[:separator]
-                   elsif options[:equals]
-                     ' '
+      @equals    = (options[:equals] || false)
+      @multiple  = (options[:multiple] || false)
+      @separator = if options[:separator] then options[:separator]
+                   elsif options[:equals] then ' '
                    end
       @sub_options = (options[:sub_options] || false)
 
       @formatter = if block
-        block
-      else
-        Proc.new do |opt,value|
-          if opt.equals
-            ["#{opt.flag}=#{value.first}"]
-          else
-            [opt.flag] + value
-          end
-        end
-      end
+                     block
+                   else
+                     Proc.new do |opt,value|
+                       if opt.equals
+                         ["#{opt.flag}=#{value.first}"]
+                       else
+                         [opt.flag] + value
+                       end
+                     end
+                   end
     end
 
     #
@@ -87,23 +85,24 @@ module RProgram
     #
     def arguments(value)
       return [@flag] if value == true
-      return [] unless value
+      return []      unless value
 
       value = value.arguments if value.respond_to?(:arguments)
 
-      if value.kind_of?(Hash)
-        value = value.map { |key,sub_value|
-          if sub_value == true
-            key.to_s
-          elsif sub_value
-            "#{key}=#{sub_value}"
-          end
-        }
-      elsif value.kind_of?(Array)
-        value.flatten!
-      else
-        value = [value]
-      end
+      value = case value
+              when Hash
+                value.map { |key,sub_value|
+                  if sub_value == true
+                    key.to_s
+                  elsif sub_value
+                    "#{key}=#{sub_value}"
+                  end
+                }
+              when Array
+                value.flatten
+              else
+                [value]
+              end
 
       value.compact!
 

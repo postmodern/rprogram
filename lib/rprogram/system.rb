@@ -109,9 +109,7 @@ module RProgram
     #
     def self.find_program(name)
       # add the `.exe` suffix to the name, if running on Windows
-      if windows?
-        name = "#{name}.exe"
-      end
+      name = "#{name}.exe" if windows?
 
       paths.each do |dir|
         full_path = dir.join(name).expand_path
@@ -190,15 +188,15 @@ module RProgram
       # extra tailing options and ENV variables from arguments
       if arguments.last.kind_of?(Hash)
         options = arguments.pop
-        env = (options.delete(:env) || {})
-        popen = options.delete(:popen)
+        env     = (options.delete(:env) || {})
+        popen   = options.delete(:popen)
       else
         options = {}
-        env = {}
+        env     = {}
       end
 
       # all arguments must be Strings
-      arguments = arguments.map { |arg| arg.to_s }
+      arguments = arguments.map(&:to_s)
 
       # print debugging information
       if RProgram.debug
@@ -232,13 +230,11 @@ module RProgram
       end
 
       # re-add ENV variables and exec options
-      arguments.unshift(env) unless env.empty?
+      arguments.unshift(env)  unless env.empty?
       arguments.push(options) unless options.empty?
 
-      if popen
-        IO.popen(arguments,popen)
-      else
-        Kernel.system(*arguments)
+      if popen then IO.popen(arguments,popen)
+      else          Kernel.system(*arguments)
       end
     end
 
