@@ -5,14 +5,14 @@ require 'rprogram/rprogram'
 
 describe RProgram do
   it "should have a VERSION constant" do
-    subject.const_defined?('VERSION').should == true
+    expect(subject.const_defined?('VERSION')).to eq(true)
   end
 
   it "should have a debug mode" do
     subject.debug = true
-    subject.debug.should be_true
+    expect(subject.debug).to be_true
 
     subject.debug = false
-    subject.debug.should be_false
+    expect(subject.debug).to be_false
   end
 end

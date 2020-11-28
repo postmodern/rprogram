@@ -14,27 +14,27 @@ describe Program do
     subject { NamedProgram }
 
     it "should be able to give a class a program name" do
-      subject.program_name.should == 'ls'
+      expect(subject.program_name).to eq('ls')
     end
 
     it "should not have any program aliases" do
-      subject.program_aliases.should be_empty
+      expect(subject.program_aliases).to be_empty
     end
 
     it "should have one program name" do
-      subject.program_names.should == ['ls']
+      expect(subject.program_names).to eq(['ls'])
     end
 
     it "should provide an instance method for the program name" do
       program = subject.find
 
-      program.program_name.should == 'ls'
+      expect(program.program_name).to eq('ls')
     end
 
     it "should provide an instance method for the program names" do
       program = subject.find
 
-      program.program_names.should == ['ls']
+      expect(program.program_names).to eq(['ls'])
     end
   end
 
@@ -42,23 +42,23 @@ describe Program do
     subject { AliasedProgram }
 
     it "should have program aliases" do
-      subject.program_aliases.should == ['dir']
+      expect(subject.program_aliases).to eq(['dir'])
     end
 
     it "should have one program name" do
-      subject.program_names.should == ['ls', 'dir']
+      expect(subject.program_names).to eq(['ls', 'dir'])
     end
 
     it "should provide an instance method for the program aliases" do
       program = subject.find
 
-      program.program_aliases.should == ['dir']
+      expect(program.program_aliases).to eq(['dir'])
     end
 
     it "should provide an instance method for the program names" do
       program = subject.find
 
-      program.program_names.should == ['ls', 'dir']
+      expect(program.program_names).to eq(['ls', 'dir'])
     end
   end
 
@@ -66,76 +66,76 @@ describe Program do
     subject { NamedProgram }
 
     it "should not have a path by default" do
-      subject.path.should be_nil
+      expect(subject.path).to be_nil
     end
 
     it "should allow setting the path" do
       new_path = '/bin/ls'
 
       subject.path = new_path
-      subject.path.should == new_path
+      expect(subject.path).to eq(new_path)
     end
 
     it "should expand paths" do
       subject.path = '/../bin/ls'
 
-      subject.path.should == '/bin/ls'
+      expect(subject.path).to eq('/bin/ls')
     end
 
     it "should allow setting the path to nil" do
       subject.path = nil
 
-      subject.path.should be_nil
+      expect(subject.path).to be_nil
     end
 
     after(:all) { NamedProgram.path = nil }
   end
 
   it "should create a Program from a path" do
-    subject.should_not be_nil
+    expect(subject).not_to be_nil
   end
 
   it "should derive the program name from a path" do
-    subject.name.should == 'cc'
+    expect(subject.name).to eq('cc')
   end
 
   it "should return the program path when converted to a String" do
-    subject.to_s.should == '/usr/bin/cc'
+    expect(subject.to_s).to eq('/usr/bin/cc')
   end
 
   it "should raise an exception for invalid paths" do
-    lambda {
+    expect {
       described_class.new('/totally/doesnt/exist')
-    }.should raise_error(ProgramNotFound)
+    }.to raise_error(ProgramNotFound)
   end
 
   it "should find a program from a path" do
     prog = described_class.find_with_path('/usr/bin/cc')
 
-    prog.should_not be_nil
+    expect(prog).not_to be_nil
   end
 
   it "should find a program from given paths" do
     prog = described_class.find_with_paths(['/usr/bin/ls','/bin/ls'])
 
-    prog.should_not be_nil
+    expect(prog).not_to be_nil
   end
 
   it "should be able to find a program based on the program names" do
     ls = LS.find
 
-    File.executable?(ls.path).should == true
+    expect(File.executable?(ls.path)).to eq(true)
   end
 
   it "should raise a ProgramNotFound exception if no path/name is valid" do
-    lambda {
+    expect {
       described_class.find
-    }.should raise_error(ProgramNotFound)
+    }.to raise_error(ProgramNotFound)
   end
 
   it "should allow using a default path" do
     LS.path = '/bin/ls'
 
-    LS.find.path.should == LS.path
+    expect(LS.find.path).to eq(LS.path)
   end
 end

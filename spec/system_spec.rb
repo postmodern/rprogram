@@ -7,25 +7,25 @@ describe System do
   subject { System }
 
   it "should determine the native architecture" do
-    subject.arch.should_not be_empty
+    expect(subject.arch).not_to be_empty
   end
 
   it "should determine the native platform" do
-    subject.platform.should_not be_empty
+    expect(subject.platform).not_to be_empty
   end
 
   it "should have a list of directories that contain programs" do
-    subject.paths.should_not be_empty
+    expect(subject.paths).not_to be_empty
 
-    subject.paths.any? { |dir| dir.directory? }.should == true
+    expect(subject.paths.any? { |dir| dir.directory? }).to eq(true)
   end
 
   it "should be able to find programs" do
-    subject.find_program('ls').should be_executable
+    expect(subject.find_program('ls')).to be_executable
   end
 
   it "should be able to find programs by multiple names" do
-    subject.find_program_by_names('ls','dir').should be_executable
+    expect(subject.find_program_by_names('ls','dir')).to be_executable
   end
 
   describe "run" do
@@ -40,11 +40,11 @@ describe System do
     let(:data) { 'hello' }
 
     it "should return true when programs succeed" do
-      subject.run(success_script).should == true
+      expect(subject.run(success_script)).to eq(true)
     end
 
     it "should return false when programs fail" do
-      subject.run(fail_script).should == false
+      expect(subject.run(fail_script)).to eq(false)
     end
 
     unless System.ruby_1_8?
@@ -52,13 +52,13 @@ describe System do
         output = Tempfile.new('rprogram_run_with_options')
         subject.run(print_script, data, :out => [output.path, 'w'])
 
-        output.read.chomp.should == data
+        expect(output.read.chomp).to eq(data)
       end
     else
       it "should raise an exception when passing exec options" do
-        lambda {
+        expect {
           subject.run(print_script, data, :out => ['foo', 'w'])
-        }.should raise_error
+        }.to raise_error
       end
     end
 
@@ -68,13 +68,13 @@ describe System do
         io = subject.run(echo_script, :popen => 'w+')
 
         io.puts(data)
-        io.readline.chomp.should == data
+        expect(io.readline.chomp).to eq(data)
       end
     else
       it "should raise an exception when specifying :popen" do
-        lambda {
+        expect {
           subject.run(echo_script, :popen => 'w+')
-        }.should raise_error
+        }.to raise_error
       end
     end
   end

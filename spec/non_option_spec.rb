@@ -9,38 +9,38 @@ describe NonOption do
     leading = NonOption.new(:name => 'files', :leading => true)
     tailing = NonOption.new(:name => 'files', :tailing => true)
 
-    leading.should be_leading
-    leading.should_not be_tailing
+    expect(leading).to be_leading
+    expect(leading).not_to be_tailing
 
-    tailing.should_not be_leading
-    tailing.should be_tailing
+    expect(tailing).not_to be_leading
+    expect(tailing).to be_tailing
   end
 
   it "should return an empty Array when passed nil" do
-    subject.arguments(nil).should == []
+    expect(subject.arguments(nil)).to eq([])
   end
 
   it "should return an empty Array when passed false" do
-    subject.arguments(false).should == []
+    expect(subject.arguments(false)).to eq([])
   end
 
   it "should return an empty Array when passed []" do
-    subject.arguments([]).should == []
+    expect(subject.arguments([])).to eq([])
   end
 
   it "should return an Array when passed a single value" do
-    subject.arguments('foo').should == ['foo']
+    expect(subject.arguments('foo')).to eq(['foo'])
   end
 
   it "should return an Array when passed multiple values" do
-    subject.arguments(['foo', 'bar']).should == ['foo', 'bar']
+    expect(subject.arguments(['foo', 'bar'])).to eq(['foo', 'bar'])
   end
 
   it "should return an Array when passed a Hash of keys" do
-    subject.arguments({:foo => true, :bar => false}).should == ['foo']
+    expect(subject.arguments({:foo => true, :bar => false})).to eq(['foo'])
   end
 
   it "should return an Array when passed a Hash of values" do
-    subject.arguments({:foo => 'bar'}).should == ['foo=bar']
+    expect(subject.arguments({:foo => 'bar'})).to eq(['foo=bar'])
   end
 end

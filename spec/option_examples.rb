@@ -2,14 +2,14 @@ require 'spec_helper'
 
 shared_examples_for 'Option' do
   it "should return an empty Array when passed nil" do
-    subject.arguments(nil).should == []
+    expect(subject.arguments(nil)).to eq([])
   end
 
   it "should return an empty Array when passed false" do
-    subject.arguments(false).should == []
+    expect(subject.arguments(false)).to eq([])
   end
 
   it "should return a single flag when passed true" do
-    subject.arguments(true).should == ['-f']
+    expect(subject.arguments(true)).to eq(['-f'])
   end
 end
