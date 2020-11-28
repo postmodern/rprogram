@@ -10,9 +10,9 @@ describe RProgram do
 
   it "should have a debug mode" do
     subject.debug = true
-    expect(subject.debug).to be_true
+    expect(subject.debug).to be(true)
 
     subject.debug = false
-    expect(subject.debug).to be_false
+    expect(subject.debug).to be(false)
   end
 end
