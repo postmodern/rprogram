@@ -26,7 +26,7 @@ system.
 * Provides cross-platform access to the `PATH` environment variable.
 * Supports leading/tailing non-options.
 * Supports long-options and short-options.
-* Supports custom formating of options.
+* Supports custom formatting of options.
 
 ## Examples
 
