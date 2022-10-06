@@ -4,6 +4,9 @@
 * [Issues](https://github.com/postmodern/rprogram/issues)
 * [Documentation](http://rubydoc.info/gems/rprogram/frames)
 
+**DEPRECATED:** This library has been deprecated by
+[command_mapper](https://github.com/postmodern/command_mapper.rb).
+
 ## Description
   
 RProgram is a library for creating wrappers around command-line programs.
