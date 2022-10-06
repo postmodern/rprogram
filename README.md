@@ -1,5 +1,4 @@
-# DEPRECATED: This library has been deprecated by
-[command_mapper](https://github.com/postmodern/command_mapper.rb).
+# DEPRECATED: This library has been deprecated by [command_mapper](https://github.com/postmodern/command_mapper.rb).
 
 # RProgram
 
