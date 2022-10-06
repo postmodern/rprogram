@@ -1,11 +1,11 @@
+# DEPRECATED: This library has been deprecated by
+[command_mapper](https://github.com/postmodern/command_mapper.rb).
+
 # RProgram
 
 * [Source](https://github.com/postmodern/rprogram)
 * [Issues](https://github.com/postmodern/rprogram/issues)
 * [Documentation](http://rubydoc.info/gems/rprogram/frames)
-
-**DEPRECATED:** This library has been deprecated by
-[command_mapper](https://github.com/postmodern/command_mapper.rb).
 
 ## Description
   
